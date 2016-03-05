@@ -1,0 +1,37 @@
+{
+  "name": "karma-babel-base",
+  "version": "1.0.0",
+  "description": "Basic dependencies for creating an ES6 app and running jasmine test through Karma.",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "keywords": [
+    "karma",
+    "babel",
+    "es6"
+  ],
+  "dependencies": {
+    "babel-polyfill": "6.3.14",
+    "babel-preset-es2015": "6.3.13",
+    "babel-core": "6.3.21",
+    "babel-loader": "6.2.0",
+    "babel-cli": "^6.3.17",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "webpack": "1.12.9",
+    "jasmine-core": "2.4.1",
+    "jasmine-es6": "0.1.4",
+    "karma": "^0.13.19",
+    "karma-webpack": "^1.7.0",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-phantomjs-launcher": "1.0.0",
+    "karma-coverage": "^0.5.3",
+    "karma-jasmine": "^0.3.6",
+    "karma-sourcemap-loader": "^0.3.7",
+    "phantomjs-prebuilt": "2.1.4",
+    "babel-istanbul": "^0.6.0",
+    "babel-istanbul-loader": "0.0.1"
+  },
+  "author": "Eric Hulburd",
+  "license": "ISC"
+}
