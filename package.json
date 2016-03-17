@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Basic architecture and dependencies for creating a React app alongside a server api.",
   "scripts": {
-    "test": "karma start",
+    "test":  "./node_modules/.bin/karma start --single-run",
     "build": "gulp build --development"
   },
   "keywords": [
     "karma",
+    "history",
     "react",
     "babel",
     "react",
@@ -53,6 +54,9 @@
     "yargs": "3.32.0",
     "gulp": "^3.9.0"
   },
-  "author": "Eric Hulburd",
+  "author": {
+    "name": "Arbolista Development",
+    "url": "http://www.arbolista.mx"
+  },
   "license": "ISC"
 }
