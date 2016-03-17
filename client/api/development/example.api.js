@@ -1,17 +1,12 @@
 const ENDPOINT = '/data/v1/example';
 
 class ExampleApi {
-
+  // replace with jQuery.ajax, etc
   static index(params){
-    return jQuery.ajax({
-      url: ENDPOINT,
-      data: JSON.stringify(params),
-      contentType: 'application/json',
-      type: 'POST',
-      dataType: 'json'
-    }).then((res)=>{
-      return res.data;
-    });
+    return Promise.resolve([
+        {id: 1, name: 'howdy'},
+        {id: 2, name: 'ho'}
+      ]);
   }
 
 }

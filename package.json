@@ -23,6 +23,7 @@
     "babel-cli": "^6.3.17",
     "babel-plugin-add-module-exports": "^0.1.2",
     "webpack": "1.12.9",
+    "extract-text-webpack-plugin": "1.0.1",
     "jasmine-core": "2.4.1",
     "jasmine-es6": "0.1.4",
     "karma": "^0.13.19",
@@ -48,7 +49,9 @@
     "style-loader": "^0.12.3",
     "json-loader": "0.5.4",
     "react-templates": "0.4.1",
-    "react-templates-loader": "0.4.0"
+    "react-templates-loader": "0.4.0",
+    "yargs": "3.32.0",
+    "gulp": "^3.9.0"
   },
   "author": "Eric Hulburd",
   "license": "ISC"
