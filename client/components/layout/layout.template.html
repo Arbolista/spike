@@ -1,0 +1,19 @@
+<div id="layout">
+  <h1>Basic Layout Component</h1>
+  <div rt-if="!this.state.example" class="alert alert-warning">
+    Choose an example.
+  </div>
+  <div rt-if="this.state.example" class="alert alert-info">
+    {this.state.example.introduce()}
+  </div>
+  <div class="btn-group" role="group">
+    <button
+      rt-repeat="example in this.props.examples"
+      key="{example.scoped_id}"
+      data-param="example_id"
+      data-value="{example.data.id}"
+      rt-class="{active: this.example && this.example.data.id === example.data.id}"
+      onClick="{this.setParam.bind(this)}"
+      type="button" class="btn btn-primary">{example.data.name}</button>
+  </div>
+</div>

@@ -1,8 +1,8 @@
 // Require babel polyfill for browser.
 require('babel-polyfill');
 
-var testsContext = require.context('./spec', true, /\.spec\.js$/);
-testsContext.keys().forEach(testsContext);
+var componentContext = require.context('./client/components', true, /\.component\.js$/);
+componentContext.keys().forEach(componentContext);
 
-var srcContext = require.context('./src', true, /\.js$/);
-srcContext.keys().forEach(srcContext);
+var testContext = require.context('./client', true, /\.test\.js$/);
+testContext.keys().forEach(testContext);
