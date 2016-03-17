@@ -1,5 +1,7 @@
 # React Server Base
 
+[![Build Status](https://travis-ci.org/arbolista-dev/react-server-base)](https://travis-ci.org/arbolista-dev/react-server-base)
+
 This repository is intended for cloning to get up and running with the following stack:
 - [React](https://facebook.github.io/react/)
 - [React Templates](http://wix.github.io/react-templates/)
