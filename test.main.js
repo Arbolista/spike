@@ -4,5 +4,5 @@ require('babel-polyfill');
 var componentContext = require.context('./client/components', true, /\.component\.js$/);
 componentContext.keys().forEach(componentContext);
 
-var testContext = require.context('./client', true, /\.test\.js$/);
-testContext.keys().forEach(testContext);
+var componentTestContext = require.context('./client/components', true, /\.test\.js$/);
+componentTestContext.keys().forEach(componentTestContext);
