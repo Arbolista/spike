@@ -55,7 +55,8 @@
     "react-templates": "0.4.1",
     "react-templates-loader": "0.4.0",
     "yargs": "3.32.0",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-copy": "0.0.2"
   },
   "dependencies": {},
   "author": {

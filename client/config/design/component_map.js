@@ -1,0 +1,1 @@
+export const COMPONENT_MAP = {"layout":"components/layout/layout"}
