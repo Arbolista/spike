@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Basic architecture and dependencies for creating a React app alongside a server api.",
   "scripts": {
-    "test":  "./node_modules/.bin/karma start --single-run",
+    "test":  "test run test_client && test run test_server",
+    "test_client": "./node_modules/.bin/karma start --single-run",
+    "test_server": "babel-node test.server.js",
     "build": "gulp build --env development",
     "start": "babel-node ./server/run.js"
   },
@@ -26,10 +28,12 @@
     "babel-loader": "6.2.0",
     "babel-cli": "^6.3.17",
     "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-react-templates": "^1.0.1",
     "webpack": "1.12.9",
     "extract-text-webpack-plugin": "1.0.1",
     "jasmine": "^2.4.1",
     "jasmine-core": "2.4.1",
+    "cheerio": "0.20.0 ",
     "karma": "^0.13.19",
     "karma-webpack": "^1.7.0",
     "karma-phantomjs-launcher": "1.0.0",
@@ -60,17 +64,15 @@
     "yargs": "3.32.0",
     "gulp": "^3.9.0",
     "webpack-dev-server": "1.14.0",
-    "express-mock-request": "0.0.2"
+    "supertest": "1.2.0"
   },
   "dependencies": {
     "express": "4.13.3",
-    "pg": "~4.4.3",
-    "pg-hstore": "~2.3.2",
     "morgan": "~1.5.1",
     "body-parser": "~1.12.0",
     "debug": "~2.1.1",
     "serve-favicon": "~2.2.0",
-    "jade": "~1.9.2"
+    "ejs": "~2.4.1"
   },
   "author": {
     "name": "Arbolista Development",

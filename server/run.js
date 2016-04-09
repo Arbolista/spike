@@ -1,5 +1,9 @@
+import path from 'path';
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var App = require(path.join(__dirname, 'config', process.env.NODE_ENV, 'app'));
+var env_server_path = path.join(__dirname, 'config', process.env.NODE_ENV, 'server'),
+  env_server_class = require(env_server_path).default,
+  server = new env_server_class();
 
-App.run();
+server.run();

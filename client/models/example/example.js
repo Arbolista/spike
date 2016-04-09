@@ -1,24 +1,25 @@
 import ExampleApi from 'api/example.api';
-class Example {
+import ExampleBase from 'shared/models/example';
 
-  constructor(data){
-    var example = this;
-    example.data = data;
-  }
+class Example extends ExampleBase {
 
-  get scoped_id(){
-    var example = this;
-    return `example-${example.data.id}`;
-  }
-
-  introduce(){
-    var example = this;
-    return "Hi, I'm " + example.data.name + "!";
+  // Check for the cached data (ie Energy.store) and PrerenderData before fetching data from API.
+  static ensureExamples(){
+    if (Example.store.size() > 0){
+      return Promise.resolve(Array.from(Example.store.values()));
+    } else if (window.PrerenderData && window.PrerenderData.examples){
+      for (var datum of window.PrerenderData.examples){
+        Example.store.set(datum.id, new Example(datum));
+      }
+      return Promise.resolve(Array.from(Example.store.values()));
+    } else {
+      return Example.getExamples();
+    }
   }
 
   // this is for example purposes only.
   // We should update this when we've decided on a good data store framework.
-  static getExamples(){
+  static getExamples(done){
     return ExampleApi.index()
       .then((example_data)=>{
         for (var datum of example_data){
@@ -28,7 +29,5 @@ class Example {
       });
   }
 }
-
-Example.store = new Map();
 
 export default Example;

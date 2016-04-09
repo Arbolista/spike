@@ -5,14 +5,14 @@ module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     files: [
-      'test.main.js',
+      'test.client.js',
     ],
     basePath: './',
     frameworks: [
       'jasmine',
     ],
     preprocessors: {
-      'test.main.js': ['webpack', 'sourcemap'],
+      'test.client.js': ['webpack', 'sourcemap'],
     },
     reporters: ['progress'],
     webpack: webpack_config

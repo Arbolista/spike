@@ -1,5 +1,6 @@
+// Configure this with test data.
 class ExampleApi{
-  static index(){
+  static index(done){
     return Promise.resolve([
         {id: 1, name: 'howdy'},
         {id: 2, name: 'ho'}

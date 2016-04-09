@@ -17,8 +17,8 @@ module.exports = {
     ],
     loaders: [
       {
-        test: /^((?!test\.js$).)*$/,
-        include: /client/,
+        test: /^((?!test\.js$).)*\.js$/,
+        include: /(client|shared)/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
@@ -40,7 +40,10 @@ module.exports = {
   resolve: {
       alias: {
           api: __dirname + '/../../api/test',
-          config: __dirname + '/../../config/test'
+          config: __dirname + '/../../config/test',
+          models: __dirname + '/../../models',
+          lib: __dirname + '/../../lib',
+          shared: __dirname + '/../../../shared'
       }
   }
 };

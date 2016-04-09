@@ -9,6 +9,7 @@ module.exports = {
     app: __dirname + '/app',
     style: __dirname + '/style'
   },
+  devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: __dirname + '/../../build/development'
@@ -27,9 +28,6 @@ module.exports = {
           }, {
             test: /\.json$/,
             loader: 'json'
-          }, {
-            test: /\.template\.html/,
-            loader: "react-templates-loader?targetVersion=0.14.0"
           }
       ]
   },
@@ -52,7 +50,10 @@ module.exports = {
   resolve: {
       alias: {
           api: __dirname + '/../../api/development',
-          config: __dirname + '/../../config/development'
+          config: __dirname + '/../../config/development',
+          models: __dirname + '/../../models',
+          lib: __dirname + '/../../lib',
+          shared: __dirname + '/../../../shared'
       }
   }
 }
