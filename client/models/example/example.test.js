@@ -1,3 +1,5 @@
+/*global describe it expect*/
+
 import Example from './example';
 
 describe('Example', ()=>{

@@ -1,3 +1,5 @@
+/*global Promise*/
+
 import StateManagerBase from './../../../shared/lib/state_manager';
 import Example from './../../models/example/example';
 

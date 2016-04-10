@@ -5,6 +5,8 @@ import ServerBase from './../server.base';
 
 const APP_PORT = 3000;
 
+/*global console*/
+
 class Server extends ServerBase {
 
   constructor(){
@@ -18,7 +20,7 @@ class Server extends ServerBase {
     server.config();
 
     server.app.listen(APP_PORT, () => {
-      console.log(`App is now running on ${os.hostname()}`);
+      console.info(`App is now running on ${os.hostname()}`);
     });
   }
 

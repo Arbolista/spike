@@ -1,3 +1,5 @@
+/*global Promise*/
+
 import ExampleBase from './../../../shared/models/example';
 
 class Example extends ExampleBase {
@@ -13,7 +15,7 @@ class Example extends ExampleBase {
 
   // this is for example purposes only.
   static getExamples(){
-    return new Promise((fnResolve, fnReject)=>{
+    return new Promise((fnResolve, _fnReject)=>{
       var a = [{id: 1, name: 'howdy'}, {id: 2, name: 'ho'}];
       for (var datum of a){
         Example.store.set(datum.id, new Example(datum));

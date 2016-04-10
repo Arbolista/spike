@@ -1,3 +1,5 @@
+/*global __dirname module*/
+
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
@@ -20,10 +22,10 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "raw-loader!sass-loader")
+        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader!sass-loader')
       }, {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "raw-loader")
+        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader')
       }, {
         test: /\.js$/,
         loader: 'babel'
@@ -32,7 +34,7 @@ module.exports = {
         loader: 'json'
       }, {
         test: /\.template\.html/,
-        loader: "react-templates-loader?targetVersion=0.14.0"
+        loader: 'react-templates-loader?targetVersion=0.14.0'
       }
     ]
   },
@@ -40,26 +42,26 @@ module.exports = {
     includePaths: [CLIENT, ROOT + '/node_modules']
   },
   plugins: [
-    new ExtractTextPlugin("style.css", {
+    new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
     new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     }),
     new webpack.optimize.UglifyJsPlugin({minimize: true})
   ],
   node: {
-    fs: "empty"
+    fs: 'empty'
   },
   resolve: {
-      alias: {
-          api: __dirname + '/../../api/production',
-          config: __dirname + '/../../config/production',
-          models: __dirname + '/../../models',,
-          lib: __dirname + '/../../lib',
-          shared: __dirname + '/../../../shared'
-      }
+    alias: {
+      api: __dirname + '/../../api/production',
+      config: __dirname + '/../../config/production',
+      models: __dirname + '/../../models',
+      lib: __dirname + '/../../lib',
+      shared: __dirname + '/../../../shared'
+    }
   }
 }

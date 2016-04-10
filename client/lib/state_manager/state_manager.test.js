@@ -1,3 +1,5 @@
+/*global it expect describe*/
+
 import StateManager from './state_manager';
 
 var state_manager = new StateManager();
@@ -11,7 +13,7 @@ state_manager.getInitialData()
         expect(state_manager.examples.length).toEqual(2);
       });
 
-      it('can update state from location object with example specific route', ()=>{
+      it('can update state from location object with example specific route', (done)=>{
         state_manager.updateStateFromUrl({pathname: '/examples/1', query: ''})
           .then(()=>{
             expect(state_manager.state.example.id).toEqual(1);
@@ -19,7 +21,7 @@ state_manager.getInitialData()
           });
       });
 
-      it('can update state from location object', ()=>{
+      it('can update state from location object', (done)=>{
         state_manager.updateStateFromUrl({pathname: '/', query: ''})
           .then(()=>{
             expect(state_manager.state.example).toEqual(undefined);

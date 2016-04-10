@@ -1,3 +1,5 @@
+/*global Promise*/
+
 // In production, you would want to configure this to make
 // AJAX calls to your production server.
 class ExampleApi{
@@ -5,7 +7,7 @@ class ExampleApi{
     return Promise.resolve([
         {id: 1, name: 'howdy'},
         {id: 2, name: 'ho'}
-      ]);
+    ]);
   }
 }
 

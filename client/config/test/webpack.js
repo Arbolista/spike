@@ -1,3 +1,5 @@
+/*global require module __dirname*/
+
 var webpack = require('webpack');
 
 module.exports = {
@@ -11,8 +13,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          cacheDirectory: true,
-        },
+          cacheDirectory: true
+        }
       }
     ],
     loaders: [
@@ -26,24 +28,24 @@ module.exports = {
         }
       }, {
         test: /\.template\.html/,
-        loader: "react-templates-loader?targetVersion=0.14.0"
+        loader: 'react-templates-loader?targetVersion=0.14.0'
       }
-    ],
+    ]
   },
   plugins: [
-      new webpack.ProvidePlugin({
-          $: "jquery",
-          jQuery: "jquery",
-          "window.jQuery": "jquery"
-      })
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    })
   ],
   resolve: {
-      alias: {
-          api: __dirname + '/../../api/test',
-          config: __dirname + '/../../config/test',
-          models: __dirname + '/../../models',
-          lib: __dirname + '/../../lib',
-          shared: __dirname + '/../../../shared'
-      }
+    alias: {
+      api: __dirname + '/../../api/test',
+      config: __dirname + '/../../config/test',
+      models: __dirname + '/../../models',
+      lib: __dirname + '/../../lib',
+      shared: __dirname + '/../../../shared'
+    }
   }
 };

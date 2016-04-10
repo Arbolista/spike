@@ -1,3 +1,5 @@
+/*global describe it expect console*/
+
 import cheerio from 'cheerio';
 import request from 'supertest';
 
@@ -22,10 +24,10 @@ describe('base route', ()=>{
         }
         try {
           expect(res.status).toEqual(200);
-          expect(res.header['content-type']).toEqual("text/html; charset=utf-8");
+          expect(res.header['content-type']).toEqual('text/html; charset=utf-8');
 
           var body = res.text,
-            $ = cheerio.load(body);
+              $ = cheerio.load(body);
           expect($('meta[name="example_id"]').length).toEqual(0);
           expect($('#prerender_data').text()).toMatch(JSON.stringify(DEFAULT_EXAMPLES));
           expect($('.alert-warning').text()).toMatch('Choose an example');
@@ -45,7 +47,6 @@ describe('base route', ()=>{
 describe('example specific route', ()=>{
 
   it('properly prerenders app', (done)=>{
-    console.log('========================')
     request(server.app)
       .get('/examples/1')
       .end((err, res)=>{
@@ -56,13 +57,13 @@ describe('example specific route', ()=>{
         }
         try {
           expect(res.status).toEqual(200);
-          expect(res.header['content-type']).toEqual("text/html; charset=utf-8");
+          expect(res.header['content-type']).toEqual('text/html; charset=utf-8');
 
           var $ = cheerio.load(res.text);
           expect($('meta[name="example_id"]').attr('content')).toEqual('1');
           expect($('#prerender_data').text()).toMatch(JSON.stringify(DEFAULT_EXAMPLES));
           expect($('.alert-warning').length).toEqual(0);
-          expect($('.alert-info').text()).toMatch("Hi, I'm howdy");
+          expect($('.alert-info').text()).toMatch('Hi, I\'m howdy');
 
           done();
         } catch (err) {
@@ -71,7 +72,7 @@ describe('example specific route', ()=>{
           done();
         }
 
-    });
+      });
   });
 
 });

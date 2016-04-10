@@ -1,18 +1,19 @@
-var path = require('path'),
-  webpack_config = require('./client/config/test/webpack');
+/*global module require*/
+
+var webpack_config = require('./client/config/test/webpack');
 
 module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     files: [
-      'test.client.js',
+      'test.client.js'
     ],
     basePath: './',
     frameworks: [
-      'jasmine',
+      'jasmine'
     ],
     preprocessors: {
-      'test.client.js': ['webpack', 'sourcemap'],
+      'test.client.js': ['webpack', 'sourcemap']
     },
     reporters: ['progress'],
     webpack: webpack_config

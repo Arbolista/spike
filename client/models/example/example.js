@@ -1,3 +1,5 @@
+/*global Promise window*/
+
 import ExampleApi from 'api/example.api';
 import ExampleBase from 'shared/models/example';
 
@@ -19,7 +21,7 @@ class Example extends ExampleBase {
 
   // this is for example purposes only.
   // We should update this when we've decided on a good data store framework.
-  static getExamples(done){
+  static getExamples(){
     return ExampleApi.index()
       .then((example_data)=>{
         for (var datum of example_data){

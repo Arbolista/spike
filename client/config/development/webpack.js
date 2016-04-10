@@ -1,3 +1,5 @@
+/*global __dirname module*/
+
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
@@ -15,45 +17,45 @@ module.exports = {
     path: __dirname + '/../../build/development'
   },
   module: {
-      loaders: [
-        {
-          test: /\.scss$/,
-          loader: ExtractTextPlugin.extract("style-loader", "raw-loader!sass-loader")
-        }, {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract("style-loader", "raw-loader")
-        }, {
-            test: /\.js$/,
-            loader: 'babel'
-          }, {
-            test: /\.json$/,
-            loader: 'json'
-          }
-      ]
+    loaders: [
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader!sass-loader')
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader')
+      }, {
+        test: /\.js$/,
+        loader: 'babel'
+      }, {
+        test: /\.json$/,
+        loader: 'json'
+      }
+    ]
   },
   sassLoader: {
     includePaths: [CLIENT, ROOT + '/node_modules']
   },
   plugins: [
-    new ExtractTextPlugin("style.css", {
+    new ExtractTextPlugin('style.css', {
       allChunks: true
     }),
     new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     })
   ],
   node: {
-    fs: "empty"
+    fs: 'empty'
   },
   resolve: {
-      alias: {
-          api: __dirname + '/../../api/development',
-          config: __dirname + '/../../config/development',
-          models: __dirname + '/../../models',
-          lib: __dirname + '/../../lib',
-          shared: __dirname + '/../../../shared'
-      }
+    alias: {
+      api: __dirname + '/../../api/development',
+      config: __dirname + '/../../config/development',
+      models: __dirname + '/../../models',
+      lib: __dirname + '/../../lib',
+      shared: __dirname + '/../../../shared'
+    }
   }
 }

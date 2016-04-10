@@ -1,8 +1,9 @@
+/*global module*/
+
 import React from 'react';
-import { createHistory } from 'history';
-import _ from 'lodash';
 
 import template from './layout.rt.html';
+import StateManager from './../../lib/state_manager/state_manager'
 
 class LayoutComponent extends React.Component {
 
@@ -31,8 +32,8 @@ class LayoutComponent extends React.Component {
 
   setParam(event){
     var layout = this,
-      param = event.target.dataset.param,
-      value = event.target.dataset.value;
+        param = event.target.dataset.param,
+        value = event.target.dataset.value;
     layout.state_manager.setParams({
       [param]: value
     });
@@ -55,6 +56,9 @@ class LayoutComponent extends React.Component {
 
 }
 
+LayoutComponent.propTypes = {
+  state_manager: React.PropTypes.instanceOf(StateManager)
+};
 LayoutComponent.NAME = 'Layout';
 
 module.exports = LayoutComponent;

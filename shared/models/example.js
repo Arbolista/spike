@@ -1,3 +1,5 @@
+/*global Map*/
+
 export default class Example {
 
   constructor(data){
@@ -12,7 +14,7 @@ export default class Example {
 
   introduce(){
     var example = this;
-    return "Hi, I'm " + example.data.name + "!";
+    return "Hi, I'm " + example.data.name + '!';
   }
 
   static get store(){

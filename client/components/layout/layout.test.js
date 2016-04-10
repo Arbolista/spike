@@ -1,9 +1,10 @@
+/*global describe it expect console*/
+
 import TestUtils from 'react-addons-test-utils';
 import createHistory from 'history/lib/createHashHistory';
 import React from 'react';
 import _ from 'lodash';
 
-import Example from 'models/example/example';
 import Layout from './layout.component';
 import StateManager from 'lib/state_manager/state_manager';
 
@@ -13,10 +14,10 @@ describe('layout component', ()=>{
     state_manager.getInitialData()
       .then(()=>{
         var initial_props = Object.assign({state_manager: state_manager}, state_manager.state, {createHistory: createHistory}),
-          alert;
+            alert;
         const layout = TestUtils.renderIntoDocument(React.createElement(Layout, initial_props) );
         alert = TestUtils.findRenderedDOMComponentWithClass(layout, 'alert-warning'),
-        expect(_.trim(alert.textContent)).toEqual("Choose an example.");
+        expect(_.trim(alert.textContent)).toEqual('Choose an example.');
         expect(layout.state.example).toEqual(undefined);
         done();
       });
@@ -51,7 +52,7 @@ describe('layout component', ()=>{
           // click a button to select an example
           TestUtils.Simulate.click(buttons[0]);
         } catch (err){
-          console.log(err)
+          console.error(err)
           expect(false).toEqual(true);
           done();
         }

@@ -19,11 +19,8 @@ export default class StateManager {
   updateStateFromUrl(location){
     // this will set StateManager#state and
     // call state_manager#updateDataFromState.
-    console.log('StateManager#updateStateFromUrl')
     var state_manager = this,
-      params = state_manager.parseUrl(location.pathname);
-    console.log('state manager params')
-    console.log(params)
+        params = state_manager.parseUrl(location.pathname);
     if (params.example_id){
       state_manager.state.example = state_manager.examples.find(example=> example.data.id === parseInt(params.example_id) )
     } else {
@@ -36,7 +33,7 @@ export default class StateManager {
    * Parse Url Parameters
    */
 
-  parseUrl(url, query){
+  parseUrl(url, _query){
     for (var route of ROUTES){
       var match = url.match(route.path);
       if (match){

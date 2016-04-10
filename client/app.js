@@ -1,3 +1,5 @@
+/*global document*/
+
 import 'babel-polyfill';
 import 'bootstrap/dist/js/bootstrap.min';
 import React from 'react';
@@ -18,4 +20,4 @@ export default function(createHistory){
         document.getElementById('root')
       );
     });
-};
+}

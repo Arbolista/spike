@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Basic architecture and dependencies for creating a React app alongside a server api.",
   "scripts": {
-    "test":  "test run test_client && test run test_server",
+    "test":  "npm run test_client && npm run test_server && npm run lint",
     "test_client": "./node_modules/.bin/karma start --single-run",
     "test_server": "babel-node test.server.js",
+    "lint": "eslint --fix .",
     "build": "gulp build --env development",
     "start": "babel-node ./server/run.js"
   },
@@ -28,7 +29,7 @@
     "babel-loader": "6.2.0",
     "babel-cli": "^6.3.17",
     "babel-plugin-add-module-exports": "^0.1.2",
-    "babel-plugin-react-templates": "^1.0.1",
+    "babel-plugin-react-templates": "^1.1.0",
     "webpack": "1.12.9",
     "extract-text-webpack-plugin": "1.0.1",
     "jasmine": "^2.4.1",
@@ -64,7 +65,10 @@
     "yargs": "3.32.0",
     "gulp": "^3.9.0",
     "webpack-dev-server": "1.14.0",
-    "supertest": "1.2.0"
+    "supertest": "1.2.0",
+    "eslint": "2.7.0",
+    "eslint-plugin-react": "4.3.0",
+    "babel-eslint": "6.0.2"
   },
   "dependencies": {
     "express": "4.13.3",

@@ -1,3 +1,5 @@
+/*global require*/
+
 // this script is run through karma (see npm test).
 
 // Require babel polyfill for browser.

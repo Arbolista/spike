@@ -1,3 +1,5 @@
+/*global Promise document window*/
+
 import Example from 'models/example/example';
 import StateManagerBase from 'shared/lib/state_manager';
 
@@ -56,7 +58,7 @@ class StateManager extends StateManagerBase {
 
   setParams(params){
     var state_manager = this,
-      url;
+        url;
     if (state_manager.update_in_progress) return false;
     state_manager.update_in_progress = true;
 
@@ -74,7 +76,7 @@ class StateManager extends StateManagerBase {
 
   updateComponentsFromUrl(location, component){
     var state_manager = this;
-    return new Promise((fnResolve, fnReject)=>{
+    return new Promise((fnResolve, _fnReject)=>{
       // sets StateManager#state and
       // then gets the necessary data for that state (StateManager#updateDataFromState).
       state_manager.updateStateFromUrl(location)
@@ -92,8 +94,7 @@ class StateManager extends StateManagerBase {
    */
 
   destroyPrerenderData(){
-    var state_manager = this,
-      prerender_data = document.getElementById('prerender_data');
+    var prerender_data = document.getElementById('prerender_data');
     window.PrerenderData = undefined;
     if (prerender_data) prerender_data.parentNode.removeChild(prerender_data);
   }

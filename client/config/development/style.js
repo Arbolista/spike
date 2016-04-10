@@ -1,3 +1,5 @@
+/*global require __dirname*/
+
 // Vendor Stylesheets
 require('bootstrap/dist/css/bootstrap.min.css');
 

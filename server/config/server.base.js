@@ -4,16 +4,17 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import fs from 'fs';
 
 import Layout from './../../client/components/layout/layout.component';
 import StateManager from './../lib/state_manager/state_manager';
+
+/*global __dirname*/
 
 class ServerBase {
 
   config(){
     var server = this,
-      app = server.app;
+        app = server.app;
 
     // serve public static files.
     app.use('/', express.static(path.resolve(__dirname, '..', 'assets')));
@@ -25,15 +26,13 @@ class ServerBase {
     app.set('view engine', 'ejs');
     app.set('views', path.resolve(__dirname, '..', 'views'));
 
-    app.get("*", ServerBase.renderReact);
+    app.get('*', ServerBase.renderReact);
   }
 
-  static renderReact(req, res, next){
+  static renderReact(req, res, _next){
     var state_manager = new StateManager();
     return state_manager.getInitialData()
       .then(()=>{
-        console.log('path')
-        console.log(req.path)
         return state_manager.updateStateFromUrl({
           pathname: req.path,
           query: req.query
@@ -41,20 +40,19 @@ class ServerBase {
       })
       .then(()=>{
         var props = Object.assign({state_manager: state_manager}, state_manager.state),
-          layout = React.createFactory(Layout)(props),
-          meta = {},
-          prerender_content = ReactDOMServer.renderToString(layout);
+            layout = React.createFactory(Layout)(props),
+            meta = {},
+            prerender_content = ReactDOMServer.renderToString(layout);
 
         if (state_manager.state.example){
           meta.example_id = state_manager.state.example.data.id;
         }
         res.set('Content-Type', 'text/html');
-        res.render("index", {
+        res.render('index', {
           prerender_content: prerender_content,
           prerender_data: {examples: state_manager.examples},
           meta: meta
         });
-        console.log('apparently rendered')
         return undefined
       });
   }
