@@ -1,10 +1,15 @@
 {
-  "name": "react-server-basekarma ",
-  "version": "1.0.0",
+  "name": "react-server-base ",
+  "version": "1.0.1",
   "description": "Basic architecture and dependencies for creating a React app alongside a server api.",
   "scripts": {
-    "test":  "./node_modules/.bin/karma start --single-run",
-    "build": "gulp build --development"
+    "test":  "npm run test_client && npm run test_server && npm run lint",
+    "test_client": "BABEL_DISABLE_CACHE=1 karma start --single-run",
+    "test_server": "BABEL_DISABLE_CACHE=1 babel-node test.server.js",
+    "lint": "eslint --fix .",
+    "build": "gulp build --env development",
+    "develop": "BABEL_DISABLE_CACHE=1 npm start",
+    "start": "babel-node ./server/run.js"
   },
   "keywords": [
     "karma",
@@ -12,6 +17,8 @@
     "react",
     "babel",
     "react",
+    "express",
+    "webpack",
     "es6"
   ],
   "devDependencies": {
@@ -23,10 +30,12 @@
     "babel-loader": "6.2.0",
     "babel-cli": "^6.3.17",
     "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-react-templates": "^1.1.0",
     "webpack": "1.12.9",
     "extract-text-webpack-plugin": "1.0.1",
     "jasmine": "^2.4.1",
     "jasmine-core": "2.4.1",
+    "cheerio": "0.20.0 ",
     "karma": "^0.13.19",
     "karma-webpack": "^1.7.0",
     "karma-phantomjs-launcher": "1.0.0",
@@ -55,9 +64,21 @@
     "react-templates": "0.4.1",
     "react-templates-loader": "0.4.0",
     "yargs": "3.32.0",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "webpack-dev-server": "1.14.0",
+    "supertest": "1.2.0",
+    "eslint": "2.7.0",
+    "eslint-plugin-react": "4.3.0",
+    "babel-eslint": "6.0.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "4.13.3",
+    "morgan": "~1.5.1",
+    "body-parser": "~1.12.0",
+    "debug": "~2.1.1",
+    "serve-favicon": "~2.2.0",
+    "ejs": "~2.4.1"
+  },
   "author": {
     "name": "Arbolista Development",
     "url": "http://www.arbolista.mx"

@@ -1,3 +1,5 @@
+/*global process require __dirname*/
+
 import gulp from 'gulp';
 import yargs from 'yargs';
 import webpack from 'webpack';
@@ -9,9 +11,9 @@ gulp.task('build', function(done) {
   var config = require(`${__dirname}/client/config/${process.env.NODE_ENV}/webpack.js`);
   webpack(config, function(err, stats) {
     if (err){
-      throw new gutil.PluginError("webpack", err);
+      throw new gutil.PluginError('webpack', err);
     }
-    gutil.log("[webpack]", stats.toString({}));
+    gutil.log('[webpack]', stats.toString({}));
     done();
   });
 });

@@ -1,7 +1,7 @@
 /*global Promise*/
 
-// In development, you would want to configure this to make
-// AJAX calls to a locally running or staging server.
+// In production, you would want to configure this to make
+// AJAX calls to your production server.
 class ExampleApi{
   static index(){
     return Promise.resolve([

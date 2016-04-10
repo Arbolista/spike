@@ -1,0 +1,11 @@
+{
+    "spec_dir": "server",
+    "spec_files": [
+        "models/**/*.test.js",
+        "lib/**/*.test.js",
+        "test/**/*.test.js"
+    ],
+    "helpers": [
+      "./test/helpers/**/*.js"
+    ]
+}

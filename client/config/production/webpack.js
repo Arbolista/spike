@@ -6,15 +6,17 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const CLIENT = __dirname + '/../..';
 const ROOT = CLIENT + '/..';
 
+// compile development app here.
+
 module.exports = {
   entry: {
-    app: __dirname + '/app',
-    style: __dirname + '/style'
+    app: __dirname + '/../development/app',
+    style: __dirname + '/../development/style'
   },
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: __dirname + '/../../build/development'
+    path: __dirname + '/../assets'
   },
   module: {
     loaders: [
@@ -44,15 +46,16 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
   ],
   node: {
     fs: 'empty'
   },
   resolve: {
     alias: {
-      api: __dirname + '/../../api/development',
-      config: __dirname + '/../../config/development',
+      api: __dirname + '/../../api/production',
+      config: __dirname + '/../../config/production',
       models: __dirname + '/../../models',
       lib: __dirname + '/../../lib',
       shared: __dirname + '/../../../shared'

@@ -5,7 +5,7 @@ import Example from './example';
 describe('Example', ()=>{
   it('can introduce itself', ()=>{
     let example = new Example({name: 'Jeremy'});
-    expect(example.introduce()).toEqual("Hi, I'm Jeremy!");
+    expect(example.introduce()).toEqual('Hi, I\'m Jeremy!');
   });
 
   it('can retrieve test data', (done)=>{

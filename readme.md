@@ -1,5 +1,6 @@
 # React Server Base
 
+[![NPM version][npm-image]][npm-url]
 [![Build Status](https://travis-ci.org/arbolista-dev/react-server-base.svg?branch=master)](https://travis-ci.org/arbolista-dev/react-server-base)
 
 This repository is intended for cloning to get up and running with the following stack:
@@ -34,9 +35,30 @@ cd ./client/build/development
 python3 -m http.server
 ```
 
-Run tests.
+## Developing
+
+To run the development server,
+
+```sh
+npm run develop
 ```
-karma start
+
+## Testing
+
+`npm test` is equivalent to:
+
 ```
+BABEL_DISABLE_CACHE=1 karma start --single-run
+BABEL_DISABLE_CACHE=1 babel-node test.server.js
+eslint --fix .
+```
+
+`test_client` runs
+
+## Needs improvement
+
+Currently, any changes made to React templates are not seen by Webpack's watcher, so you have to force a change in the React component class for Webpack to load the changes in your template files.
+
+The alternative is to set `cache: false` in the development webpack configuration file. However, this dramatically slows down hot patching.
 
 
