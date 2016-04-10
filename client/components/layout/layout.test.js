@@ -13,10 +13,9 @@ describe('layout component', ()=>{
     var state_manager = new StateManager();
     state_manager.getInitialData()
       .then(()=>{
-        var initial_props = Object.assign({state_manager: state_manager}, state_manager.state, {createHistory: createHistory}),
-            alert;
-        const layout = TestUtils.renderIntoDocument(React.createElement(Layout, initial_props) );
-        alert = TestUtils.findRenderedDOMComponentWithClass(layout, 'alert-warning'),
+        const initial_props = Object.assign({state_manager: state_manager}, state_manager.state, {createHistory: createHistory}),
+            layout = TestUtils.renderIntoDocument(React.createElement(Layout, initial_props) ),
+            alert = TestUtils.findRenderedDOMComponentWithClass(layout, 'alert-warning');
         expect(_.trim(alert.textContent)).toEqual('Choose an example.');
         expect(layout.state.example).toEqual(undefined);
         done();
@@ -26,8 +25,8 @@ describe('layout component', ()=>{
     var state_manager = new StateManager();
     state_manager.getInitialData()
       .then(()=>{
-        var initial_props = Object.assign({state_manager: state_manager}, state_manager.state, {createHistory: createHistory});
-        var layout = TestUtils.renderIntoDocument(React.createElement(Layout, initial_props) );
+        var initial_props = Object.assign({state_manager: state_manager}, state_manager.state, {createHistory: createHistory}),
+            layout = TestUtils.renderIntoDocument(React.createElement(Layout, initial_props) );
         try {
           var buttons = TestUtils.scryRenderedDOMComponentsWithClass(layout, 'btn-primary');
           expect(buttons.length).toEqual(2);
@@ -36,7 +35,7 @@ describe('layout component', ()=>{
             if (new_location.action !== 'PUSH') return false;
 
             var info = TestUtils.findRenderedDOMComponentWithClass(layout, 'alert-info');
-            expect(_.trim(info.textContent)).toEqual("Hi, I'm howdy!");
+            expect(_.trim(info.textContent)).toEqual('Hi, I\'m howdy!');
 
             var selected = TestUtils.scryRenderedDOMComponentsWithClass(layout, 'active');
             expect(selected.length).toEqual(1);

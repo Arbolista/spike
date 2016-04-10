@@ -3,7 +3,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  cache: true,
+  cache: false,
   devtool: 'source-map',
   module: {
     preLoaders: [
@@ -13,7 +13,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          cacheDirectory: true
+          cacheDirectory: false
         }
       }
     ],
@@ -24,11 +24,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          cacheDirectory: true
+          cacheDirectory: false
         }
-      }, {
-        test: /\.template\.html/,
-        loader: 'react-templates-loader?targetVersion=0.14.0'
       }
     ]
   },

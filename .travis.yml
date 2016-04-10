@@ -2,5 +2,4 @@ language: node_js
 node_js:
   - "5"
 script:
-  - ./node_modules/.bin/karma start --single-run
-  - npm run test_server
+  - npm test

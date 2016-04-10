@@ -2,8 +2,8 @@
 
 import React from 'react';
 
+import StateManagerBase from './../../../shared/lib/state_manager';
 import template from './layout.rt.html';
-import StateManager from './../../lib/state_manager/state_manager'
 
 class LayoutComponent extends React.Component {
 
@@ -57,7 +57,7 @@ class LayoutComponent extends React.Component {
 }
 
 LayoutComponent.propTypes = {
-  state_manager: React.PropTypes.instanceOf(StateManager)
+  state_manager: React.PropTypes.instanceOf(StateManagerBase).isRequired
 };
 LayoutComponent.NAME = 'Layout';
 

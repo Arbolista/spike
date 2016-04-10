@@ -1,13 +1,14 @@
 {
   "name": "react-server-base ",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic architecture and dependencies for creating a React app alongside a server api.",
   "scripts": {
     "test":  "npm run test_client && npm run test_server && npm run lint",
-    "test_client": "./node_modules/.bin/karma start --single-run",
-    "test_server": "babel-node test.server.js",
+    "test_client": "BABEL_DISABLE_CACHE=1 karma start --single-run",
+    "test_server": "BABEL_DISABLE_CACHE=1 babel-node test.server.js",
     "lint": "eslint --fix .",
     "build": "gulp build --env development",
+    "develop": "BABEL_DISABLE_CACHE=1 npm start",
     "start": "babel-node ./server/run.js"
   },
   "keywords": [

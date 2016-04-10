@@ -16,7 +16,7 @@ state_manager.getInitialData()
       it('can update state from location object with example specific route', (done)=>{
         state_manager.updateStateFromUrl({pathname: '/examples/1', query: ''})
           .then(()=>{
-            expect(state_manager.state.example.id).toEqual(1);
+            expect(state_manager.state.example.data.id).toEqual(1);
             done();
           });
       });
