@@ -1,6 +1,5 @@
 # React Server Base
 
-[![NPM version][npm-image]][npm-url]
 [![Build Status](https://travis-ci.org/arbolista-dev/react-server-base.svg?branch=master)](https://travis-ci.org/arbolista-dev/react-server-base)
 
 This repository is intended for cloning to get up and running with the following stack:
