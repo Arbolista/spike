@@ -8,8 +8,8 @@
     "test_server": "BABEL_DISABLE_CACHE=1 babel-node test.server.js",
     "lint": "eslint --fix .",
     "build": "gulp build --env development",
-    "develop": "BABEL_DISABLE_CACHE=1 npm start",
-    "start": "babel-node ./server/run.js"
+    "start": "babel-node ./server/run.js",
+    "develop": "NODE_ENV=development npm start"
   },
   "keywords": [
     "karma",
