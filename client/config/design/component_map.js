@@ -1,1 +1,1 @@
-export const COMPONENT_MAP = {'layout':'components/layout/layout'}
+export const COMPONENT_MAP = {"layout":"components/layout/layout"}

@@ -35,7 +35,7 @@ class Templates {
 
   static evalTemplate(component_name, eval_context, fnResolve){
     window.jQuery.ajax({
-      url: COMPONENT_MAP[component_name] + '.template.html'
+      url: COMPONENT_MAP[component_name] + '.rt.html'
     }).done((template)=>{
       var code = react_templates.convertTemplateToReact(template, {modules: 'none', name: component_name});
       code = code.replace('var ' + component_name + ' = ', 'this.' + component_name + ' = ');

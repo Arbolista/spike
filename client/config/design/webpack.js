@@ -53,8 +53,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      api: CLIENT + '/api/' + process.env.NODE_ENV,
-      config: CLIENT + '/config/' + process.env.NODE_ENV
+      api: __dirname + '/../../api/design',
+      config: __dirname + '/../../config/design',
+      models: __dirname + '/../../models',
+      lib: __dirname + '/../../lib',
+      shared: __dirname + '/../../../shared'
     }
   }
 }

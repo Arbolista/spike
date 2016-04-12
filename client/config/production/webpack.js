@@ -6,7 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const CLIENT = __dirname + '/../..';
 const ROOT = CLIENT + '/..';
 
-// compile development app here.
+// NOTE: This configuration is exactly the same as development, except it is minimized and users the extract text plugin.
 
 module.exports = {
   entry: {
@@ -16,7 +16,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: __dirname + '/../assets'
+    path: __dirname + '/../../build/production'
   },
   module: {
     loaders: [

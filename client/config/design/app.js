@@ -12,6 +12,5 @@ Promise.all([
   Templates.sync(),
   Styles.sync()
 ]).then(()=>{
-  window.jQuery('#compiling_layouts').remove();
   app(useQueries(createHistory));
 });

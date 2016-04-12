@@ -38,17 +38,6 @@ Install dependencies
 npm install
 ```
 
-Compile client side React application.
-```
-gulp build --env development
-```
-
-Serve standalone React app.
-```
-cd ./client/build/development
-python3 -m http.server
-```
-
 ## Developing
 
 To run the Webpack development server,
@@ -66,19 +55,24 @@ BABEL_DISABLE_CACHE=1 karma start --single-run
 BABEL_DISABLE_CACHE=1 babel-node test.server.js
 eslint --fix .
 ```
-## Building the design pack
+
+Karma is used to test client side application interactions.
+
+Jasmine is used to test that the application successfully renders server side for a given URL (using [supertest](https://github.com/visionmedia/supertest) to mock requests).
+
+## Design Build
 
 To build a design pack, you first need to install [sass.js](https://github.com/medialize/sass.js/) in the design build directory so the design build can compile the sass in the browser.
 
 ```sh
-cd client/build/design
-git clone https://github.com/medialize/sass.js.git
+cd client/build/design/assets
+git clone https://github.com/medialize/sass.js.git sass
 ```
 
 Then build the app with webpack:
 
 ```sh
-gulp build --env design
+gulp run design
 ```
 
 The design app requires no backend, just a server so files can be downloaded with jQuery. For instance with Python or Python3:
@@ -94,10 +88,6 @@ In order for the design build to work, the following component naming convention
 - Component keys are internally generated.
   - For a base component, them naming convention is '{component_name}' from the path 'components/{component_name}/{component_name}.component.js'. For instance, a component at 'components/example/example.component.js' will be keyed as 'example'. This should be unique.
   - For a nested component (shouldn't be nested more than one level deep), the naming convention is '{base}_{component_name}' from the path 'components/{base}/{component_name}/{component_name}.component.js'. For instance, a component at 'components/example/graph/graph.component.js', will be keyed as 'example_graph'. This should be unique.
-
-Karma is used to test client side application interactions.
-
-Jasmine is used to test that the application successfully renders server side for a given URL (using [supertest](https://github.com/visionmedia/supertest) to mock requests).
 
 ## Areas for Improvement
 

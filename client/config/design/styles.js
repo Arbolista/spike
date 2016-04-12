@@ -43,7 +43,7 @@ class Styles {
   static addAppCss(){
     return new Promise((fnResolve, _fnReject)=>{
       window.jQuery.ajax({
-        url: '/components/app.scss'
+        url: '/assets/app.scss'
       })
       .fail(()=>{
         // if app.scss not found, fail silently.
