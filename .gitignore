@@ -3,3 +3,7 @@ client/build/design/assets
 client/build/design/components
 client/build/development/**/*.js
 client/build/development/**/*.css
+server/bin/
+client/build/**/*.js
+client/build/**/*.css
+npm-debug.log

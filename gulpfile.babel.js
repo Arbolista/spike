@@ -1,3 +1,5 @@
+/*eslint-env node*/
+
 import gulp from 'gulp';
 import gulpCopy from 'gulp-copy';
 import yargs from 'yargs';
@@ -16,22 +18,22 @@ gulp.task('build', function(done) {
     .then(()=>{
 
     // build assets/app.js and assets/style.css
-    var config = require(__dirname + `/client/config/${process.env.NODE_ENV}/webpack.js`);
-    webpack(config, function(err, stats) {
-      if (err){ console.log(err); done(); return false; }
-      gutil.log("[webpack]", stats.toString({}));
+      var config = require(__dirname + `/client/config/${process.env.NODE_ENV}/webpack.js`);
+      webpack(config, function(err, stats) {
+        if (err){ console.error(err); done(); return false; }
+        gutil.log('[webpack]', stats.toString({}));
 
-      if (process.env.NODE_ENV === 'design'){
-        var path = 'client/build/design/components';
+        if (process.env.NODE_ENV === 'design'){
+          var path = 'client/build/design/components';
         // copy all react templates and their styles sheets into build/design/components.
-        FsHelper.rmdirAsync(path, ()=>{
-          fs.mkdir(path, ()=>{
-            gulp.src([
-              `client/app.scss`
+          FsHelper.rmdirAsync(path, ()=>{
+            fs.mkdir(path, ()=>{
+              gulp.src([
+              'client/app.scss'
             ]).pipe(gulpCopy(path, {prefix: 1}));
 
-            FsHelper.walk('client/components', (err, files)=>{
-              if (err){ console.log(err); done(); return false; }
+              FsHelper.walk('client/components', (err, files)=>{
+              if (err){ console.error(err); done(); return false; }
               var files_to_copy = files.filter((file)=>{
                 return /\.(template\.html|scss)$/.test(file)
               });
@@ -39,11 +41,11 @@ gulp.task('build', function(done) {
                 .pipe(gulpCopy(path, {prefix: 2}));
               done()
             });
+            });
           });
-        });
-      } else {
-        done();
-      }
+        } else {
+          done();
+        }
+      });
     });
-  });
 });

@@ -1,3 +1,6 @@
+/*eslint-env browser*/
+/*global window Promise*/
+
 import createHistory from 'history/lib/createHashHistory';
 import { useQueries } from 'history';
 
@@ -9,6 +12,6 @@ Promise.all([
   Templates.sync(),
   Styles.sync()
 ]).then(()=>{
-  jQuery('#compiling_layouts').remove();
+  window.jQuery('#compiling_layouts').remove();
   app(useQueries(createHistory));
 });

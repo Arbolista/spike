@@ -1,3 +1,5 @@
+/*eslint-env node*/
+
 // Vendor Stylesheets
 require('bootstrap/dist/css/bootstrap.min.css');
 

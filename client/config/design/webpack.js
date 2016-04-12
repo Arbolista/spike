@@ -1,3 +1,5 @@
+/*eslint-env node*/
+
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import webpack from 'webpack';
 
@@ -14,45 +16,45 @@ module.exports = {
     path: CLIENT + '/build/design/assets'
   },
   module: {
-      loaders: [
-        {
-          test: /\.scss$/,
-          loader: ExtractTextPlugin.extract("style-loader", "raw-loader!sass-loader")
-        }, {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract("style-loader", "raw-loader")
-        }, {
-          test: /\.js$/,
-          loader: 'babel'
-        }, {
-          test: /\.json$/,
-          loader: 'json'
-        }, {
+    loaders: [
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader!sass-loader')
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader')
+      }, {
+        test: /\.js$/,
+        loader: 'babel'
+      }, {
+        test: /\.json$/,
+        loader: 'json'
+      }, {
           test: /\.template\.html/,
-          loader: "react-templates-loader?targetVersion=0.14.0"
+          loader: 'react-templates-loader?targetVersion=0.14.0'
         }
-      ]
+    ]
   },
   sassLoader: {
     includePaths: [CLIENT, ROOT + '/node_modules']
   },
   plugins: [
-      new ExtractTextPlugin("style.css", {
-        allChunks: true
-      }),
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "window.jQuery": "jquery"
-      })
+    new ExtractTextPlugin('style.css', {
+      allChunks: true
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    })
   ],
   node: {
-    fs: "empty"
+    fs: 'empty'
   },
   resolve: {
-      alias: {
-          api: CLIENT + '/api/' + process.env.NODE_ENV,
-          config: CLIENT + '/config/' + process.env.NODE_ENV
-      }
+    alias: {
+      api: CLIENT + '/api/' + process.env.NODE_ENV,
+      config: CLIENT + '/config/' + process.env.NODE_ENV
+    }
   }
 }

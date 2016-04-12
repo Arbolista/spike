@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% if (meta) {  for (var name in meta){ %>
+      <meta name="<%= name %>" content="<%= meta[name] %>">
+    <% } } %>
+    <title>React Server Base</title>
+    <script id="prerender_data">
+      window.PrerenderData = {};
+      <% if (prerender_data) { %>
+        Object.assign(window.PrerenderData, <%- JSON.stringify(prerender_data) %>);
+      <% } %>
+    </script>
+    <link href="/assets/style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="app_container">
+      <div id="app_content">
+        <nav style="margin-bottom:0px;" class="navbar navbar-default">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="/" class="navbar-brand">React Server Base</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">React Server Base</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="container">
+          <!-- render on online to avoid whitespace -->
+          <div id="root"><% if (prerender_content){ %><%- prerender_content %><% } else { %><div class="alert alert-warning">Loading app...</div><% } %></div>
+        </div>
+      </div>
+      <div id="app_footer">
+        <div class="container">Footer</div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    // Force `fetch` polyfill to workaround Chrome not displaying request body
+    // in developer tools for the native `fetch`.
+    self.fetch = null;
+  </script>
+  <% if (process.env.NODE_ENV === 'development') { %>
+  <script src="http://localhost:3000/webpack-dev-server.js"></script>
+  <% } %>
+  <script src="/assets/app.js"></script>
+</html>

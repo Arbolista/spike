@@ -1,9 +1,9 @@
-import React from 'react';
-import { createHistory } from 'history';
+/*global module*/
 
-import template from './layout.template.html';
-import Example from './../../models/example/example';
-import StateManager from './../state_manager';
+import React from 'react';
+
+import StateManagerBase from './../../../shared/lib/state_manager';
+import template from './layout.rt.html';
 
 class LayoutComponent extends React.Component {
 
@@ -14,21 +14,26 @@ class LayoutComponent extends React.Component {
   }
 
   get example(){
-    return this.state.example;
+    return this.state_manager.state.example;
+  }
+
+  get examples(){
+    return this.state_manager.examples;
+  }
+
+  get state_manager(){
+    return this.props.state_manager;
   }
 
   componentDidMount() {
     var layout = this;
-    layout.state_manager = new StateManager(layout.props.createHistory, layout.props.examples);
-    layout.state_manager.history.listen((location)=>{
-      layout.state_manager.updateStateFromUrl(location, layout);
-    });
+    layout.state_manager.initializeHistory(layout);
   }
 
   setParam(event){
     var layout = this,
-      param = event.target.dataset.param,
-      value = event.target.dataset.value;
+        param = event.target.dataset.param,
+        value = event.target.dataset.value;
     layout.state_manager.setParams({
       [param]: value
     });
@@ -36,8 +41,12 @@ class LayoutComponent extends React.Component {
 
   syncFromStateManager(fnStateSet){
     var layout = this;
+
     layout.setState(layout.state_manager.state, ()=>{
-      fnStateSet()
+      fnStateSet();
+      // Prerendered data should be consumed after the first time the
+      // state is set from the URL.
+      layout.state_manager.destroyPrerenderData();
     });
   }
 
@@ -47,6 +56,9 @@ class LayoutComponent extends React.Component {
 
 }
 
+LayoutComponent.propTypes = {
+  state_manager: React.PropTypes.instanceOf(StateManagerBase).isRequired
+};
 LayoutComponent.NAME = 'Layout';
 
 module.exports = LayoutComponent;
