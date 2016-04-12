@@ -7,7 +7,7 @@
     "test_client": "BABEL_DISABLE_CACHE=1 karma start --single-run",
     "test_server": "BABEL_DISABLE_CACHE=1 babel-node test.server.js",
     "lint": "eslint --fix .",
-    "design": "gulp build --env design",
+    "build_design": "gulp build --env design",
     "start": "babel-node ./server/run.js",
     "develop": "NODE_ENV=development npm start"
   },

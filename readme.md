@@ -72,7 +72,7 @@ git clone https://github.com/medialize/sass.js.git sass
 Then build the app with webpack:
 
 ```sh
-gulp run design
+npm run build_design
 ```
 
 The design app requires no backend, just a server so files can be downloaded with jQuery. For instance with Python or Python3:
