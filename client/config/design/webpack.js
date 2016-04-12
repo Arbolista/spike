@@ -30,9 +30,9 @@ module.exports = {
         test: /\.json$/,
         loader: 'json'
       }, {
-          test: /\.template\.html/,
-          loader: 'react-templates-loader?targetVersion=0.14.0'
-        }
+        test: /\.template\.html/,
+        loader: 'react-templates-loader?targetVersion=0.14.0'
+      }
     ]
   },
   sassLoader: {

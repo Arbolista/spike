@@ -1,3 +1,5 @@
+/*global __dirname process*/
+
 import express from 'express';
 import path from 'path';
 import favicon from 'serve-favicon';
@@ -7,8 +9,6 @@ import React from 'react';
 
 import Layout from './../../client/components/layout/layout.component';
 import StateManager from './../lib/state_manager/state_manager';
-
-/*global __dirname*/
 
 class ServerBase {
 

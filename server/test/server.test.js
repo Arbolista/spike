@@ -5,6 +5,9 @@ import request from 'supertest';
 
 import Server from './../config/production/server';
 
+// set node env to production to test production server configuration.
+process.env.NODE_ENV = 'production';
+
 var server = new Server();
 server.config();
 

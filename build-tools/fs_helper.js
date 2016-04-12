@@ -1,3 +1,5 @@
+/*global Promise console*/
+
 import fs from 'fs';
 import path from 'path';
 import mkdirp from 'mkdirp';
@@ -125,8 +127,8 @@ class FsHelper {
             console.error('=== FsHelper.copy Error ===');
             console.error(err);
           });
-        });
       });
+    });
   }
 
   // Promise wrapper for fs.writeFile

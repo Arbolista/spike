@@ -1,8 +1,8 @@
 /*eslint-env node*/
+/*global Promise*/
 
 import yargs from 'yargs';
 import webpack from 'webpack';
-import fs from 'fs';
 import path from 'path';
 
 import FsHelper from './fs_helper';
@@ -18,7 +18,7 @@ export default function build(options, done){
       // build assets/app.js and assets/style.css with webpack
       let config = require(__dirname + `/../client/config/${process.env.NODE_ENV}/webpack.js`);
 
-      webpack(config, function(err, stats) {
+      webpack(config, function(err, _stats) {
         if (err){
           console.error('=== Error building webpack config ===')
           console.error(err);
@@ -34,7 +34,7 @@ export default function build(options, done){
 
 function copyDesignComponents(done){
   let design_build_path = path.normalize(__dirname + '/../client/build/design'),
-    asset_path = design_build_path + '/assets'
+      asset_path = design_build_path + '/assets'
   FsHelper.rmDir(design_build_path, {except: [asset_path + '/sass', asset_path + '/app.js', asset_path + '/style.css']})
     .then(()=>{
       return FsHelper.mkDir(design_build_path)

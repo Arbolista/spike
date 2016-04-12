@@ -1,4 +1,4 @@
-/*global Promise*/
+/*global Promise console*/
 
 import fs from 'fs';
 import ejs from 'ejs';
