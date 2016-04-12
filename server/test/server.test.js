@@ -1,4 +1,4 @@
-/*global describe it expect console*/
+/*global describe it expect console process*/
 
 import cheerio from 'cheerio';
 import request from 'supertest';
