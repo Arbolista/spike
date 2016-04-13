@@ -1,22 +1,19 @@
-/*global __dirname module*/
+/*eslint-env node*/
 
-import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import webpack from 'webpack';
 
 const CLIENT = __dirname + '/../..';
 const ROOT = CLIENT + '/..';
 
-// NOTE: This configuration is exactly the same as development, except it is minimized and users the extract text plugin.
-
 module.exports = {
   entry: {
-    app: __dirname + '/../development/app',
-    style: __dirname + '/../development/style'
+    app: CLIENT + '/config/design/app',
+    style: CLIENT + '/config/design/style'
   },
-  devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: __dirname + '/../../build/production'
+    path: CLIENT + '/build/design/assets'
   },
   module: {
     loaders: [
@@ -32,6 +29,9 @@ module.exports = {
       }, {
         test: /\.json$/,
         loader: 'json'
+      }, {
+        test: /\.template\.html/,
+        loader: 'react-templates-loader?targetVersion=0.14.0'
       }
     ]
   },
@@ -46,16 +46,15 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
-    }),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    })
   ],
   node: {
     fs: 'empty'
   },
   resolve: {
     alias: {
-      api: __dirname + '/../../api/production',
-      config: __dirname + '/../../config/production',
+      api: __dirname + '/../../api/design',
+      config: __dirname + '/../../config/design',
       models: __dirname + '/../../models',
       lib: __dirname + '/../../lib',
       shared: __dirname + '/../../../shared'

@@ -47,6 +47,9 @@
       </div>
     </div>
   </body>
+  <% if (process.env.NODE_ENV === 'design') { %>
+  <script src="/assets/sass/dist/sass.js" type="text/javascript"/>
+  <% } %>
   <script type="text/javascript">
     // Force `fetch` polyfill to workaround Chrome not displaying request body
     // in developer tools for the native `fetch`.

@@ -1,5 +1,4 @@
 node_modules/
+client/build/
 server/bin/
-client/build/**/*.js
-client/build/**/*.css
 npm-debug.log
