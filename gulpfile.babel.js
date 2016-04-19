@@ -2,7 +2,6 @@
 
 import gulp from 'gulp';
 import yargs from 'yargs';
-import _ from 'lodash';
 import template from 'gulp-template';
 import rename from 'gulp-rename';
 import foreach from 'gulp-foreach';
@@ -20,7 +19,7 @@ gulp.task('generate', (done) => {
   var what = '';
   if (componentName) {
     what = 'component';
-  };
+  }
   var destinationFolderName = component.data(componentName).componentNameLowerCase;
   var destination = yargs.argv.destination || (destinationFolderName);
   if (what === 'component') {
@@ -29,7 +28,7 @@ gulp.task('generate', (done) => {
     // feeding it component name
     // and then creates a copy of processed files
     gulp.src('./client/config/templates/component/*.tpl')
-      .pipe(foreach((stream, file)=>{
+      .pipe(foreach((stream, _file)=>{
         return stream
         .pipe(template(component.data(componentName)))
         .pipe(rename((path) => {
