@@ -1,4 +1,4 @@
-/*global require*/
+/*global require window*/
 
 // this script is run through karma (see npm test).
 

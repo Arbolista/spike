@@ -1,3 +1,5 @@
+/*global describe beforeEach it expect*/
+
 import SharedExample from './example.base';
 
 export function testSharedExampleRepoBehavior(ExampleRepo){
@@ -7,8 +9,6 @@ export function testSharedExampleRepoBehavior(ExampleRepo){
       ExampleRepo.findById(1)
         .then((example)=>{
           expect(example instanceof SharedExample).toEqual(true);
-          console.log('*data*')
-          console.log(example.data)
           expect(example.id).toEqual(1);
           done();
         });
@@ -43,15 +43,15 @@ export function testSharedExampleBehavior(Example){
     })
 
     it('can introduce itself', ()=>{
-      expect(example.introduce()).toEqual(`Hi, I'm John!`);
+      expect(example.introduce()).toEqual('Hi, I\'m John!');
     });
 
     it('provides id accessor', ()=>{
-       expect(example.id).toEqual(3);
+      expect(example.id).toEqual(3);
     });
 
     it('provides scoped id', ()=>{
-      expect(example.scoped_id).toEqual(`example-3`);
+      expect(example.scoped_id).toEqual('example-3');
     });
 
   });

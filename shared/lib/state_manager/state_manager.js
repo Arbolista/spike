@@ -1,3 +1,5 @@
+/*global JS_ENV require*/
+
 export default class StateManager {
 
   constructor(){
@@ -16,21 +18,14 @@ export default class StateManager {
   }
 
   exampleSet(example_id){
-    console.log('StateManager#exampleSet')
-    console.log(example_id)
-    console.log(this.params)
     return parseInt(this.params.example_id) === parseInt(example_id);
   }
 
   getInitialData(){
-    console.log('getInitialData')
-    console.log(JS_ENV)
     let state_manager = this,
         ExampleRepo = require(`./../../../${JS_ENV}/models/example/example.repository`);
-      console.log(ExampleRepo)
     return ExampleRepo.all()
             .then((examples)=>{
-              console.log('all examples retrieved.')
               state_manager.examples = examples;
             });
   }

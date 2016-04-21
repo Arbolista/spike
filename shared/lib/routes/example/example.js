@@ -1,3 +1,5 @@
+/*global JS_ENV Promise require*/
+
 import RouteBase from './../route.base';
 
 class ExampleRoute extends RouteBase {
@@ -10,8 +12,6 @@ class ExampleRoute extends RouteBase {
     let route = this;
 
     if (!route.stateExampleSet(state)){
-      console.log('ExampleRoute#assureData')
-      console.log(JS_ENV)
       let ExampleRepo = require(`./../../../../${JS_ENV}/models/example/example.repository.js`);
       return ExampleRepo.findById(route.params.example_id)
         .then((example)=>{

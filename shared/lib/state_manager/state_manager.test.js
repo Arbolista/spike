@@ -1,3 +1,5 @@
+/*global describe beforeEach it expect*/
+
 import ExampleRoute from './../routes/example/example';
 import StateManager from './state_manager';
 

@@ -1,4 +1,4 @@
-/*global document*/
+/*global document window*/
 
 import 'babel-polyfill';
 import 'bootstrap/dist/js/bootstrap.min';
@@ -16,7 +16,7 @@ export default function(createHistory){
   window.JS_ENV = 'client';
 
   var state_manager = new StateManager(),
-    router = new Router(state_manager, ROUTES);
+      router = new Router(state_manager, ROUTES);
   state_manager.getInitialData()
     .then(()=>{
       return router.setLocation(router.current_location);

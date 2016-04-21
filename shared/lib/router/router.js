@@ -1,3 +1,7 @@
+/*global window*/
+
+import queryString from 'query-string';
+
 export default class Router {
 
   constructor(state_manager, routes){
@@ -13,10 +17,8 @@ export default class Router {
   }
 
   setLocation(location){
-    console.log('Router#setLocation')
-    console.log(current_route)
     let router = this,
-      current_route = router.state_manager.state.route;
+        current_route = router.state_manager.state.route;
 
     if (current_route === undefined || !current_route.matchesLocation(location)){
       current_route = router.findRoute(location)
@@ -52,11 +54,8 @@ export default class Router {
     router.history = component.props.createHistory();
     router.history.listen((new_location)=>{
       if (new_location.action !== 'PUSH') return false;
-      console.log('new_location set')
-      console.log(new_location)
       router.setLocation(new_location)
         .then(()=>{
-          console.log('new location set on router')
           return component.syncFromStateManager();
         })
         .then(()=>{
@@ -70,11 +69,8 @@ export default class Router {
   goToExample(example_id){
     let router = this;
     example_id = parseInt(example_id);
-    console.log('Router#goToExample')
-    console.log(example_id)
 
     if (!router.state_manager.exampleSet(example_id)){
-      console.log('setting new url')
       let new_url = `/examples/${example_id}`;
       router.update_in_progress = true;
       router.history.push(new_url);

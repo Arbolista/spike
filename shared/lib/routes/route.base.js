@@ -17,12 +17,11 @@ export default class RouteBase {
   // location is a React History location object.
   setParams(location){
     let route = this,
-      match = location.pathname.match(route.path);
-console.log('RouteBase#setParams')
+        match = location.pathname.match(route.path);
     if (match){
       for (let i in route.parameters){
         let param = route.parameters[i],
-          value = match[i];
+            value = match[i];
         route.params[param] = value;
       }
       Object.assign(route.params, location.query || {});

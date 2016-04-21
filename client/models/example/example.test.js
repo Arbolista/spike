@@ -1,4 +1,4 @@
-/*global describe it expect*/
+/*global describe*/
 
 import Example from './example';
 import ExampleRepo from './example.repository';
@@ -10,6 +10,5 @@ describe('client Example entity', ()=>{
 });
 
 describe('client Example repository', ()=>{
-  console.log('ExampleRepo', ExampleRepo)
   testSharedExampleRepoBehavior(ExampleRepo);
 });

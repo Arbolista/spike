@@ -1,7 +1,6 @@
-/*global module*/
+/*global module Promise document window*/
 
 import React from 'react';
-import _ from 'lodash';
 
 import StateManager from './../../lib/state_manager/state_manager';
 import Router from './../../lib/router/router';
@@ -45,18 +44,15 @@ class LayoutComponent extends React.Component {
   goToExample(event){
     var layout = this,
         value = event.target.dataset.value;
-      console.log('component#goToExample')
     layout.router.goToExample(value);
   }
 
   syncFromStateManager(){
     var layout = this;
-    console.log('Layout#syncFromStateManager')
-    return new Promise((fnResolve, fnReject)=>{
+    return new Promise((fnResolve, _fnReject)=>{
       layout.setState(layout.state_manager.state, ()=>{
         // Prerendered data should be consumed after the first time the
         // state is set from the URL.
-        console.log('new state has been set')
         layout.destroyPrerenderData();
         fnResolve();
       });
@@ -73,6 +69,12 @@ class LayoutComponent extends React.Component {
     return template.call(this);
   }
 
+}
+LayoutComponent.propTypes = {
+  state_manager: React.PropTypes.instanceOf(StateManager).isRequired,
+  router: React.PropTypes.instanceOf(Router).isRequired,
+  route: React.PropTypes.instanceOf(BaseRoute),
+  example: React.PropTypes.instanceOf(BaseExample)
 }
 
 LayoutComponent.NAME = 'Layout';

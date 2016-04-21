@@ -1,3 +1,5 @@
+/*global Promise*/
+
 import SharedRoute from './../route.base';
 
 export default class MissingRoute extends SharedRoute {

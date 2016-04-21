@@ -1,3 +1,5 @@
+/*global describe*/
+
 import Example from './example';
 import ExampleRepo from './example.repository';
 

@@ -1,3 +1,5 @@
+/*global describe it expect*/
+
 import ExampleRoute from './example';
 import {testSharedRouteBehavior} from './../route.base.test';
 

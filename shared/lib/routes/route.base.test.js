@@ -1,3 +1,5 @@
+/*global describe it expect*/
+
 export function testSharedRouteBehavior(route){
 
   describe('shared Route behavior', ()=>{
@@ -12,4 +14,4 @@ export function testSharedRouteBehavior(route){
 
   });
 
-};
+}

@@ -1,3 +1,5 @@
+/*global Promise module*/
+
 import Example from './example';
 import {EXAMPLES} from './../../../shared/data/examples';
 
@@ -15,8 +17,8 @@ class ExampleRepo {
 
   static all(){
     return Promise.resolve(EXAMPLES.map((example_datum)=>{
-        return new Example(example_datum);
-      }));
+      return new Example(example_datum);
+    }));
   }
 
 }

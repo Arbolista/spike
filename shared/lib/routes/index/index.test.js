@@ -1,3 +1,5 @@
+/*global describe it expect*/
+
 import IndexRoute from './index';
 import {testSharedRouteBehavior} from './../route.base.test';
 

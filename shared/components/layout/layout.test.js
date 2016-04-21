@@ -1,4 +1,4 @@
-/*global describe it expect console*/
+/*global describe it expect console JS_ENV beforeEach*/
 
 import TestUtils from 'react-addons-test-utils';
 import createHistory from 'history/lib/createHashHistory';
@@ -48,7 +48,7 @@ if (JS_ENV === 'client'){
         var buttons = TestUtils.scryRenderedDOMComponentsWithClass(layout, 'btn-primary');
         expect(buttons.length).toEqual(3);
 
-        router.afterLocationUpdate = (new_location)=>{
+        router.afterLocationUpdate = (_new_location)=>{
           var info = TestUtils.findRenderedDOMComponentWithClass(layout, 'alert-info');
           expect(_.trim(info.textContent)).toEqual('Hi, I\'m Bob!');
 

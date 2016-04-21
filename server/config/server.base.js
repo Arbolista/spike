@@ -1,4 +1,4 @@
-/*global __dirname process*/
+/*global __dirname process GLOBAL*/
 
 import express from 'express';
 import path from 'path';
@@ -43,13 +43,11 @@ class ServerBase {
         });
       })
       .then(()=>{
-        console.log('a')
         let props = Object.assign({state_manager: state_manager, router: router}, state_manager.state),
             layout = React.createFactory(Layout)(props),
             meta = {},
             prerender_content;
         prerender_content = ReactDOMServer.renderToString(layout);
-console.log('b')
         if (state_manager.state.example){
           meta.example_id = state_manager.state.example.data.id;
         }
@@ -59,7 +57,6 @@ console.log('b')
           prerender_data: {examples: state_manager.examples},
           meta: meta
         });
-        console.log('c')
         return undefined
       });
   }

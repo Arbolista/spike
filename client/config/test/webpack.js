@@ -20,7 +20,7 @@ module.exports = {
     loaders: [
       {
         test: /^((?!test\.js$).)*\.js$/,
-        include: /(client|shared)/,
+        include: /(client|shared|server)/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {

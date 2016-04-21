@@ -1,3 +1,5 @@
+/*global describe it expect*/
+
 import MissingRoute from './missing';
 import {testSharedRouteBehavior} from './../route.base.test';
 

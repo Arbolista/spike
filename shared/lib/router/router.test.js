@@ -1,3 +1,5 @@
+/*global describe it expect*/
+
 import StateManager from './../state_manager/state_manager';
 import Router from './router';
 import {ROUTES} from './../routes';
@@ -5,7 +7,6 @@ import {ROUTES} from './../routes';
 /*
  * Test Shared Behavior of Subclasses
  */
-
 
 const state_manager = new StateManager(),
     router = new Router(state_manager, ROUTES);

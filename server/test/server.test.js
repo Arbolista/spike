@@ -25,7 +25,6 @@ describe('base route', ()=>{
           done()
         }
         try {
-          console.log('res received')
           expect(res.status).toEqual(200);
           expect(res.header['content-type']).toEqual('text/html; charset=utf-8');
 
@@ -60,7 +59,6 @@ describe('example specific route', ()=>{
           done()
         }
         try {
-          console.log('res received')
           expect(res.status).toEqual(200);
           expect(res.header['content-type']).toEqual('text/html; charset=utf-8');
 
