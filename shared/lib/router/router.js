@@ -18,21 +18,14 @@ export default class Router {
 
   setLocation(location){
     let router = this,
-        current_route = router.state_manager.state.route;
+        new_route = router.findRoute(location);
 
-    if (current_route === undefined || !current_route.matchesLocation(location)){
-      current_route = router.findRoute(location)
-    }
-    current_route.setParams(location);
-
-    return router.state_manager.setRoute(current_route);
+    new_route.setParams(location);
+    return router.state_manager.setRoute(new_route);
   }
 
   findRoute(location){
     let router = this;
-    if (router.current_route && router.current_route.matchesLocation(location)){
-      return router.current_route;
-    }
     return router.routes.find((route)=>{
       return route.matchesLocation(location);
     });

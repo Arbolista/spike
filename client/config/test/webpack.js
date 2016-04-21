@@ -3,7 +3,6 @@
 var webpack = require('webpack');
 
 module.exports = {
-  cache: false,
   devtool: 'source-map',
   module: {
     preLoaders: [

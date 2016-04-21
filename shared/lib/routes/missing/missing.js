@@ -1,8 +1,8 @@
 /*global Promise*/
 
-import SharedRoute from './../route.base';
+import RouteBase from './../route.base';
 
-export default class MissingRoute extends SharedRoute {
+export default class MissingRoute extends RouteBase {
 
   get route_name(){
     return 'MissingRoute';

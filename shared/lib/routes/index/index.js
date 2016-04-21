@@ -1,8 +1,8 @@
 /*global Promise*/
 
-import SharedRoute from './../route.base';
+import RouteBase from './../route.base';
 
-export default class IndexRoute extends SharedRoute {
+export default class IndexRoute extends RouteBase {
 
   get route_name(){
     return 'IndexRoute';

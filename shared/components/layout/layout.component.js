@@ -4,8 +4,8 @@ import React from 'react';
 
 import StateManager from './../../lib/state_manager/state_manager';
 import Router from './../../lib/router/router';
-import BaseRoute from './../../lib/routes/route.base';
-import BaseExample from './../../models/example/example.base';
+//import RouteBase from './../../lib/routes/route.base';
+import ExampleBase from './../../models/example/example.base';
 import template from './layout.rt.html';
 
 class LayoutComponent extends React.Component {
@@ -73,8 +73,8 @@ class LayoutComponent extends React.Component {
 LayoutComponent.propTypes = {
   state_manager: React.PropTypes.instanceOf(StateManager).isRequired,
   router: React.PropTypes.instanceOf(Router).isRequired,
-  route: React.PropTypes.instanceOf(BaseRoute),
-  example: React.PropTypes.instanceOf(BaseExample)
+  route: React.PropTypes.any,
+  example: React.PropTypes.instanceOf(ExampleBase)
 }
 
 LayoutComponent.NAME = 'Layout';
