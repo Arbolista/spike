@@ -1,11 +1,10 @@
 {
-    "spec_dir": "server",
+    "spec_dir": "./",
     "spec_files": [
-        "models/**/*.test.js",
-        "lib/**/*.test.js",
-        "test/**/*.test.js"
+        "server/**/*.test.js",
+        "shared/**/*.test.js"
     ],
     "helpers": [
-      "./test/helpers/**/*.js"
+      "./server/test/helpers/**/*.test.js"
     ]
 }

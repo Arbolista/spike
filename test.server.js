@@ -2,6 +2,8 @@
 
 import Jasmine from 'jasmine'
 
+GLOBAL.JS_ENV = 'server';
+
 var jasmine = new Jasmine()
 jasmine.loadConfigFile('jasmine.json')
 jasmine.execute();

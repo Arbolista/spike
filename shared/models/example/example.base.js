@@ -1,10 +1,12 @@
-/*global Map*/
-
-export default class Example {
+export class Example {
 
   constructor(data){
     var example = this;
     example.data = data;
+  }
+
+  get id(){
+    return parseInt(this.data.id);
   }
 
   get scoped_id(){
@@ -17,9 +19,6 @@ export default class Example {
     return "Hi, I'm " + example.data.name + '!';
   }
 
-  static get store(){
-    if (!Example._store) Example._store = new Map();
-    return Example._store;
-  }
-
 }
+
+export default Example;

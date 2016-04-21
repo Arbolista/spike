@@ -4,12 +4,12 @@
   "description": "Basic architecture and dependencies for creating a React app alongside a server api.",
   "scripts": {
     "test":  "npm run test_client && npm run test_server && npm run lint",
-    "test_client": "BABEL_DISABLE_CACHE=1 karma start --single-run",
-    "test_server": "BABEL_DISABLE_CACHE=1 babel-node test.server.js",
+    "test_client": "BABEL_DISABLE_CACHE=1 NODE_ENV=TEST karma start --single-run",
+    "test_server": "NODE_ENV=TEST babel-node test.server.js",
     "lint": "eslint --fix .",
     "build_design": "gulp build --env design",
     "start": "babel-node ./server/run.js",
-    "develop": "NODE_ENV=development npm start"
+    "develop": "NODE_ENV=DEVELOPMENT npm start"
   },
   "keywords": [
     "karma",

@@ -1,12 +1,11 @@
 /*eslint-env browser*/
 /*global Promise*/
 
+import {EXAMPLES} from './../../../shared/data/examples';
+
 class ExampleApi {
   static index(){
-    return Promise.resolve([
-        {id: 1, name: 'howdy'},
-        {id: 2, name: 'ho'}
-    ]);
+    return Promise.resolve(EXAMPLES);
   }
 
 }

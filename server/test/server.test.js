@@ -4,14 +4,13 @@ import cheerio from 'cheerio';
 import request from 'supertest';
 
 import Server from './../config/production/server';
+import {EXAMPLES} from './../../shared/data/examples';
 
 // set node env to production to test production server configuration.
 process.env.NODE_ENV = 'production';
 
 var server = new Server();
 server.config();
-
-const DEFAULT_EXAMPLES = [{id: 1, name: 'howdy'}, {id: 2, name: 'ho'}]
 
 describe('base route', ()=>{
 
@@ -26,13 +25,14 @@ describe('base route', ()=>{
           done()
         }
         try {
+          console.log('res received')
           expect(res.status).toEqual(200);
           expect(res.header['content-type']).toEqual('text/html; charset=utf-8');
 
           var body = res.text,
               $ = cheerio.load(body);
           expect($('meta[name="example_id"]').length).toEqual(0);
-          expect($('#prerender_data').text()).toMatch(JSON.stringify(DEFAULT_EXAMPLES));
+          expect($('#prerender_data').text()).toMatch(JSON.stringify(EXAMPLES));
 
           expect($('.alert-warning').text()).toMatch('Choose an example');
           expect($('.alert-info').length).toEqual(0);
@@ -60,14 +60,15 @@ describe('example specific route', ()=>{
           done()
         }
         try {
+          console.log('res received')
           expect(res.status).toEqual(200);
           expect(res.header['content-type']).toEqual('text/html; charset=utf-8');
 
           var $ = cheerio.load(res.text);
           expect($('meta[name="example_id"]').attr('content')).toEqual('1');
-          expect($('#prerender_data').text()).toMatch(JSON.stringify(DEFAULT_EXAMPLES));
+          expect($('#prerender_data').text()).toMatch(JSON.stringify(EXAMPLES));
           expect($('.alert-warning').length).toEqual(0);
-          expect($('.alert-info').text()).toMatch('Hi, I\'m howdy');
+          expect($('.alert-info').text()).toMatch('Hi, I\'m Bob');
 
           done();
         } catch (err) {

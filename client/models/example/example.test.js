@@ -1,19 +1,15 @@
 /*global describe it expect*/
 
 import Example from './example';
+import ExampleRepo from './example.repository';
 
-describe('Example', ()=>{
-  it('can introduce itself', ()=>{
-    let example = new Example({name: 'Jeremy'});
-    expect(example.introduce()).toEqual("Hi, I'm Jeremy!");
-  });
+import {testSharedExampleRepoBehavior, testSharedExampleBehavior} from './../../../shared/models/example/example.base.test';
 
-  it('can retrieve test data', (done)=>{
-    Example.getExamples()
-      .then((examples)=>{
-        expect(examples.length).toEqual(2);
-        expect(examples.map(example=>example.data.id)).toEqual([1, 2]);
-        done();
-      });
-  });
+describe('client Example entity', ()=>{
+  testSharedExampleBehavior(Example);
+});
+
+describe('client Example repository', ()=>{
+  console.log('ExampleRepo', ExampleRepo)
+  testSharedExampleRepoBehavior(ExampleRepo);
 });

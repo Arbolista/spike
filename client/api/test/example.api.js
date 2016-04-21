@@ -1,13 +1,14 @@
+/*eslint-env browser*/
 /*global Promise*/
 
-// Configure this with test data.
-class ExampleApi{
+import {EXAMPLES} from './../../../shared/data/examples';
+
+class ExampleApi {
   static index(){
-    return Promise.resolve([
-        {id: 1, name: 'howdy'},
-        {id: 2, name: 'ho'}
-    ]);
+    return Promise.resolve(EXAMPLES);
   }
+
 }
 
 export default ExampleApi;
+

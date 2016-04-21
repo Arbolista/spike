@@ -7,12 +7,15 @@ import logger from 'morgan';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 
-import Layout from './../../client/components/layout/layout.component';
-import StateManager from './../lib/state_manager/state_manager';
+import StateManager from './../../shared/lib/state_manager/state_manager';
+import Router from './../../shared/lib/router/router';
+import {ROUTES} from './../../shared/lib/routes';
+import Layout from './../../shared/components/layout/layout.component';
 
 class ServerBase {
 
   config(){
+    GLOBAL.JS_ENV = 'server';
     var server = this,
         app = server.app;
 
@@ -30,20 +33,23 @@ class ServerBase {
   }
 
   static renderReact(req, res, _next){
-    var state_manager = new StateManager();
+    var state_manager = new StateManager(),
+        router = new Router(state_manager, ROUTES);
     return state_manager.getInitialData()
       .then(()=>{
-        return state_manager.updateStateFromUrl({
+        return router.setLocation({
           pathname: req.path,
           query: req.query
         });
       })
       .then(()=>{
-        var props = Object.assign({state_manager: state_manager}, state_manager.state),
+        console.log('a')
+        let props = Object.assign({state_manager: state_manager, router: router}, state_manager.state),
             layout = React.createFactory(Layout)(props),
             meta = {},
-            prerender_content = ReactDOMServer.renderToString(layout);
-
+            prerender_content;
+        prerender_content = ReactDOMServer.renderToString(layout);
+console.log('b')
         if (state_manager.state.example){
           meta.example_id = state_manager.state.example.data.id;
         }
@@ -53,6 +59,7 @@ class ServerBase {
           prerender_data: {examples: state_manager.examples},
           meta: meta
         });
+        console.log('c')
         return undefined
       });
   }
