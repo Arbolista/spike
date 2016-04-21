@@ -7,7 +7,7 @@ import Server from './../config/production/server';
 import {EXAMPLES} from './../../shared/data/examples';
 
 // set node env to production to test production server configuration.
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'PRODUCTION';
 
 var server = new Server();
 server.config();

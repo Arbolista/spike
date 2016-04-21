@@ -20,7 +20,7 @@ class ServerBase {
         app = server.app;
 
     // serve public static files.
-    app.use('/', express.static(path.resolve(__dirname, '../../client/build', process.env.NODE_ENV)));
+    app.use('/', express.static(path.resolve(__dirname, '../../client/build', process.env.NODE_ENV.toLowerCase())));
 
     app.use(favicon(__dirname + '/../assets/favicon.ico'));
     app.use(logger('dev'));
