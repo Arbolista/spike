@@ -38,6 +38,25 @@ Install dependencies
 npm install
 ```
 
+## Generating components
+
+Generate component named Super
+```
+npm run generate -- --component Super
+```
+
+This will copy and process a set of files in ./client/config/templates/component
+and put it into ./client/components/super directory
+
+To specify a different subdirectory use --destination switch with subdirectory name relative to ./client/components/
+
+```
+gulp generate --component SubSuper --destination super/sub_super
+```
+
+This will generate set of component files inside of ./client/components/super/sub_super/.
+
+
 ## Developing
 
 To run the Webpack development server,
@@ -94,5 +113,3 @@ In order for the design build to work, the following component naming convention
 Currently, any changes made to React templates are not seen by Webpack's watcher, so you have to force a change in the React component class for Webpack to load the changes in your template files.
 
 The alternative is to set `cache: false` in the development webpack configuration file. However, this dramatically slows down hot patching.
-
-
