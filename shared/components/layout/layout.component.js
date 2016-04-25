@@ -41,6 +41,11 @@ class LayoutComponent extends React.Component {
     layout.router.initializeHistory(layout);
   }
 
+  isButtonActive(example_id) {
+    let result = this.example && this.example.id === example_id;
+    return result;
+  }
+
   goToExample(event){
     var layout = this,
         value = event.target.dataset.value;

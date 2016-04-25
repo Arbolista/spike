@@ -1,4 +1,4 @@
-/*global JS_ENV require*/
+/*global JS_ENV Map require*/
 
 export default class StateManager {
 
@@ -24,7 +24,8 @@ export default class StateManager {
   getInitialData(){
     let state_manager = this,
         ExampleRepo = require(`./../../../${JS_ENV}/models/example/example.repository`);
-    return ExampleRepo.all()
+    let repo = new ExampleRepo(new Map());
+    return repo.all()
             .then((examples)=>{
               state_manager.examples = examples;
             });

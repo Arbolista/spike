@@ -63,7 +63,7 @@
     "react": "0.14.x",
     "react-addons-test-utils": "0.14.x",
     "react-dom": "0.14.x",
-    "react-templates": "0.4.x",
+    "react-templates": "0.4.3",
     "react-templates-loader": "0.4.x",
     "sass-loader": "3.1.x",
     "style-loader": "0.12.x",
