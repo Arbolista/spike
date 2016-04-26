@@ -5,7 +5,15 @@ function repeatExample1(example, exampleIndex) {
         'key': example.scoped_id,
         'data-param': 'example_id',
         'data-value': example.id,
-        'className': _.keys(_.pick({ active: this.example && this.example.id === example.id }, _.identity)).join(' ') + ' ' + 'btn btn-primary',
+        'className': _({
+            active: this.isButtonActive(example.id),
+            btn: true,
+            'btn-primary': true
+        }).transform(function (res, value, key) {
+            if (value) {
+                res.push(key);
+            }
+        }, []).join(' '),
         'onClick': this.goToExample.bind(this),
         'type': 'button'
     }, example.data.name);
@@ -19,4 +27,4 @@ export default function () {
         },
         _.map(this.examples, repeatExample1.bind(this))
     ]));
-};
+}

@@ -15,8 +15,8 @@
       key="{example.scoped_id}"
       data-param="example_id"
       data-value="{example.id}"
-      rt-class="{active: this.example && this.example.id === example.id}"
+      rt-class="{active: this.isButtonActive(example.id), btn: true, 'btn-primary': true }"
       onClick="{this.goToExample.bind(this)}"
-      type="button" class="btn btn-primary">{example.data.name}</button>
+      type="button">{example.data.name}</button>
   </div>
 </div>

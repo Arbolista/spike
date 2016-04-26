@@ -1,35 +1,37 @@
-/*global Promise module Map*/
+/*global Promise module */
 
 import ExampleApi from 'api/example.api';
 import Example from './example';
 
 class ExampleRepo {
 
-  static findById(id){
-    return ExampleRepo.all()
-      .then((_examples)=>{
-        return ExampleRepo.store.get(parseInt(id));
+  constructor(store) {
+    this.store = store;
+  }
+
+  findById(id) {
+    return this.all()
+      .then((_examples) => {
+        return this.store.get(parseInt(id));
       })
   }
 
-  static all(){
-    if (ExampleRepo.store.size === 0){
+  all() {
+    if (this.store.size === 0) {
       return ExampleApi.index()
-        .then((example_data)=>{
-          return example_data.map((example_datum)=>{
+        .then((example_data) => {
+          return example_data.map((example_datum) => {
             let example = new Example(example_datum);
-            ExampleRepo.store.set(example.id, example);
+            this.store.set(example.id, example);
             return example;
           })
         })
     } else {
-      return Promise.resolve(Array.from(ExampleRepo.store.values()))
+      return Promise.resolve(Array.from(this.store.values()))
     }
   }
 
 }
-
-ExampleRepo.store = new Map();
 
 module.exports = ExampleRepo;
 export default ExampleRepo;

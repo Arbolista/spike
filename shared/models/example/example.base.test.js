@@ -1,4 +1,4 @@
-/*global describe beforeEach it expect*/
+/*global describe Map beforeEach it expect*/
 
 import SharedExample from './example.base';
 
@@ -6,7 +6,8 @@ export function testSharedExampleRepoBehavior(ExampleRepo){
   describe('shared example repo behavior',()=>{
 
     it('can get example by id', (done)=>{
-      ExampleRepo.findById(1)
+      let repo = new ExampleRepo(new Map());
+      repo.findById(1)
         .then((example)=>{
           expect(example instanceof SharedExample).toEqual(true);
           expect(example.id).toEqual(1);
@@ -16,7 +17,8 @@ export function testSharedExampleRepoBehavior(ExampleRepo){
     });
 
     it('can get all examples', (done)=>{
-      ExampleRepo.all()
+      let repo = new ExampleRepo(new Map());
+      repo.all()
         .then((examples)=>{
           expect(examples.length).toEqual(3);
           examples.forEach((example)=>{
