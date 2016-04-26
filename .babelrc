@@ -1,4 +1,6 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": [["react-templates", {"ext": ".rt.html"}]]
+  "plugins": [
+    ["react-templates", {reactVersion: "0.14.7", "modules": "es6", "ext":".rt.html"}]
+  ]
 }

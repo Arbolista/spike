@@ -1,18 +1,18 @@
-/*global require*/
+/*global require window*/
 
 // this script is run through karma (see npm test).
 
 // Require babel polyfill for browser.
 require('babel-polyfill');
 
-var modelContext = require.context('./client/models', true, /^((?!test\.js$).)*\.js$/);
-modelContext.keys().forEach(modelContext);
+window.JS_ENV = 'client';
 
-var libContext = require.context('./client/lib', true, /^((?!test\.js$).)*\.js$/);
-libContext.keys().forEach(libContext);
-
-var componentContext = require.context('./client/components', true, /^((?!test\.js$).)*\.js$/);
-componentContext.keys().forEach(componentContext);
-
-var clientTestContext = require.context('./client', true, /\.test\.js$/);
-clientTestContext.keys().forEach(clientTestContext);
+[
+  require.context('./shared/lib', true, /^((?!test\.js$).)*\.js$/),
+  require.context('./shared/components', true, /^((?!test\.js$).)*\.js$/),
+  require.context('./client/models', true, /^((?!test\.js$).)*\.js$/),
+  require.context('./client', true, /\.test\.js$/),
+  require.context('./shared', true, /\.test\.js$/)
+].forEach((context)=>{
+  context.keys().forEach(context);
+});

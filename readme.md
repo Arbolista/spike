@@ -42,7 +42,7 @@ npm install
 
 Generate component named Super
 ```
-gulp generate --component Super
+npm run generate -- --component Super
 ```
 
 This will copy and process a set of files in ./client/config/templates/component
@@ -51,7 +51,7 @@ and put it into ./client/components/super directory
 To specify a different subdirectory use --destination switch with subdirectory name relative to ./client/components/
 
 ```
-gulp generate --component SubSuper --destination super/sub_super
+npm run generate -- --component SubSuper --destination super/sub_super
 ```
 
 This will generate set of component files inside of ./client/components/super/sub_super/.

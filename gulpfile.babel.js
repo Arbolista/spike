@@ -7,7 +7,7 @@ import rename from 'gulp-rename';
 import foreach from 'gulp-foreach';
 
 import build from './build-tools/build';
-import component from './client/lib/generators/component'
+import component from './build-tools/generators/component'
 
 gulp.task('build', function(done) {
   process.env.NODE_ENV = yargs.argv.env || 'development';
@@ -27,7 +27,7 @@ gulp.task('generate', (done) => {
     // runs it through lodash templating engine
     // feeding it component name
     // and then creates a copy of processed files
-    gulp.src('./client/config/templates/component/*.tpl')
+    gulp.src('./build-tools/templates/component/*.tpl')
       .pipe(foreach((stream, _file)=>{
         return stream
         .pipe(template(component.data(componentName)))
@@ -36,7 +36,7 @@ gulp.task('generate', (done) => {
           path.basename = component.fileName(path.basename, componentName);
           path.extname = path.extname.replace('.tpl','');
         }))
-        .pipe(gulp.dest('./client/components'));
+        .pipe(gulp.dest('./shared/components'));
       }));
   }
   done();
