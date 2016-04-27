@@ -55,6 +55,7 @@
     "karma-sourcemap-loader": "0.3.x",
     "karma-spec-reporter": "0.0.x",
     "karma-webpack": "1.7.x",
+    "karma-webpack-with-fast-source-maps": "^1.9.2",
     "mkdirp": "0.5.x",
     "node-sass": "3.4.x",
     "phantomjs-prebuilt": "2.1.x",
@@ -82,6 +83,9 @@
     "ejs": "2.4.x"
   },
   "author": "Eric Hulburd <eric@analyticsfire.com> (http://afdc.co/)",
-  "repository" : { "type" : "git", "url" : "https://github.com/AnalyticsFire/spike" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnalyticsFire/spike"
+  },
   "license": "ISC"
 }
