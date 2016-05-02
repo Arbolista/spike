@@ -23,8 +23,8 @@
     "es6"
   ],
   "devDependencies": {
-    "babel-cli": "6.3.x",
-    "babel-core": "6.3.x",
+    "babel-cli": "6.7.x",
+    "babel-core": "6.7.x",
     "babel-eslint": "6.0.x",
     "babel-loader": "6.2.x",
     "babel-plugin-add-module-exports": "0.1.x",

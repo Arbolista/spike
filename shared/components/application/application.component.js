@@ -12,17 +12,26 @@ class ApplicationComponent extends React.Component {
     };
   }
 
-  render() {
-    let result = React.createElement(LayoutComponent, Object.assign({}, this.props, {
+  getChildContext() {
+    return {
       i18n: this.state.i18n
-    }));
-    return result;
+    };
+  }
+
+  render() {
+    return React.createElement(LayoutComponent, this.props);
   }
 
 }
-ApplicationComponent.propTypes = Object.assign({}, LayoutComponent.propTypes, {
+
+ApplicationComponent.propTypes =  Object.assign({}, LayoutComponent.propTypes,{
   i18n: React.PropTypes.any
 });
+
+ApplicationComponent.childContextTypes = {
+  i18n: React.PropTypes.any
+}
+
 
 ApplicationComponent.NAME = 'Application';
 
