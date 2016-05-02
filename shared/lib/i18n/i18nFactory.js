@@ -5,9 +5,10 @@ import i18n from 'i18next';
 function i18nFactory(environment, directory, provider, callback) {
   let BackendProvider = provider || require('i18next-xhr-backend');
   let path = (environment === 'server') ? `${directory}/..` : '';
-  
+
   let options = {
     fallbackLng: 'en',
+    lng: 'bs',
 
     // have a common namespace used around the full app
     ns: ['translation'],

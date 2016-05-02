@@ -23,6 +23,10 @@ class TranslatableComponent extends React.Component {
       return i18n.getFixedT('en', 'translation');
     }
   }
+
+  get i18next() {
+    return this.context.i18n;
+  }
 }
 
 TranslatableComponent.contextTypes = {

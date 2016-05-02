@@ -108,6 +108,24 @@ In order for the design build to work, the following component naming convention
   - For a base component, them naming convention is '{component_name}' from the path 'components/{component_name}/{component_name}.component.js'. For instance, a component at 'components/example/example.component.js' will be keyed as 'example'. This should be unique.
   - For a nested component (shouldn't be nested more than one level deep), the naming convention is '{base}_{component_name}' from the path 'components/{base}/{component_name}/{component_name}.component.js'. For instance, a component at 'components/example/graph/graph.component.js', will be keyed as 'example_graph'. This should be unique.
 
+
+## Internationalization
+
+In order to internationalize the component it must inherit from TranslatableComponent.
+
+This parent class provides child components with `t` property that
+can be called in templates as `this.t('Some string')` and with `i18next` property that is uninitialized in test environment.
+
+Translations can be found in ./server/assets/translation/{lngCode}.json and it is in following format:
+
+```json
+{
+  "This is a key to be translated.": "Ovo je ključ koji treba prevesti."
+}
+```
+
+Setup uses gettext type keys - so if key is missing library will fallback on the key. Translation is turned off in test environments.
+
 ## Areas for Improvement
 
 Currently, any changes made to React templates are not seen by Webpack's watcher, so you have to force a change in the React component class for Webpack to load the changes in your template files.
