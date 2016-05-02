@@ -43,6 +43,8 @@
     "gulp-rename": "1.2.x",
     "gulp-template": "4.0.x",
     "history": "2.0.x",
+    "i18next-node-fs-backend": "^0.1.2",
+    "i18next-xhr-backend": "^0.5.3",
     "jasmine": "2.4.x",
     "jasmine-core": "2.4.x",
     "jquery": "2.2.x",
@@ -75,12 +77,13 @@
     "yargs": "3.32.x"
   },
   "dependencies": {
-    "express": "4.13.x",
-    "morgan": "1.5.x",
     "body-parser": "1.12.x",
     "debug": "2.1.x",
-    "serve-favicon": "2.2.x",
-    "ejs": "2.4.x"
+    "ejs": "2.4.x",
+    "express": "4.13.x",
+    "i18next": "^2.5.1",
+    "morgan": "1.5.x",
+    "serve-favicon": "2.2.x"
   },
   "author": "Eric Hulburd <eric@analyticsfire.com> (http://afdc.co/)",
   "repository": {
