@@ -15,7 +15,11 @@ module.exports = function (config) {
     preprocessors: {
       'test.client.js': ['webpack', 'sourcemap']
     },
-    reporters: ['progress'],
-    webpack: webpack_config
+    reporters: ['dots','progress'],
+    webpack: webpack_config,
+    webpackMiddleware: {
+      // info is too chatty - it obscures test information
+      noInfo: true
+    }
   });
 };

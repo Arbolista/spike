@@ -19,7 +19,7 @@ function repeatExample1(example, exampleIndex) {
     }, example.data.name);
 }
 export default function () {
-    return React.createElement('div', { 'id': 'layout' }, React.createElement('h1', {}, 'Basic Layout Component'), this.route_name === 'MissingRoute' ? React.createElement('div', { 'className': 'alert alert-danger' }, '\n    Sorry, the page you requested does not exist.\n  ') : null, this.route_name === 'IndexRoute' ? React.createElement('div', { 'className': 'alert alert-warning' }, '\n    Choose an example.\n  ') : null, this.route_name === 'ExampleRoute' ? React.createElement('div', { 'className': 'alert alert-info' }, '\n    ', this.example.introduce(), '\n  ') : null, React.createElement.apply(this, [
+    return React.createElement('div', { 'id': 'layout' }, React.createElement('h1', {}, this.t('Basic Layout Component')), this.route_name === 'MissingRoute' ? React.createElement('div', { 'className': 'alert alert-danger' }, '\n    Sorry, the page you requested does not exist.\n  ') : null, this.route_name === 'IndexRoute' ? React.createElement('div', { 'className': 'alert alert-warning' }, '\n    Choose an example.\n  ') : null, this.route_name === 'ExampleRoute' ? React.createElement('div', { 'className': 'alert alert-info' }, '\n    ', this.example.introduce(), '\n  ') : null, React.createElement.apply(this, [
         'div',
         {
             'className': 'btn-group',

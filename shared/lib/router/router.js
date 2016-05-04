@@ -35,11 +35,14 @@ export default class Router {
    * Client-only
    */
 
-  get current_location(){
-    return {
-      pathname: window.location.pathname,
-      query: queryString.parse(window.location.search)
-    }
+   // should be used on app initialization.
+  setLocationToCurrentUrl(){
+    let router = this,
+        current_location = {
+          pathname: window.location.pathname,
+          query: queryString.parse(window.location.search)
+        };
+    return router.setLocation(current_location);
   }
 
   initializeHistory(component){

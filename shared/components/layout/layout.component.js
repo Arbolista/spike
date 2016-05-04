@@ -7,32 +7,34 @@ import Router from './../../lib/router/router';
 //import RouteBase from './../../lib/routes/route.base';
 import ExampleBase from './../../models/example/example.base';
 import template from './layout.rt.html';
+import TranslatableComponent from '../translatable/translatable.component'
 
-class LayoutComponent extends React.Component {
 
-  constructor(props, context){
+class LayoutComponent extends TranslatableComponent {
+
+  constructor(props, context) {
     super(props, context);
     var layout = this;
-    layout.state = {}
+    layout.state = {};
   }
 
-  get state_manager(){
+  get state_manager() {
     return this.props.state_manager;
   }
 
-  get router(){
+  get router() {
     return this.props.router;
   }
 
-  get example(){
+  get example() {
     return this.state_manager.state.example;
   }
 
-  get examples(){
+  get examples() {
     return this.state_manager.examples;
   }
 
-  get route_name(){
+  get route_name() {
     return this.state_manager.state.route.route_name;
   }
 
@@ -46,16 +48,16 @@ class LayoutComponent extends React.Component {
     return result;
   }
 
-  goToExample(event){
+  goToExample(event) {
     var layout = this,
         value = event.target.dataset.value;
     layout.router.goToExample(value);
   }
 
-  syncFromStateManager(){
+  syncFromStateManager() {
     var layout = this;
-    return new Promise((fnResolve, _fnReject)=>{
-      layout.setState(layout.state_manager.state, ()=>{
+    return new Promise((fnResolve, _fnReject) => {
+      layout.setState(layout.state_manager.state, () => {
         // Prerendered data should be consumed after the first time the
         // state is set from the URL.
         layout.destroyPrerenderData();
@@ -64,18 +66,19 @@ class LayoutComponent extends React.Component {
     });
   }
 
-  destroyPrerenderData(){
+  destroyPrerenderData() {
     var prerender_data = document.getElementById('prerender_data');
     window.PrerenderData = undefined;
     if (prerender_data) prerender_data.parentNode.removeChild(prerender_data);
   }
 
-  render(){
+  render() {
     return template.call(this);
   }
 
 }
 LayoutComponent.propTypes = {
+  environment: React.PropTypes.any,
   state_manager: React.PropTypes.instanceOf(StateManager).isRequired,
   router: React.PropTypes.instanceOf(Router).isRequired,
   route: React.PropTypes.any,
