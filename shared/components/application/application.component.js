@@ -7,14 +7,11 @@ class ApplicationComponent extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      i18n: props.i18n
-    };
   }
 
   getChildContext() {
     return {
-      i18n: this.state.i18n
+      i18n: this.props.i18n
     };
   }
 

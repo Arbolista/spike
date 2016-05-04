@@ -23,7 +23,7 @@ export default function(createHistory) {
       router = new Router(state_manager, ROUTES);
   state_manager.getInitialData()
     .then(() => {
-      return router.setLocation(router.current_location);
+      return router.setLocationToCurrentUrl();
     })
     .then(() => {
 
