@@ -1,4 +1,4 @@
-/*global __dirname process*/
+/*global __dirname process GLOBAL*/
 
 import express from 'express';
 import path from 'path';
@@ -7,17 +7,20 @@ import logger from 'morgan';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 
-import Layout from './../../client/components/layout/layout.component';
-import StateManager from './../lib/state_manager/state_manager';
+import StateManager from './../../shared/lib/state_manager/state_manager';
+import Router from './../../shared/lib/router/router';
+import {ROUTES} from './../../shared/lib/routes';
+import Layout from './../../shared/components/layout/layout.component';
 
 class ServerBase {
 
   config(){
+    GLOBAL.JS_ENV = 'server';
     var server = this,
         app = server.app;
 
     // serve public static files.
-    app.use('/', express.static(path.resolve(__dirname, '../../client/build', process.env.NODE_ENV)));
+    app.use('/', express.static(path.resolve(__dirname, '../../client/build', process.env.NODE_ENV.toLowerCase())));
 
     app.use(favicon(__dirname + '/../assets/favicon.ico'));
     app.use(logger('dev'));
@@ -30,20 +33,21 @@ class ServerBase {
   }
 
   static renderReact(req, res, _next){
-    var state_manager = new StateManager();
+    var state_manager = new StateManager(),
+        router = new Router(state_manager, ROUTES);
     return state_manager.getInitialData()
       .then(()=>{
-        return state_manager.updateStateFromUrl({
+        return router.setLocation({
           pathname: req.path,
           query: req.query
         });
       })
       .then(()=>{
-        var props = Object.assign({state_manager: state_manager}, state_manager.state),
+        let props = Object.assign({state_manager: state_manager, router: router}, state_manager.state),
             layout = React.createFactory(Layout)(props),
             meta = {},
-            prerender_content = ReactDOMServer.renderToString(layout);
-
+            prerender_content;
+        prerender_content = ReactDOMServer.renderToString(layout);
         if (state_manager.state.example){
           meta.example_id = state_manager.state.example.data.id;
         }

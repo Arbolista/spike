@@ -1,11 +1,11 @@
+/*global console*/
+
 import express from 'express';
 import os from 'os'
 
 import ServerBase from './../server.base';
 
 const APP_PORT = 3000;
-
-/*global console*/
 
 class Server extends ServerBase {
 

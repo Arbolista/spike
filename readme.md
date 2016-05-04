@@ -42,7 +42,7 @@ npm install
 
 Generate component named Super
 ```
-gulp generate --component Super
+npm run generate -- --component Super
 ```
 
 This will copy and process a set of files in ./client/config/templates/component
@@ -51,7 +51,7 @@ and put it into ./client/components/super directory
 To specify a different subdirectory use --destination switch with subdirectory name relative to ./client/components/
 
 ```
-gulp generate --component SubSuper --destination super/sub_super
+npm run generate -- --component SubSuper --destination super/sub_super
 ```
 
 This will generate set of component files inside of ./client/components/super/sub_super/.
@@ -113,3 +113,16 @@ In order for the design build to work, the following component naming convention
 Currently, any changes made to React templates are not seen by Webpack's watcher, so you have to force a change in the React component class for Webpack to load the changes in your template files.
 
 The alternative is to set `cache: false` in the development webpack configuration file. However, this dramatically slows down hot patching.
+
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice must be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.

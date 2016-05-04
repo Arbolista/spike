@@ -3,13 +3,12 @@
 var webpack = require('webpack');
 
 module.exports = {
-  cache: false,
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   module: {
     preLoaders: [
       {
         test: /\.test\.js$/,
-        include: /client/,
+        include: /(client|shared)/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
@@ -20,7 +19,7 @@ module.exports = {
     loaders: [
       {
         test: /^((?!test\.js$).)*\.js$/,
-        include: /(client|shared)/,
+        include: /(client|shared|server)/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
@@ -38,11 +37,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      api: __dirname + '/../../api/test',
-      config: __dirname + '/../../config/test',
-      models: __dirname + '/../../models',
-      lib: __dirname + '/../../lib',
-      shared: __dirname + '/../../../shared'
+      api: __dirname + '/../../api/test'
     }
   }
 };

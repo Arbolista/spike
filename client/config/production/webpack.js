@@ -55,9 +55,7 @@ module.exports = {
   resolve: {
     alias: {
       api: __dirname + '/../../api/production',
-      config: __dirname + '/../../config/production',
-      models: __dirname + '/../../models',
-      lib: __dirname + '/../../lib',
+      client: __dirname + '/../..',
       shared: __dirname + '/../../../shared'
     }
   }
