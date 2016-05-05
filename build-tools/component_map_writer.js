@@ -8,7 +8,7 @@ class ComponentMapWriter {
   static write(path){
     return new Promise((fnResolve, fnReject)=>{
       var TEMPLATE_ROUTES = {},
-          component_dir = __dirname + '/../client/components';
+          component_dir = __dirname + '/../shared/components';
       FsHelper.walk(component_dir)
         .then((files)=>{
           files.forEach((file)=>{

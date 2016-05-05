@@ -44,7 +44,7 @@ function copyDesignComponents(done){
       return FsHelper.copy(__dirname + '/../client/app.scss', asset_path)
     }, done)
     .then(()=>{
-      return FsHelper.walk(__dirname + '/../client/components')
+      return FsHelper.walk(__dirname + '/../shared/components')
     }, done)
     .then((files)=>{
       // copy all React Templates and .scss files to build/design/components
