@@ -17,21 +17,19 @@ module.exports = {
     path: __dirname + '/../../build/development'
   },
   module: {
-    loaders: [
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css-loader', 'style-loader', 'raw-loader!sass-loader')
-      }, {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css-loader', 'style-loader', 'raw-loader')
-      }, {
-        test: /\.js$/,
-        loader: 'babel'
-      }, {
-        test: /\.json$/,
-        loader: 'json'
-      }
-    ]
+    loaders: [{
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('css-loader', 'raw-loader!sass-loader')
+    }, {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('css-loader',  'raw-loader')
+    }, {
+      test: /\.js$/,
+      loader: 'babel'
+    }, {
+      test: /\.json$/,
+      loader: 'json'
+    }]
   },
   sassLoader: {
     includePaths: [CLIENT, ROOT + '/node_modules']
