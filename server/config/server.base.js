@@ -1,11 +1,13 @@
 /*global __dirname process GLOBAL JS_ENV Promise */
 
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
+import url from 'url';
 
 import StateManager from './../../shared/lib/state_manager/state_manager';
 import Router from './../../shared/lib/router/router';
@@ -22,8 +24,9 @@ class ServerBase {
   config() {
     GLOBAL.JS_ENV = 'server';
     var server = this,
-        app = server.app;
+      app = server.app;
 
+    app.use(cookieParser());
     // serve public static files.
     app.use('/', express.static(path.resolve(__dirname, '../../client/build', process.env.NODE_ENV.toLowerCase())));
     app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
@@ -40,9 +43,23 @@ class ServerBase {
 
   static renderReact(req, res, _next) {
     let i18n;
+
+    // get the language from url
+    // or from cookie
+    // or fallback to english
+    let language;
+    if (req.query) {
+      language = language || req.query.lang;
+    };
+
+    if (req.cookies) {
+      language = language || req.cookies['lang'];
+    };
+
+
     try {
       var state_manager = new StateManager(),
-          router = new Router(state_manager, ROUTES);
+        router = new Router(state_manager, ROUTES);
       return state_manager.getInitialData()
         .then(() => {
           return router.setLocation({
@@ -54,6 +71,22 @@ class ServerBase {
           return new Promise((resolve, reject) => {
             try {
               i18n = i18nFactory(JS_ENV, __dirname, Backend, resolve);
+            } catch (e) {
+              reject(e);
+            }
+          })
+        })
+        .then(() => {
+          return new Promise((resolve, reject) => {
+            try {
+              if (language && language !== i18n.language) {
+                i18n.changeLanguage(language, (err, t) => {
+                  resolve();
+                });
+              } else {
+                language = i18n.language;
+                resolve();
+              }
             } catch (e) {
               reject(e);
             }
@@ -75,6 +108,14 @@ class ServerBase {
           if (state_manager.state.example) {
             meta.example_id = state_manager.state.example.data.id;
           }
+
+          // save language for this user
+          // it will be used for client side to
+          // decide what to load, hence httpOnly: false
+          res.cookie('lang', language, {
+            maxAge: 900000,
+            httpOnly: false
+          });
           res.set('Content-Type', 'text/html');
           res.render('index', {
             prerender_content: prerender_content,

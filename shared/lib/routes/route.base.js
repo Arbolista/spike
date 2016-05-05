@@ -13,6 +13,7 @@ export default class RouteBase {
     let route = this;
     return route.path.test(location.pathname);
   }
+  
 
   // location is a React History location object.
   setParams(location){
