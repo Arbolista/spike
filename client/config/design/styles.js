@@ -3,59 +3,50 @@
 
 import {COMPONENT_MAP} from './component_map';
 
+const sass = new window.Sass();
+let css = '';
+
 class Styles {
 
   static sync(){
-    var all = [],
-        css = '';
+    var promises = [];
     for (var view in COMPONENT_MAP){
-      var done = new Promise((fnResolve, _fnReject)=>{
-        Styles.addCss(view, fnResolve)
-      }).then((result)=>{
-        if (result) css += result;
-      });
-      all.push(done);
+      let promise = Styles.addCss(COMPONENT_MAP[view]);
+      promises.push(promise);
     }
-    all.push(Styles.addAppCss()
-      .then((result)=>{ if(result)css += result; }));
-    return Promise.all(all)
+    // defined in <head> of views/index.ejs
+    window.SASS_DESIGN_ASSETS.forEach((sass_route)=>{
+      let promise =  Styles.addCss(sass_route);
+      promises.push(promise);
+    });
+    return Promise.all(promises)
       .then(()=>{
+        document.getElementById('root').style.display = 'block';
+        document.getElementById('loading_styles').style.display = 'none';
         window.jQuery('head').append(`<style>${css}</style>`);
       });
   }
 
-  static addCss(view, fnResolve){
-    return window.jQuery.ajax({
-      url: COMPONENT_MAP[view] + '.scss'
-    })
-    .fail(()=>{
-      fnResolve('');
-    })
-    .then((scss)=>{
-      var sass = new window.Sass();
-      if (!scss) return fnResolve('');
-      sass.compile(scss, (result, _a)=>{
-        fnResolve(result.text)
-      });
-    });
-  }
-
-  static addAppCss(){
+  static addCss(path){
     return new Promise((fnResolve, _fnReject)=>{
       window.jQuery.ajax({
-        url: '/assets/app.scss'
+        url: path + '.scss'
       })
       .fail(()=>{
-        // if app.scss not found, fail silently.
-        fnResolve('');
+        console.error(`${path} not compiled`)
+        fnResolve();
       })
       .then((scss)=>{
-        var sass = new window.Sass();
+
+        if (!scss) return fnResolve();
         sass.compile(scss, (result, _a)=>{
-          fnResolve(result.text);
+          css += result.text;
+          console.info(`${path} has been compiled`)
+          fnResolve();
         });
       });
     });
+
   }
 
 }

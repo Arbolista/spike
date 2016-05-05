@@ -5,8 +5,8 @@ import createHistory from 'history/lib/createHashHistory';
 import { useQueries } from 'history';
 
 import app from './../../app';
-import Styles from './styles';
-import Templates from './templates';
+import Styles from 'config/styles';
+import Templates from 'config/templates';
 
 Promise.all([
   Templates.sync(),
@@ -14,3 +14,4 @@ Promise.all([
 ]).then(()=>{
   app(useQueries(createHistory));
 });
+

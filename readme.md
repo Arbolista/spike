@@ -81,14 +81,7 @@ Jasmine is used to test that the application successfully renders server side fo
 
 ## Design Build
 
-To build a design pack, you first need to install [sass.js](https://github.com/medialize/sass.js/) in the design build directory so the design build can compile the sass in the browser.
-
-```sh
-cd client/build/design/assets
-git clone https://github.com/medialize/sass.js.git sass
-```
-
-Then build the app with webpack:
+Build the app with webpack:
 
 ```sh
 npm run build_design

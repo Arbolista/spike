@@ -28,7 +28,7 @@ class ServerBase {
     app.use('/', express.static(path.resolve(__dirname, '../../client/build', process.env.NODE_ENV.toLowerCase())));
     app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 
-    app.use(favicon(__dirname + '/../assets/favicon.ico'));
+    app.use(favicon(__dirname + '/../../client/assets/favicon.ico'));
     app.use(logger('dev'));
 
     // view engine set up

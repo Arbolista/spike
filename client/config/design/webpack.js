@@ -1,37 +1,24 @@
 /*eslint-env node*/
 
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import webpack from 'webpack';
 
 const CLIENT = __dirname + '/../..';
 const ROOT = CLIENT + '/..';
 
 module.exports = {
-  entry: {
-    app: CLIENT + '/config/design/app',
-    style: CLIENT + '/config/design/style'
-  },
+  entry: CLIENT + '/config/design/app',
   output: {
-    filename: '[name].js',
+    filename: 'app.js',
     path: CLIENT + '/build/design/assets'
   },
   module: {
     loaders: [
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader!sass-loader')
-      }, {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'raw-loader')
-      }, {
         test: /\.js$/,
-        loader: 'babel'
+        loader: 'babel-loader'
       }, {
         test: /\.json$/,
         loader: 'json'
-      }, {
-        test: /\.template\.html/,
-        loader: 'react-templates-loader?targetVersion=0.14.0'
       }
     ]
   },
@@ -39,9 +26,6 @@ module.exports = {
     includePaths: [CLIENT, ROOT + '/node_modules']
   },
   plugins: [
-    new ExtractTextPlugin('style.css', {
-      allChunks: true
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -54,7 +38,9 @@ module.exports = {
   resolve: {
     alias: {
       api: __dirname + '/../../api/design',
-      client: __dirname + '/../..',
+      config: __dirname + '/../../config/design',
+      models: __dirname + '/../../models',
+      lib: __dirname + '/../../lib',
       shared: __dirname + '/../../../shared'
     }
   }

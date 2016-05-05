@@ -3,6 +3,9 @@
 // Vendor Stylesheets
 require('bootstrap/dist/css/bootstrap.min.css');
 
-// Component Stylesheets
-require(__dirname + '/../../app.scss');
-require(__dirname + '/../../../shared/components/layout/layout.scss');
+// other css assets.
+let cssContext = require.context(__dirname + '/../../assets/css', true);
+cssContext.keys().forEach(cssContext);
+
+// component context
+require(__dirname + '/../../components/layout/layout.scss');
