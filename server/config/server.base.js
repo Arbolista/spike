@@ -7,7 +7,6 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import url from 'url';
 
 import StateManager from './../../shared/lib/state_manager/state_manager';
 import Router from './../../shared/lib/router/router';
@@ -24,7 +23,7 @@ class ServerBase {
   config() {
     GLOBAL.JS_ENV = 'server';
     var server = this,
-      app = server.app;
+        app = server.app;
 
     app.use(cookieParser());
     // serve public static files.
@@ -50,16 +49,16 @@ class ServerBase {
     let language;
     if (req.query) {
       language = language || req.query.lang;
-    };
+    }
 
     if (req.cookies) {
       language = language || req.cookies['lang'];
-    };
+    }
 
 
     try {
       var state_manager = new StateManager(),
-        router = new Router(state_manager, ROUTES);
+          router = new Router(state_manager, ROUTES);
       return state_manager.getInitialData()
         .then(() => {
           return router.setLocation({
@@ -80,7 +79,7 @@ class ServerBase {
           return new Promise((resolve, reject) => {
             try {
               if (language && language !== i18n.language) {
-                i18n.changeLanguage(language, (err, t) => {
+                i18n.changeLanguage(language, () => {
                   resolve();
                 });
               } else {

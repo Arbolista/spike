@@ -18,7 +18,7 @@ export default class Router {
 
   setLocation(location) {
     let router = this,
-      new_route = router.findRoute(location);
+        new_route = router.findRoute(location);
 
     new_route.setParams(location);
     return router.state_manager.setRoute(new_route);
@@ -38,10 +38,10 @@ export default class Router {
   // should be used on app initialization.
   setLocationToCurrentUrl() {
     let router = this,
-      current_location = {
-        pathname: window.location.pathname,
-        query: queryString.parse(window.location.search)
-      };
+        current_location = {
+          pathname: window.location.pathname,
+          query: queryString.parse(window.location.search)
+        };
     return router.setLocation(current_location);
   }
 
@@ -63,7 +63,7 @@ export default class Router {
   }
 
   getQueryParam(key) {
-    return queryString.parse(window.location.search)['key'];
+    return queryString.parse(window.location.search)[key];
   }
 
   goToExample(example_id) {

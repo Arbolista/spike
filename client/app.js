@@ -1,4 +1,4 @@
-/*global document window*/
+/*global document window Promise*/
 
 import 'babel-polyfill';
 import 'bootstrap/dist/js/bootstrap.min';
@@ -23,7 +23,7 @@ export default function(createHistory) {
 
 
   var state_manager = new StateManager(),
-    router = new Router(state_manager, ROUTES);
+      router = new Router(state_manager, ROUTES);
 
   state_manager.getInitialData()
     .then(() => {
@@ -42,7 +42,7 @@ export default function(createHistory) {
       return new Promise((resolve, reject) => {
         try {
           let language = router.getQueryParam('lang') || Helper.getCookieValue('lang') ||  i18n.language;
-          
+
           if (language && language !== i18n.language) {
             i18n.changeLanguage(language, resolve);
           } else {
