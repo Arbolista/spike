@@ -1,4 +1,4 @@
-/*global document window Promise*/
+/*global document window Promise console*/
 
 import 'babel-polyfill';
 import 'bootstrap/dist/js/bootstrap.min';
@@ -15,47 +15,39 @@ import {
 } from './../shared/lib/routes.js';
 import XHR from 'i18next-xhr-backend';
 
+function setTranslations(router){
+  return new Promise((resolve, reject) => {
+    try {
+      let i18n = i18nFactory(window.JS_ENV, '', XHR, ()=>{
+        let language = router.getQueryParam('lang') || Helper.getCookieValue('lang') ||  i18n.language;
+
+        if (language && language !== i18n.language) {
+          i18n.changeLanguage(language, resolve);
+        } else {
+          resolve(i18n);
+        }
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
 // Pass in an instance of ReactJs History function - with either browser or hash history.
 export default function(createHistory) {
 
   window.JS_ENV = 'client';
-  let i18n;
-
-
   var state_manager = new StateManager(),
       router = new Router(state_manager, ROUTES);
 
   state_manager.getInitialData()
-    .then(() => {
+    .then(()=>{
       return router.setLocationToCurrentUrl();
     })
     .then(() => {
-      return new Promise((resolve, reject) => {
-        try {
-          i18n = i18nFactory(window.JS_ENV, '', XHR, resolve);
-        } catch (e) {
-          reject(e);
-        }
-      })
+      return setTranslations(router);
     })
-    .then(() => {
-      return new Promise((resolve, reject) => {
-        try {
-          let language = router.getQueryParam('lang') || Helper.getCookieValue('lang') ||  i18n.language;
-
-          if (language && language !== i18n.language) {
-            i18n.changeLanguage(language, resolve);
-          } else {
-            resolve();
-          }
-        } catch (e) {
-          reject(e);
-        }
-      })
-
-    })
-    .then(() => {
-
+    .then((i18n) => {
       var initial_props = Object.assign({
         environment: window.JS_ENV,
         state_manager: state_manager,
@@ -67,6 +59,8 @@ export default function(createHistory) {
       ReactDOM.render(
         React.createElement(ApplicationComponent, initial_props),
         document.getElementById('root'));
-
+    })
+    .catch((err)=>{
+      console.error(err);
     });
 }
