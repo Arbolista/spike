@@ -8,7 +8,7 @@ function i18nFactory(environment, directory, provider, callback) {
 
   let options = {
     fallbackLng: 'en',
-    lng: 'bs',
+    lng: 'en',
 
     // have a common namespace used around the full app
     ns: ['translation'],

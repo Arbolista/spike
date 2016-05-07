@@ -126,6 +126,9 @@ Translations can be found in ./server/assets/translation/{lngCode}.json and it i
 
 Setup uses gettext type keys - so if key is missing library will fallback on the key. Translation is turned off in test environments.
 
+Language detection uses URL, and stores information in `lang` cookie.
+You can change language by appending `lang=LANGUAGE_CODE` to query string of the URL (eg. `lang=bs`).
+
 ## Areas for Improvement
 
 Currently, any changes made to React templates are not seen by Webpack's watcher, so you have to force a change in the React component class for Webpack to load the changes in your template files.
