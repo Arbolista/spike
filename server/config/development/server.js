@@ -4,7 +4,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 import ServerBase from './../server.base';
-import config from './../../../client/config/development/webpack';
+import config from './../../../client/config/webpack/development';
 
 const APP_PORT = 3000;
 

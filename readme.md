@@ -96,11 +96,7 @@ python3 -m http.server
 ```
 
 *Note*
-In order for the design build to work, the following component naming conventions should be followed:
-- Component keys are internally generated.
-  - For a base component, them naming convention is '{component_name}' from the path 'components/{component_name}/{component_name}.component.js'. For instance, a component at 'components/example/example.component.js' will be keyed as 'example'. This should be unique.
-  - For a nested component (shouldn't be nested more than one level deep), the naming convention is '{base}_{component_name}' from the path 'components/{base}/{component_name}/{component_name}.component.js'. For instance, a component at 'components/example/graph/graph.component.js', will be keyed as 'example_graph'. This should be unique.
-
+In order for the design build to work, every rendered component should have a class level `NAME` which is unique and the same as the name used to import the component in the templates.
 
 ## Internationalization
 

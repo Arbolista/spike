@@ -6,6 +6,7 @@
 require('babel-polyfill');
 
 window.JS_ENV = 'client';
+window.DESIGN = false;
 
 [
   require.context('./shared/lib', true, /^((?!test\.js$).)*\.js$/),

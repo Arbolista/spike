@@ -21,6 +21,7 @@ class ServerBase {
 
   config() {
     GLOBAL.JS_ENV = 'server';
+    GLOBAL.DESIGN = false;
     var server = this,
         app = server.app;
 

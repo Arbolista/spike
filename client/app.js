@@ -18,6 +18,7 @@ import XHR from 'i18next-xhr-backend';
 export default function(createHistory) {
 
   window.JS_ENV = 'client';
+  window.DESIGN = window.DESIGN || false;
 
   var state_manager = new StateManager(),
       router = new Router(state_manager, ROUTES);

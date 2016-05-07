@@ -1,13 +1,13 @@
 /*global module*/
 
 import React from 'react';
-import template from './<%=  componentNameLowerCase%>.rt.html';
 
 class <%=  componentNameCamelCase %>Component extends React.Component {
 
   constructor(props, context){
     super(props, context);
     var <%=  componentNameLowerCase %> = this;
+    <%=  componentNameLowerCase %>.has_template = true;
     <%=  componentNameLowerCase %>.state = {}
   }
 
@@ -16,6 +16,13 @@ class <%=  componentNameCamelCase %>Component extends React.Component {
   }
 
   render(){
+    let template;
+    if (!DESIGN){
+      template = require('./componentNameLowerCase.rt.html');
+    } else {
+      let DesignComponentTemplateLoader = require('design_component_template_loader')
+      template = DesignComponentTemplateLoader.forComponent(this.constructor);
+    }
     return template.call(this);
   }
 

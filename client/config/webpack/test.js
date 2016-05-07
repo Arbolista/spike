@@ -19,6 +19,9 @@ module.exports = {
         include: /(client|shared|server)/,
         exclude: /node_modules/,
         loader: 'babel'
+      }, {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },

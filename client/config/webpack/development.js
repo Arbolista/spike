@@ -8,8 +8,8 @@ const ROOT = CLIENT + '/..';
 
 module.exports = {
   entry: {
-    app: __dirname + '/app',
-    style: __dirname + '/style'
+    app: __dirname + '/../app/development',
+    style: __dirname + '/../style/app'
   },
   devtool: 'source-map',
   output: {
