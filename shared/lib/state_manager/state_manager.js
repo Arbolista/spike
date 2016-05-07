@@ -11,6 +11,10 @@ export default class StateManager {
     return this.state.route.params;
   }
 
+  get example_id(){
+    return this.state.example && this.state.example.data.id;
+  }
+
   setRoute(route){
     let state_manager = this;
     state_manager.state.route = route;
