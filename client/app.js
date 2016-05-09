@@ -37,6 +37,8 @@ function setTranslations(router){
 export default function(createHistory) {
 
   window.JS_ENV = 'client';
+  window.DESIGN = window.DESIGN || false;
+
   var state_manager = new StateManager(),
       router = new Router(state_manager, ROUTES);
 

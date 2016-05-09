@@ -1,4 +1,4 @@
-/*global module Promise document window*/
+/*global module Promise document window DESIGN*/
 
 import React from 'react';
 
@@ -6,9 +6,11 @@ import StateManager from './../../lib/state_manager/state_manager';
 import Router from './../../lib/router/router';
 //import RouteBase from './../../lib/routes/route.base';
 import ExampleBase from './../../models/example/example.base';
-import template from './layout.rt.html';
-import TranslatableComponent from '../translatable/translatable.component'
+import TranslatableComponent from '../translatable/translatable.component';
 
+// NOTE: The template loader is only needed in Design build.
+import DesignComponentTemplateLoader from 'design_component_template_loader';
+import template from './layout.rt.html';
 
 class LayoutComponent extends TranslatableComponent {
 
@@ -73,10 +75,16 @@ class LayoutComponent extends TranslatableComponent {
   }
 
   render() {
-    return template.call(this);
+    if (!DESIGN){
+      return template.call(this);
+    } else {
+      return DesignComponentTemplateLoader.forComponent(this.constructor.NAME).call(this);
+    }
   }
 
 }
+LayoutComponent.has_template = true;
+LayoutComponent.NAME = 'Layout';
 LayoutComponent.propTypes = {
   environment: React.PropTypes.any,
   state_manager: React.PropTypes.instanceOf(StateManager).isRequired,
@@ -84,7 +92,5 @@ LayoutComponent.propTypes = {
   route: React.PropTypes.any,
   example: React.PropTypes.instanceOf(ExampleBase)
 }
-
-LayoutComponent.NAME = 'Layout';
 
 module.exports = LayoutComponent;

@@ -10,10 +10,7 @@ module.exports = {
         test: /\.test\.js$/,
         include: /(client|shared)/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: false
-        }
+        loader: 'babel'
       }
     ],
     loaders: [
@@ -21,10 +18,10 @@ module.exports = {
         test: /^((?!test\.js$).)*\.js$/,
         include: /(client|shared|server)/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: false
-        }
+        loader: 'babel'
+      }, {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   },
@@ -37,7 +34,11 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      api: __dirname + '/../../api/test'
+      api: __dirname + '/../../api/test',
+      config: __dirname + '/../../config/test',
+      models: __dirname + '/../../models',
+      lib: __dirname + '/../../lib',
+      shared: __dirname + '/../../../shared'
     }
   }
 };

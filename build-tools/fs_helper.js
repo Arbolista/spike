@@ -2,6 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import ncp from 'ncp';
 import mkdirp from 'mkdirp';
 
 class FsHelper {
@@ -103,30 +104,30 @@ class FsHelper {
     });
   }
 
-  static copy(source_file, dest_dir, opts){
+  static copy(source, dest, opts){
     opts = Object.assign({
-      prefix: 0
+      stopOnError: true
     }, opts || {});
-    return new Promise((fnResolve, fnReject)=>{
-      fs.readFile(source_file, 'utf8', (read_err, content)=>{
-        if (read_err){
-          console.error('=== FsHelper.copy Error ===');
-          console.error('error reading file', source_file);
-          console.error(read_err);
-          return fnReject();
-        }
 
-        FsHelper.mkDir(dest_dir)
-          .then(()=>{
-            let file_parts = source_file.split('/'),
-                prefixed_filename = file_parts.slice(file_parts.length - (opts.prefix + 1), file_parts.length + 1).join('/'),
-                file_path = path.resolve(dest_dir, prefixed_filename);
-            return FsHelper.writeFile(file_path, content)
-          })
-          .then(fnResolve, (err)=>{
-            console.error('=== FsHelper.copy Error ===');
-            console.error(err);
-          });
+    if (opts && opts.ext){
+      opts.filter = function(source){
+        let stats = fs.statSync(source)
+        if (stats.isDirectory()){
+          return true;
+        } else if (opts.ext.test(source)){
+          return true
+        }
+        return false;
+      }
+    }
+
+    return new Promise((fnResolve, fnReject)=>{
+      ncp.ncp(source, dest, opts, (err)=>{
+        if (err){
+          console.error('=== FsHelper.copy Error ===');
+          return fnReject(err);
+        }
+        fnResolve();
       });
     });
   }
