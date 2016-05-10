@@ -1,6 +1,7 @@
 /*global module*/
 
 import React from 'react';
+import moment from 'moment';
 
 class TranslatableComponent extends React.Component {
 
@@ -10,8 +11,16 @@ class TranslatableComponent extends React.Component {
     // once new.target starts working
   }
 
+  get moment() {
+    let i18n = this.context.i18n;
+    if(i18n && i18n.language) {
+      moment.locale(i18n.language);
+    }
+    return moment;
+  }
+
   get t() {
-    var i18n = this.context.i18n;
+    let i18n = this.context.i18n;
     if (!i18n) {
       // i18n not present - probably unit test
       return (key) => {

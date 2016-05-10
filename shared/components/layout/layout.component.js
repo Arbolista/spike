@@ -12,6 +12,7 @@ import TranslatableComponent from '../translatable/translatable.component';
 import DesignComponentTemplateLoader from 'design_component_template_loader';
 import template from './layout.rt.html';
 
+
 class LayoutComponent extends TranslatableComponent {
 
   constructor(props, context) {
