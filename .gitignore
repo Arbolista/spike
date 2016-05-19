@@ -2,3 +2,4 @@ node_modules/
 client/build/
 server/bin/
 npm-debug.log
+**/.DS_Store
