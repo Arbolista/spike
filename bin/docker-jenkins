@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+cd ${0%/*}/..
+
+# build the image
+docker build -t spike .
+
+# remove the old container
+docker rm -flv spike || true
+
+# run the new container
+docker run --rm spike npm test
