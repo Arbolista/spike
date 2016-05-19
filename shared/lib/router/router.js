@@ -69,7 +69,7 @@ export default class Router {
   pushHistory(url){
     let router = this;
     router.update_in_progress = true;
-    router.history.push(new_url);
+    router.history.push(url);
   }
 
   goToExample(example_id) {
