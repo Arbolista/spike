@@ -35,7 +35,7 @@ export default class Router {
    * Client-only
    */
 
-  // should be used on app initialization.
+  // should be used before React app initialized.
   setLocationToCurrentUrl() {
     let router = this,
         current_location = {
@@ -66,14 +66,18 @@ export default class Router {
     return queryString.parse(window.location.search)[key];
   }
 
+  pushHistory(url){
+    let router = this;
+    router.update_in_progress = true;
+    router.history.push(url);
+  }
+
   goToExample(example_id) {
     let router = this;
     example_id = parseInt(example_id);
 
     if (!router.state_manager.exampleSet(example_id)) {
-      let new_url = `/examples/${example_id}`;
-      router.update_in_progress = true;
-      router.history.push(new_url);
+      router.pushHistory(`/examples/${example_id}`);
     }
   }
 
