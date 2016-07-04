@@ -12,7 +12,7 @@ process.env.NODE_ENV = yargs.argv.env || 'development';
 
 export default function build(options, done){
   // build assets/app.js and assets/style.css with webpack
-  let config = require(__dirname + `/../client/config/webpack/${process.env.NODE_ENV}`);
+  let config = require(__dirname + `/../client/config/${process.env.NODE_ENV}/webpack`);
   webpack(config, function(err, _stats) {
     if (err){
       console.error('=== Error building webpack config ===')
