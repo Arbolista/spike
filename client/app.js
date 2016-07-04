@@ -14,7 +14,7 @@ import Router from 'shared/lib/router/router';
 function setTranslations(){
   return new Promise((resolve, reject) => {
     try {
-      let i18n = i18nFactory(window.JS_ENV, '', XHR, ()=>{
+      let i18n = i18nFactory('', XHR, ()=>{
         let language = Router.locale() || i18n.language;
 
         if (language && language !== i18n.language) {

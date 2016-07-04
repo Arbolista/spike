@@ -114,7 +114,7 @@ class ServerBase {
 
     return new Promise((resolve, reject) => {
       try {
-        i18n = i18nFactory(JS_ENV, __dirname, Backend, resolve);
+        i18n = i18nFactory(__dirname, Backend, resolve);
       } catch (e) {
         reject(e);
       }
