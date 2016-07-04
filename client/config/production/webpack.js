@@ -6,15 +6,16 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const CLIENT = __dirname + '/../..';
 const ROOT = CLIENT + '/..';
 
+// Identical to development webpack config, except minified.
 module.exports = {
   entry: {
-    app: __dirname + '/../app/development',
-    style: __dirname + '/../style/app'
+    app: __dirname + '/../development/entry',
+    style: __dirname + '/../development/style'
   },
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: __dirname + '/../../build/development'
+    path: __dirname + '/../../../build/development'
   },
   module: {
     loaders: [
@@ -23,10 +24,10 @@ module.exports = {
         loader: 'babel'
       }, {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css-loader', 'raw-loader!sass-loader')
+        loader: ExtractTextPlugin.extract('style', 'css!sass?sourceMap=true')
       }, {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css-loader',  'raw-loader')
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap=true')
       }, {
         test: /\.json$/,
         loader: 'json'
@@ -54,6 +55,9 @@ module.exports = {
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=image/svg+xml'
+      }, {
+        test: /\.rt\.html$/,
+        loader: 'react-templates-loader?targetVersion=0.14.0'
       }
     ]
   },
@@ -68,6 +72,10 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
+    }),
+    new webpack.DefinePlugin({
+      'window.NODE_ENV': `"${process.env.NODE_ENV}"`,
+      'window.BASE_URL': `"${process.env.API_BASE_URL}"`
     })
   ],
   node: {
@@ -75,11 +83,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      api: __dirname + '/../../api/development',
-      config: __dirname + '/../../config/development',
-      models: __dirname + '/../../models',
-      lib: __dirname + '/../../lib',
+      api: __dirname + `/../../api/${process.env.API_DIR}`,
+      assets: __dirname + '/../../../server/assets',
+      client: __dirname + '/../..',
       shared: __dirname + '/../../../shared'
     }
   }
 }
+

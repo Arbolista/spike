@@ -1,10 +1,11 @@
 /*global require __dirname*/
 
-// include vendor assets first
-require('./vendor');
+// Vendor Stylesheets
+require('bootstrap/dist/css/bootstrap.min.css');
+require('font-awesome/css/font-awesome.min.css');
 
 // other css assets.
-let cssContext = require.context(__dirname + '/../../../server/assets/css', true, /\.s?css$/);
+let cssContext = require.context(__dirname + '/../../../server/assets/css', true);
 cssContext.keys().forEach(cssContext);
 
 // component context

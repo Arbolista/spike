@@ -1,5 +1,5 @@
 import { createHistory, useQueries } from 'history';
 
-import app from './../../app';
+import app from 'client/app';
 
 app(useQueries(createHistory));
