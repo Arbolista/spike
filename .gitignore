@@ -4,3 +4,4 @@ build/
 server/bin/
 bin/
 npm-debug.log
+*.rt.js
