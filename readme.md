@@ -53,7 +53,7 @@ A Spike application is separated into 3 main directories:
 
 ## Best Practices
 
-See [Best Practice documentation!](best_practices.md) for a list of concepts and tools meant for keeping code DRY and maintainable.
+See [Best Practice documentation](best_practices.md) for a list of concepts and tools meant for keeping code DRY and maintainable.
 
 ## Generators
 
@@ -93,7 +93,6 @@ Can run scripts in four modes:
 - no server side rendering
 - WebpackDevServer hot loading (refreshes page on change).
 - No babel caching of templates.
-- Uses `client/api/faux` - so not hooked up to an API.
 
 ### Development
 
@@ -102,8 +101,6 @@ Can run scripts in four modes:
 - Server side rendering.
 - Babel compiles & caches templates on server (this is a FIXME).
 - WebpackDevServer hot loading (refreshes page on change).
-- Uses `client/api/real`.
-- pass `-- --local_api` to hit local API. Staging API is default.
 
 ### Local Production
 
@@ -113,7 +110,6 @@ Can run scripts in four modes:
 - Babel compiles & caches templates on server.
 - Plain ol' Express server.
 - Uses `client/api/real`.
-- pass `-- --local_api` to hit local API. Staging API is default.
 - This run `gulp build --env production` before launching server (must kill server and re-run to see any changes reflected).
 - This is meant for local development.
 
@@ -123,6 +119,10 @@ Can run scripts in four modes:
 
 - Same as above, but without the build step (`gulp build --env production`).
 - This is meant to be run on a staging or production server.
+
+### Changing API Directory
+
+To change the api directory, for a given node env, change the api module alias for the NODE_ENV in `.babelrc` and `client/config/{NODE_ENV}/webpack.js`.
 
 ## Building
 
