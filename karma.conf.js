@@ -1,6 +1,6 @@
 /*global module require*/
 
-var webpack_config = require('./client/config/webpack/test');
+var webpack_config = require('./client/config/test/webpack');
 
 module.exports = function (config) {
   config.set({

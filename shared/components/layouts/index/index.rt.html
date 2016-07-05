@@ -1,0 +1,11 @@
+<div id="index">
+  <div rt-if="!this.data_loaded" class="alert alert-warning">Loading examples...</div>
+  <div rt-if="this.data_loaded" class="btn-group">
+    <button rt-repeat="example in this.examples"
+      class="btn btn-primary"
+      key="{example.id}"
+      onClick="{this.detailExample.bind(this, example)}">
+        {example.first_name} {example.last_name}
+    </button>
+  </div>
+</div>

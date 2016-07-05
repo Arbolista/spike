@@ -51,180 +51,84 @@ A Spike application is separated into 3 main directories:
   - SpikeRoute base clase for route specific logic including delegation of data getting/ setting to client and server models and repositories.
   - Model and repository base classes (data getters, setters implemented in client and shared directories).
 
-## Core Classes
+## Best Practices
 
-The following base classes can be imported from Spike and subclassed in a Spike application.
-
-### SpikeStateManager
-`spike/shared/lib/state_manager`
-
-*Super Class Implementation*
-- `constructor` - initializes state.
-- `setRoute` - Assigns passed route to `StateManager#state.route` and returns `Route#assureData` promise.
-
-*Sub Class Implementation*
-- `getInitialData` - Should set any universally needed application data and return a promise.
-
-### SpikeRouter
-`spike/shared/lib/router`
-
-*Super Class Implementation*
-- `constructor` - accepts instances of `StateManager` and an Array of routes.
-- `inititializeHistory` - accepts the top level component and initializes React History. Any time a browser history event is received, Router will pass the new location object to `Router#setLocation`. Upon completion of that promise chain, the top level component's `syncFromStateManager` will be called.
-- `setLocation` - accepts a browser history location object, which will be passed to `StateManager#setRoute`.
-- `setLocationToCurrentUrl` - Equivalent to above, but rather than accepting a location object, is uses the window's current location. This could be called before React application is initialized in browser, to ensure that it is initialized with StateManager in the intended state.
-- `pushHistory` - accepts a URL path (String) which is pushed to browser history, in turn triggering `Router#setLocaiton`.
-
-*Sub Class Implementation*
-- `goTo` convenience methods for creating and pushing new urls to browser history.
-
-### SpikeRoute
-`spike/shared/lib/route`
-
-*Super Class Implementation*
-- `matchesLocation` - accepts browser history location object, and returns true/false if location matches Route.
-- `setParams` - accepts browser history location object and parses the url to extract route parameters.
-
-*Sub Class Implementation*
-- `assureData` - Get necessary data for route after params have been set. Return promise.
-
-## Mixins
-
-Enable multiple classes and objects to be mixed into class prototypes. For instance:
-
-```js
-import mixin from 'spike/shared/lib/mixin';
-
-class BaseClass{}
-
-const someFunctionality = {
-  sayHi(){
-    console.log('hi')
-  }
-}
-
-class NewClass extends mixin(BaseClass, someFunctionality){
-  // ...
-}
-
-```
-
-### Translatable Component
-`spike/shared/lib/components/translatable`
-
-*Super Class Implementation*
-`t` - pass a translation key to i18n. Returns key if i18n not found on component context.
+See [Best Practice documentation!](best_practices.md) for a list of concepts and tools meant for keeping code DRY and maintainable.
 
 ## Generators
 
-### Application
+Currently, there are two generator helpers:
 
-```sh
-spike generate --application
-```
-Will generate basic basic directory structure, along with the following basic implementations of core classes:
+- `npm run generate -- --what component --name MySubComponent --where {path_relative_to shared/components}`
 
-- `server/config/development/server.js` - Webpack development server configuration that wraps and serves `client/config/app/development.js`.
-- `server/config/server.base.js` - Base server class for serving `server/assets` and allowing user to configure any required Express middleware.
-- `server/test/server.test.js` - to test basic rendering of application.
-- `server/views/index.ejs` - Basic HTML page with a root element for React application and script tag for Webpack dev server in development.
-- `client/config/webpack/development.js` - Webpack configuration file for running basic app with Webpack dev server.
-- `client/config/app/development.js` - Basic wrapper for `shared/app.js` to launch application in browser.
-- `shared/lib/state_manager/` - minimal implementation of SpikeStateManager.
-- `shared/lib/router/` - minimal implementation of SpikeRouter.
-- `shared/lib/routes/home/` - minimal implementation of SpikeRoute.
-- `shared/components/layout/` - React component class with associated stylesheet, React Template, and test for rendering a very basic 'Hello World' page.
-- `shared/app.js` - Exportable function to be called by server/client wrapper. that renders top level application component.
-- `.babelrc` for compiling React Templates through Babel.
+This will generate a React component file (`component.js`), a React template file (`rt.html`), a Sas file (`.scss`), and Jasmine test file (`.test.js`).
 
-### Routes
+- `npm run generate -- --what layout --name SomeLayout`
 
-```sh
-spike generate --route Super
-```
+This will generate the template files above, as well as a new directory in `shared/lib/routes` with a route file. You'll still need to initialize the route in `shared/lib/routes.js` to get the layout to render.
 
-#### Options
-
-- `template` - file location of a custom route template.
-
-### React Components
-
-```sh
-spike generate --component Super
-```
-
-#### Options
-
-- `extends` - super class to extend.
-- `template` - file location of a custom route template.
-
-### Design Configuration
-
-```sh
-spike generate --design_config
-```
-
-This will create `client/config/webpack/design.js` and `client/config/app/design.js`, which will be used by the design build process to build an offline app.
-
-`client/config/app/design.js` uses `spike/client/lib/design_component_sass_loader.js` and `spike/client/lib/design_component_template_loader.js` to load and compile those assets client side.
-
-## Configure
+## Configuration
 
 A spike application is configurable in several places.
 
 ### Client
 
-- Create Webpack configurations in `client/config/webpack`
-- Create Webpack entry points in `client/config/entry` for different environments that wrap `shared/app.js`.
-- Create Webpack entry points for bundling application stylesheets in `client/config/style`.
-- Create Webpack entry points for bundling vendor Javascript and CSS in `client/config/vendor`.
+- Create Webpack configurations in `client/config/{NODE_ENV}/webpack.js`
+- Create Webpack entry points in `client/config/{NODE_ENV}/entry.js` for different environments that wrap `client/app.js`.
+- Create Webpack entry points for bundling application stylesheets in `client/config/{NODE_ENV}/style.js`.
 
 ### Server
 
 - Add middleware to Express application in `server/config/server.base.js` in `ServerBase#config`.
-- Create production implementations of Express server in `server/config/production/`.
+- Create production implementations of Express server in `server/config/{NODE_ENV}/server.js` - should subclass ServerBase class from above.
 
-## Develop
+## Running Server
 
-To run the Webpack development server:
+Can run scripts in four modes:
 
-```sh
-spike develop
-```
+### Design
 
-This will run Webpack development server.
+`npm run design`
 
-### Build
+- no server side rendering
+- WebpackDevServer hot loading (refreshes page on change).
+- No babel caching of templates.
+- Uses `client/api/faux` - so not hooked up to an API.
 
-```sh
-spike build --env {env}
-```
+### Development
 
-This will build assets in `build/{env}` based on `client/config/webpack/{env}.js`.
+`npm run develop`
 
-#### Design
+- Server side rendering.
+- Babel compiles & caches templates on server (this is a FIXME).
+- WebpackDevServer hot loading (refreshes page on change).
+- Uses `client/api/real`.
+- pass `-- --local_api` to hit local API. Staging API is default.
 
-```sh
-spike build_design
-```
+### Local Production
 
-In addition to Webpack bundling of `client/config/webpac/design.js`, this will also copy `server/assets/` to `build/design/assets/` and all Sass and React Template files in `shared/components/` to `build/design/components/`.
+`npm run production_build`
 
-It will also compile `server/views/index.ejs` and copy it to `build/design/index.html` (check `process.env.NODE_ENV` to customize compiled template for design).
+- Server side rendering.
+- Babel compiles & caches templates on server.
+- Plain ol' Express server.
+- Uses `client/api/real`.
+- pass `-- --local_api` to hit local API. Staging API is default.
+- This run `gulp build --env production` before launching server (must kill server and re-run to see any changes reflected).
+- This is meant for local development.
 
-This build is meant to run with a simple file server and allow a designer to change Sass and React Template files and view their changes on page refresh.
+### Production
 
-`spike generate --design_config` should be run beforehand.
+`npm run production`
 
-#### Production
+- Same as above, but without the build step (`gulp build --env production`).
+- This is meant to be run on a staging or production server.
 
-Production builds can just use `spike build --env production` and simply serve compiled assets with Express static.
+## Building
 
-## Test
+`npm run build -- --env {environment}`
 
-Directory structure emphasizes colaction of unit tests with the files they are testing. Therefore, components and route generators will also generate simple test files.
-
-Tests in the shared directory should run in both browser tests (ie Karma) and server tests (plain mocha/jasmine).
+This should be run on staging or production server before `npm run production` is called (ie in Docker build).
 
 ## License
 

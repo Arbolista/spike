@@ -3,11 +3,10 @@
 import cheerio from 'cheerio';
 import request from 'supertest';
 
-import Server from './../config/production/server';
-import {EXAMPLES} from './../../shared/data/examples';
+import Server from 'server/config/production/server';
 
 // set node env to production to test production server configuration.
-process.env.NODE_ENV = 'PRODUCTION';
+process.env.NODE_ENV = 'production';
 
 var server = new Server();
 server.config();

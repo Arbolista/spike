@@ -4,8 +4,7 @@
 
 import Jasmine from 'jasmine'
 
-GLOBAL.JS_ENV = 'server';
-GLOBAL.DESIGN = false;
+require('app-module-path').addPath(__dirname);
 
 var jasmine = new Jasmine()
 jasmine.loadConfigFile('jasmine.json')

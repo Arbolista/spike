@@ -1,22 +1,3 @@
 <div id="layout">
-  <h1>{ this.t('Basic Layout Component') }</h1>
-  <div rt-if="this.route_name === 'MissingRoute'" class="alert alert-danger">
-    Sorry, the page you requested does not exist.
-  </div>
-  <div rt-if="this.route_name === 'IndexRoute'" class="alert alert-warning">
-    Choose an example.
-  </div>
-  <div rt-if="this.route_name === 'ExampleRoute'" class="alert alert-info">
-    {this.example.introduce()}
-  </div>
-  <div class="btn-group" role="group">
-    <button
-      rt-repeat="example in this.examples"
-      key="{example.scoped_id}"
-      data-param="example_id"
-      data-value="{example.id}"
-      rt-class="{active: this.isButtonActive(example.id), btn: true, 'btn-primary': true }"
-      onClick="{this.goToExample.bind(this)}"
-      type="button">{example.data.name}</button>
-  </div>
+
 </div>

@@ -2,9 +2,8 @@
 
 import i18n from 'i18next';
 
-function i18nFactory(environment, directory, provider, callback) {
+function i18nFactory(path_to_server, provider, callback) {
   let BackendProvider = provider || require('i18next-xhr-backend');
-  let path = (environment === 'server') ? `${directory}/..` : '';
 
   let options = {
     fallbackLng: 'en',
@@ -14,7 +13,7 @@ function i18nFactory(environment, directory, provider, callback) {
     ns: ['translation'],
     defaultNS: 'translation',
 
-    debug: true,
+    debug: false,
     /* nsSeparator: false,
     keySeparator: false, */
 
@@ -24,7 +23,7 @@ function i18nFactory(environment, directory, provider, callback) {
 
     backend: {
       // path where resources get loaded from
-      loadPath: `${path}/assets/translations/{{lng}}.json`,
+      loadPath: `${path_to_server}/assets/translations/{{lng}}.json`,
 
       // your backend server supports multiloading
       // /locales/resources.json?lng=de+en&ns=ns1+ns2

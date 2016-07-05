@@ -1,84 +1,131 @@
-/*global window*/
-
+/*global window NODE_ENV*/
 import queryString from 'query-string';
+import extend from 'extend';
+
+import {defineRoutes} from '../routes';
+import { updateLocation } from 'shared/reducers/location.reducer';
+
+const DEFAULT_UPDATE_LOCATION_ACTION = {
+  type: updateLocation.getType(),
+  payload: {}
+};
 
 export default class Router {
 
-  constructor(state_manager, routes) {
+  constructor(i18n) {
     let router = this;
 
-    router.routes = routes;
-    router.update_in_progress = true;
-    router.state_manager = state_manager;
+    router.i18n = i18n;
+    router.routes = defineRoutes(i18n);
   }
 
-  get current_route() {
-    return this.state_manager.state.route;
+  get main_routes(){
+    return this.routes.filter((route)=>{ return route.route_name !== 'MissingRoute'; })
   }
 
-  setLocation(location) {
-    let router = this,
-        new_route = router.findRoute(location);
-
-    new_route.setParams(location);
-    return router.state_manager.setRoute(new_route);
+  get locale(){
+    return Router.locale();
   }
 
-  findRoute(location) {
+  findRoute(pathname) {
     let router = this;
     return router.routes.find((route) => {
-      return route.matchesLocation(location);
+      return route.matchesLocation(pathname);
     });
   }
 
-  /*
-   * Client-only
-   */
+  shouldUpdateCurrentRoute(location){
+    let router = this;
+    return !router.current_route || !router.current_route.matchesLocation(location.pathname);
+  }
 
-  // should be used before React app initialized.
-  setLocationToCurrentUrl() {
+  initializeHistory(createHistory, store) {
+    let router = this;
+    router.history = createHistory();
+    router.history.listen(router.onLocationChange.bind(router, store));
+  }
+
+  // Changing Route
+
+  // this will cause onLocationChange to fire with
+  // the new location.
+  pushRoute(route_name, action, payload){
     let router = this,
-        current_location = {
-          pathname: window.location.pathname,
-          query: queryString.parse(window.location.search)
+        route = router.routes.getRoute(route_name);
+
+    action = {
+      type: action ? action.getType() : updateLocation.getType(),
+      payload: payload,
+      no_scroll: payload ? payload.no_scroll : false
+    };
+
+    router.pushHistory({
+      pathname: route.url(action, router.i18n),
+      state: action
+    });
+  }
+
+  pushHistory(location){
+    this.history.push(location);
+  }
+
+  onLocationChange(store, new_location){
+    let router = this;
+
+    if (new_location.action !== 'PUSH') return false;
+    if (router.scrollForNewLocation(new_location)) router.scrollToTop();
+
+    let action = extend(true, {payload: {}}, new_location.state) || this.default_update_location_action;
+
+    action.payload['location'] = this.parseLocation(new_location);
+    store.dispatch(action);
+  }
+
+  parseLocation(new_location){
+    let route = this.findRoute(new_location.pathname),
+        location = {
+          pathname: new_location.pathname,
+          query: queryString.parse(new_location.search)
         };
-    return router.setLocation(current_location);
+    location.route_name = route.route_name;
+    location.params = route.parseParams(location);
+    return location;
   }
 
-  initializeHistory(component) {
-    let router = this;
-    router.history = component.props.createHistory();
-    router.history.listen((new_location) => {
-      if (new_location.action !== 'PUSH') return false;
-      router.setLocation(new_location)
-        .then(() => {
-          return component.syncFromStateManager();
-        })
-        .then(() => {
-          router.update_in_progress = false;
-          if (router.afterLocationUpdate) return router.afterLocationUpdate(new_location);
-          return undefined
-        });
-    })
+  get default_update_location_action(){
+    return extend(true, {}, DEFAULT_UPDATE_LOCATION_ACTION);
   }
 
-  getQueryParam(key) {
-    return queryString.parse(window.location.search)[key];
+  scrollForNewLocation(location){
+    return !location.state || !location.state.no_scroll
   }
 
-  pushHistory(url){
-    let router = this;
-    router.update_in_progress = true;
-    router.history.push(url);
+  scrollToTop(){
+    window.jQuery("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
-  goToExample(example_id) {
-    let router = this;
-    example_id = parseInt(example_id);
+  static currentWindowLocation(){
+    let pathname = window.location.pathname,
+        query = window.location.search;
+    return { pathname: pathname, query: query };
+  }
 
-    if (!router.state_manager.exampleSet(example_id)) {
-      router.pushHistory(`/examples/${example_id}`);
+  // Use this when createHistory is a hash history.
+  static currentHashLocation(){
+    let hash = window.location.hash,
+        match = hash.match(/^#([^\?]+)(\?.+)?/);
+    return {
+      pathname: match ? match[1] : '',
+      query: match && match[2] ? match[2] : ''
     }
+  }
+
+  static locale(){
+    let pathname = window.location.pathname,
+        match = pathname.match(new RegExp('^\/?(\\w{2})(\/|$)'));
+
+    if (!match){ return 'en'; }
+    return match[1];
   }
 
 }

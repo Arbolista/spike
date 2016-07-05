@@ -1,9 +1,12 @@
 /*global describe it expect*/
 
 import MissingRoute from './missing';
-import {testSharedRouteBehavior} from './../route.base.test';
+import {testSharedRouteBehavior} from '../route.base.test';
 
-let route = new MissingRoute();
+import { defineRoutes } from '../../routes';
+import i18n from 'shared/lib/i18n/i18nFactory.mock';
+
+let route = defineRoutes(i18n).getRoute('Missing');
 
 describe('MissingRoute', ()=>{
   testSharedRouteBehavior(route);

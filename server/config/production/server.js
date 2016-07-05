@@ -1,13 +1,16 @@
-/*global console*/
-
 import express from 'express';
 import os from 'os'
+import webpack from 'webpack';
 
-import ServerBase from './../server.base';
+import ServerBase from '../server.base';
+import serverRenderable from 'server/lib/mixins/server_renderable';
+import webpack_config from 'client/config/production/webpack';
 
 const APP_PORT = 3000;
 
-class Server extends ServerBase {
+/*global console*/
+
+class Server extends serverRenderable(ServerBase) {
 
   constructor(){
     super();
@@ -17,10 +20,14 @@ class Server extends ServerBase {
 
   run(){
     var server = this;
-    server.config();
 
-    server.app.listen(APP_PORT, () => {
-      console.info(`App is now running on ${os.hostname()}`);
+    // returns a Compiler instance
+    webpack(webpack_config, function(err, stats) {
+      server.config();
+
+      server.app.listen(APP_PORT, () => {
+        console.info(`App is now running on ${os.hostname()}`);
+      });
     });
   }
 

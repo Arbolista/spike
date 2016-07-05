@@ -1,5 +1,6 @@
-*.DS_Store
+.DS_Store
 node_modules/
-client/build/
+build/
 server/bin/
+bin/
 npm-debug.log

@@ -1,0 +1,22 @@
+<div id="details">
+  <div rt-if="!this.data_loaded" class="alert alert-info">
+    {this.t('Retrieving data...')}
+  </div>
+  <div rt-if="this.data_loaded"
+    class="panel panel-default">
+    <div class="panel-heading">{this.example_full_name}</div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li rt-repeat="skill in this.skills"
+          class="list-group-item"
+          key="{skillIndex}">
+          {skill}
+        </li>
+      </ul>
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-danger btn-sm"
+        onClick="{this.close.bind(this)}">{this.t('Close')}</button>
+    </div>
+  </div>
+</div>
