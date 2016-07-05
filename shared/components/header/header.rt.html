@@ -1,0 +1,23 @@
+<nav style="margin-bottom:0px;" class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Spike</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"
+          rt-if="!this.logged_in"
+          onClick="{this.login.bind(this)}">{this.t('Login')}</a></li>
+        <li><a href="#"
+          rt-if="this.logged_in"
+          onClick="{this.logout.bind(this)}">{this.t('Logout')}</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

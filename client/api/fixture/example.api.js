@@ -8,15 +8,15 @@ const USERS = {
 };
 
 const DETAILS = {
-  1: {skills: 'Jokes'},
-  2: {skills: 'Knitting'},
-  3: {skills: 'Donuts'}
+  1: {skills: ['Jokes', 'Laughs']},
+  2: {skills: ['Knitting', 'Crocheting']},
+  3: {skills: ['Donuts', 'Pies']}
 }
 
 export default class ExampleApi extends BaseApi {
 
   index(){
-    return this.delayResolve(_.values(USERS));
+    return this.delayResolve(USERS);
   }
 
   show(user_id){

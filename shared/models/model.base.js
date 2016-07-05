@@ -2,8 +2,8 @@ import _ from 'lodash';
 import extend from 'extend';
 import Immutable from 'immutable';
 
-import Validator from 'client/lib/validator';
-import ErrorMessenger from 'client/lib/error_messenger';
+import Validator from 'client/lib/validation/validator';
+import ErrorMessenger from 'client/lib/validation/error_messenger';
 
 export default class ModelBase {
 

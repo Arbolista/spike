@@ -1,22 +1,27 @@
 import Details from './routes/details/details.route';
 import Index from './routes/index/index.route';
+import Login from './routes/login/login.route';
 import Missing from './routes/missing/missing.route';
 
-export function (i18n) {
+export function defineRoutes(i18n) {
   return includeHelpers([
     new Index({
       path: new RegExp(`^\/?((\\w{2})\/?)?$`),
-      parameters: {}
+      parameters: {2: 'locale'}
     }),
     new Details({
-      path: new RegExp(`^\/?((\\w{2})\/)?${i18n.t('details')}/\\d+$`),
-      parameters: {1: 'user_id'}
+      path: new RegExp(`^\/?((\\w{2})\/)?${i18n.t('details')}/(\\d+)$`),
+      parameters: {2: 'locale', 3: 'example_id'}
+    }),
+    new Login({
+      path: new RegExp(`^\/?((\\w{2})\/)?${i18n.t('login')}$`),
+      parameters: {2: 'locale'}
     }),
 
     // Missing route must be last
     new Missing({
       path: /\.*/,
-      parameters: {}
+      parameters: {2: 'locale'}
     })
   ]);
 }
@@ -31,5 +36,6 @@ function includeHelpers(routes){
     configurable: false
   });
 
+  return routes;
 
 }

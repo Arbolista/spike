@@ -13,7 +13,7 @@ function i18nFactory(path_to_server, provider, callback) {
     ns: ['translation'],
     defaultNS: 'translation',
 
-    debug: true,
+    debug: false,
     /* nsSeparator: false,
     keySeparator: false, */
 

@@ -43,13 +43,15 @@ const ACTIONS = {
     return Immutable.fromJS({token: new_token});
   },
 
-  [sessionError]: (_current_session, _res){
+  [sessionError]: (_current_session, _res)=>{
     return current_session.set('load_error', true);
-  }
+  },
 
-  [logout]: (current_token)=>{
+  [logout]: (current_session)=>{
     return loop(
-      current_session.set('loading', true),
+      current_session
+        .set('loading', true)
+        .set('token', null),
       Effects.promise(()=>{
         let api = new SessionApi();
         return api.logout()
@@ -68,6 +70,6 @@ const ACTIONS = {
 
 };
 
-const REDUCER = createReducer(ACTIONS, Immutable.fromJS(BLANK_SESSION));
+const REDUCER = createReducer(ACTIONS);
 
 export default REDUCER;

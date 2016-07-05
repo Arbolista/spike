@@ -83,7 +83,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      api: __dirname + `/../../api/${process.env.API_DIR}`,
+      api: __dirname + `/../../api/fixture`,
       assets: __dirname + '/../../../server/assets',
       client: __dirname + '/../..',
       shared: __dirname + '/../../../shared'

@@ -1,19 +1,22 @@
-/*global JS_ENV Map Promise require*/
+/*global*/
 
-import RouteBase from './../route.base';
+import RouteBase from '../route.base';
 
 class Details extends RouteBase {
 
-  get route_name() {
+  get route_name(){
     return 'Details';
   }
 
+  get component(){
+    return require('shared/components/layouts/details/details.component');
+  }
+
   url(action, i18n){
-    let route = this,
-        route_path = i18n.t(route.key);
-    return `/${i18n.language}/${route_path}/${action.payload.user_id}`;
+    return `/${i18n.language}/${i18n.t('details')}/${action.payload.id}`
   }
 
 }
 
 export default Details;
+

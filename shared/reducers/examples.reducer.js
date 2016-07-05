@@ -12,10 +12,12 @@ export { ensureExamples };
 
 /*
 {
-  <Integer user_id>: <Object{
-    id: <Integer>,
-    first_name: <String>,
-    last_name: <String>
+  examples: <Object{
+      <Integer user_id>: <Object{
+      id: <Integer>,
+      first_name: <String>,
+      last_name: <String>
+    }>
   }>,
 
   load_error: <Boolean>
@@ -26,15 +28,15 @@ const ACTIONS = {
 
   // Load initial data from api.
 
-  [ensureExamples]: (examples_data, token)=>{
+  [ensureExamples]: (examples_data, data)=>{
     if (examples_data === null){
       return loop(
         null,
         Effects.promise(()=>{
-          let api = new ExampleApi(token);
+          let api = new ExampleApi(data.token);
           return api.index()
             .then(examplesRetrieved)
-            .catch(exampleRetrievalError);
+            .catch(examplesRetrievalError);
         })
       )
     }
@@ -43,9 +45,7 @@ const ACTIONS = {
 
   // example_data from API response.
   [examplesRetrieved]: (_examples_data, api_data)=>{
-    api_data.loading = false;
-
-    return Immutable.fromJS(api_data);
+    return Immutable.fromJS({examples: api_data});
   },
 
   [examplesRetrievalError]: (_examples_data, _res)=>{

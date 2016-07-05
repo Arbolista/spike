@@ -3,18 +3,19 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
-import ServerBase from './../server.base';
-import config from './../../../client/config/webpack/development';
+import ServerBase from '../server.base';
+import serverRenderable from 'server/lib/mixins/server_renderable';
+import config from 'client/config/development/webpack';
 
 const APP_PORT = 3000;
 
-class Server extends ServerBase {
+class Server extends serverRenderable(ServerBase) {
 
   constructor(){
     super();
     var server = this;
     server.dev_server = new WebpackDevServer(webpack(config), {
-      contentBase: './../../../client/build/development',
+      contentBase: '../../../client/build/development',
       publicPath: '/assets/',
       stats: {colors: true}
     });

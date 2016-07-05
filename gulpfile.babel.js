@@ -23,7 +23,7 @@ gulp.task('generate', (done) => {
 
   var destinationFolderName = generateHelper.data(name).componentNameLowerCase;
   if (what === 'component') {
-    var destination = yargs.argv.destination || (destinationFolderName);
+    var destination = yargs.argv.where || (destinationFolderName);
     fnGenerate(name, './build-tools/templates/component/*.tpl', `./shared/components/${destination}`, 'COMPONENT_NAME');
   } else if (what === 'layout'){
     // Layout will generate the route, as well as the component files.

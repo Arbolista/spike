@@ -19,15 +19,15 @@ export default class RouteBase {
   }
 
   // location is a React History location object.
-  setParams(location){
+  parseParams(location){
     let route = this,
-        match = location.pathname.match(route.path);
-    route.params = {};
+        match = location.pathname.match(route.path),
+        params = {};
     if (match){
       for (let i in route.parameters){
         let param = route.parameters[i],
             value = match[i];
-        route.params[param] = value;
+        params[param] = value;
       }
 
       if (location.query){
@@ -35,10 +35,10 @@ export default class RouteBase {
         if (typeof query === 'string'){
           query = queryString.parse(query);
         }
-        Object.assign(route.params, query);
+        Object.assign(params, query);
       }
     }
-    return route.params;
+    return params;
   }
 
   // route should override if it must use state to generate url

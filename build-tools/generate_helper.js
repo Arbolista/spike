@@ -7,8 +7,8 @@ function templateData(componentName) {
   };
 }
 
-function translateFileName(fileName, componentName) {
-  return S.replaceAll(fileName, 'COMPONENT_NAME',
+function translateFileName(fileName, componentName, templateName) {
+  return S.replaceAll(fileName, templateName,
     S.underscored(componentName));
 }
 

@@ -8,4 +8,8 @@ export default class Missing extends RouteBase {
     return 'Missing';
   }
 
+  get component(){
+    return require('shared/components/layouts/missing/missing.component');
+  }
+
 }

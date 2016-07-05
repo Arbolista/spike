@@ -8,4 +8,12 @@ export default class Index extends RouteBase {
     return 'Index';
   }
 
+  get component(){
+    return require('shared/components/layouts/index/index.component');
+  }
+
+  url(_action, _i18n){
+    return '';
+  }
+
 }

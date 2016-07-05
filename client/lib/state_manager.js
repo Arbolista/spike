@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import SharedStateManager from 'shared/lib/state_manager/state_manager';
 
 export default class StateManager extends SharedStateManager {
@@ -21,8 +22,8 @@ export default class StateManager extends SharedStateManager {
 
   initialState(opts){
     return Object.assign({
-      user: this.storageParse('user'),
-      token: this.storageValue('token')
+      user: fromJS(this.storageParse('user')),
+      session: fromJS({ token: this.storageValue('token') })
     }, opts);
   }
 

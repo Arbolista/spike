@@ -2,28 +2,13 @@
 
 import React from 'react';
 
-class <%=  componentNameCamelCase %>Component extends React.Component {
+import template from './<%= componentNameLowerCase %>.rt.html';
+import SpikeComponent from 'shared/lib/base_classes/spike_component';
 
-  constructor(props, context){
-    super(props, context);
-    var <%=  componentNameLowerCase %> = this;
-    <%=  componentNameLowerCase %>.has_template = true;
-    <%=  componentNameLowerCase %>.state = {}
-  }
+class <%=  componentNameCamelCase %>Component extends SpikeComponent {
 
-  componentDidMount() {
-    var <%=  componentNameLowerCase %> = this;
-  }
-
-  render(){
-    let template;
-    if (!DESIGN){
-      template = require('./componentNameLowerCase.rt.html');
-    } else {
-      let DesignComponentTemplateLoader = require('design_component_template_loader')
-      template = DesignComponentTemplateLoader.forComponent(this.constructor);
-    }
-    return template.call(this);
+  get template(){
+    return template;
   }
 
 }
@@ -31,7 +16,5 @@ class <%=  componentNameCamelCase %>Component extends React.Component {
 <%=  componentNameCamelCase %>Component.propTypes = {
 
 };
-
-<%=  componentNameCamelCase %>Component.NAME = '<%=  componentNameCamelCase %>';
 
 module.exports = <%=  componentNameCamelCase %>Component;

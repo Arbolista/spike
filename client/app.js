@@ -8,7 +8,7 @@ import XHR from 'i18next-xhr-backend';
 
 import StateManager from 'client/lib/state_manager';
 import ApplicationComponent from 'shared/components/application/application.component';
-import i18nFactory from 'shared/lib/i18n/i18n_factory';
+import i18nFactory from 'shared/lib/i18n/i18nFactory';
 import Router from 'shared/lib/router/router';
 
 function setTranslations(){
@@ -54,7 +54,6 @@ export default function(createHistory) {
         document.getElementById('root'));
     })
     .catch((err)=>{
-      console.error(err);
-      console.err(stack);
+      console.error(err.stack);
     });
 }

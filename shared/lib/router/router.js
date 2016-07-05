@@ -27,32 +27,6 @@ export default class Router {
     return Router.locale();
   }
 
-  // Changing Route
-
-  // this will cause onLocationChange to fire with
-  // the new location.
-  pushRoute(route_name, action, payload){
-    let router = this,
-        route = router.routes.find((route)=>{
-          return route.route_name === route_name;
-        });
-
-    action = {
-      type: action ? action.getType() : updateLocation.getType(),
-      payload: payload,
-      no_scroll: payload.no_scroll
-    };
-
-    router.pushHistory({
-      pathname: route.url(action, router.i18n),
-      state: action
-    });
-  }
-
-  pushHistory(location){
-    this.history.push(location);
-  }
-
   findRoute(pathname) {
     let router = this;
     return router.routes.find((route) => {
@@ -65,23 +39,57 @@ export default class Router {
     return !router.current_route || !router.current_route.matchesLocation(location.pathname);
   }
 
+  initializeHistory(createHistory, store) {
+    let router = this;
+    router.history = createHistory();
+    router.history.listen(router.onLocationChange.bind(router, store));
+  }
+
+  // Changing Route
+
+  // this will cause onLocationChange to fire with
+  // the new location.
+  pushRoute(route_name, action, payload){
+    let router = this,
+        route = router.routes.getRoute(route_name);
+
+    action = {
+      type: action ? action.getType() : updateLocation.getType(),
+      payload: payload,
+      no_scroll: payload ? payload.no_scroll : false
+    };
+
+    router.pushHistory({
+      pathname: route.url(action, router.i18n),
+      state: action
+    });
+  }
+
+  pushHistory(location){
+    this.history.push(location);
+  }
+
   onLocationChange(store, new_location){
     let router = this;
-    //if (new_location.action !== 'PUSH') return false;
+
+    if (new_location.action !== 'PUSH') return false;
     if (router.scrollForNewLocation(new_location)) router.scrollToTop();
 
-    let action = new_location.state || this.default_update_location_action,
-      query = queryString.parse(new_location.search),
-      route = router.findRoute(location.pathname),
-      location = {
-        pathname: new_location.pathname,
-        query: query
-      };
-    location.route_name = route.route_name;
-    location.params = route.setParams(location);
-    action.payload['location'] = location;
+    let action = extend(true, {payload: {}}, new_location.state) || this.default_update_location_action;
 
+    action.payload['location'] = this.parseLocation(new_location);
     store.dispatch(action);
+  }
+
+  parseLocation(new_location){
+    let route = this.findRoute(new_location.pathname),
+        location = {
+          pathname: new_location.pathname,
+          query: queryString.parse(new_location.search)
+        };
+    location.route_name = route.route_name;
+    location.params = route.parseParams(location);
+    return location;
   }
 
   get default_update_location_action(){
@@ -90,16 +98,6 @@ export default class Router {
 
   scrollForNewLocation(location){
     return !location.state || !location.state.no_scroll
-  }
-
-  initializeHistory(createHistory, store) {
-    let router = this;
-    router.history = createHistory();
-    router.history.listen(router.onLocationChange.bind(router, store));
-
-    store.subscribe(()=>{
-      router.onStateChange(store.getState());
-    });
   }
 
   scrollToTop(){
