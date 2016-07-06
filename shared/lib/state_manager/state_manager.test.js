@@ -1,30 +1,33 @@
 /*global describe beforeEach it expect*/
 
-import ExampleRoute from './../routes/example/example';
 import StateManager from './state_manager';
+import i18n from 'shared/lib/i18n/i18nFactory.mock';
 
-let example_route = new ExampleRoute();
 
-describe('StateManager', ()=>{
+(function(){
   let state_manager = new StateManager();
-  beforeEach((done)=>{
-    example_route.params = {example_id: '4'}
-    state_manager.setRoute(example_route)
-      .then(done);
+  testSharedStateManagerBehavior(state_manager);
+})();
+
+export function testSharedStateManagerBehavior(state_manager){
+
+  describe('shared StateManager behavior', ()=>{
+
+    it('initializes store', ()=>{
+      let initial_state = {
+        session: { token: '123456'},
+        location: {pathname: '/test1/15'}
+      }
+      state_manager.initializeStore(initial_state);
+      expect(state_manager.store.getState()['session']).toEqual({ token: '123456'});
+      expect(state_manager.store.getState()['location']).toEqual({pathname: '/test1/15'});
+    });
+
+
   });
 
-  it('can set route', ()=>{
-    expect(state_manager.state.route).toEqual(example_route);
-  });
+}
 
-  it('can check state example id', ()=>{
-    expect(state_manager.exampleSet(4)).toEqual(true);
-  });
 
-  it('can access route params', ()=>{
-    expect(state_manager.params).toEqual(example_route.params);
-  });
-
-});
 
 

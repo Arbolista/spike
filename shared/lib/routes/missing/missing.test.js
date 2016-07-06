@@ -1,6 +1,5 @@
 /*global describe it expect*/
 
-import MissingRoute from './missing';
 import {testSharedRouteBehavior} from '../route.base.test';
 
 import { defineRoutes } from '../../routes';
@@ -19,8 +18,12 @@ describe('MissingRoute', ()=>{
   });
 
   it('properly sets params', ()=>{
-    route.setParams({pathname: '/whatever'});
+    let params = route.parseParams({pathname: '/whatever'});
     expect(route.params).toEqual({});
+  });
+
+  it('has a component', ()=>{
+    expect(typeof route.component).toEqual('function');
   });
 
 });

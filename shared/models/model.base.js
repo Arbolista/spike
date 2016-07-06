@@ -40,6 +40,8 @@ export default class ModelBase {
   assignData(data){
     if (Immutable.Map.isMap(data) || Immutable.List.isList(data)){
       data = data.toJS();
+    } else {
+      data = extend(true, {}, data);
     }
     this.data = data;
   }

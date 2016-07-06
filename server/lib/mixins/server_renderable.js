@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { fromJS } from 'immutable';
 
 import ApplicationComponent from 'shared/components/application/application.component';
 import StateManager from 'shared/lib/state_manager/state_manager';
+import Router from 'shared/lib/router/router';
 
 export default function(superclass){
 
@@ -48,16 +50,20 @@ export default function(superclass){
     }
 
     prerenderReact(req, i18n){
-      let state_manager = new StateManager();
+      let state_manager = new StateManager(),
+          router = new Router(i18n);
       let location = {
         pathname: req.path,
         query: req.query
       };
       return state_manager.getInitialData()
         .then(() => {
-          return state_manager.initializeRouterAndStore(i18n, location, req.cookies);
+          let initial_state = state_manager.initialState({
+            location: fromJS(router.parseLocation(location))
+          }, req.cookies);
+          return state_manager.initializeStore(initial_state);
         })
-        .then((router)=>{
+        .then(()=>{
           let props = {
             state_manager: state_manager,
             router: router,

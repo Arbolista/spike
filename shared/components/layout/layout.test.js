@@ -12,7 +12,7 @@ import {
   ROUTES
 } from './../../lib/routes';
 
-
+/*
 if (JS_ENV === 'client') {
 
   describe('layout component', () => {
@@ -80,4 +80,4 @@ if (JS_ENV === 'client') {
 
   });
 
-}
+}*/

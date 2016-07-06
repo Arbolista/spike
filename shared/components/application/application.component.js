@@ -1,5 +1,4 @@
 /*global module */
-import 'babel-polyfill';
 import React from 'react';
 import LayoutComponent from '../layout/layout.component';
 import { Provider } from 'react-redux';

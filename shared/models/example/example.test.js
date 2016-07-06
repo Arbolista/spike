@@ -3,12 +3,9 @@
 import Example from './example';
 import ExampleRepo from './example.repository';
 
-import {testSharedExampleRepoBehavior, testSharedExampleBehavior} from 'shared/models/example/example.base.test';
+import { testSharedModelBehavior } from 'shared/models/model.test';
 
-describe('client Example entity', ()=>{
-  testSharedExampleBehavior(Example);
+describe('Example model', ()=>{
+  testSharedModelBehavior(Example);
 });
 
-describe('client Example repository', ()=>{
-  testSharedExampleRepoBehavior(ExampleRepo);
-});

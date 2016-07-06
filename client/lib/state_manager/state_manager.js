@@ -1,7 +1,12 @@
 import { fromJS } from 'immutable';
 import SharedStateManager from 'shared/lib/state_manager/state_manager';
+import Router from 'client/lib/router/router';
 
 export default class StateManager extends SharedStateManager {
+
+  get Router(){
+    return Router;
+  }
 
   // Check localStorage first. If not present check session storage.
   storageValue(key){
@@ -22,7 +27,6 @@ export default class StateManager extends SharedStateManager {
 
   initialState(opts){
     return Object.assign({
-      user: fromJS(this.storageParse('user')),
       session: fromJS({ token: this.storageValue('token') })
     }, opts);
   }

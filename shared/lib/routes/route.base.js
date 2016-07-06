@@ -26,10 +26,9 @@ export default class RouteBase {
     if (match){
       for (let i in route.parameters){
         let param = route.parameters[i],
-            value = match[i];
+            value = match[parseInt(i)];
         params[param] = value;
       }
-
       if (location.query){
         let query = location.query;
         if (typeof query === 'string'){

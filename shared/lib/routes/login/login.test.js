@@ -10,16 +10,18 @@ describe('Login route', ()=>{
   testSharedRouteBehavior(route);
 
   it('detects location', ()=>{
-    expect(route.matchesLocation({pathname: '/en/login'})).toBe(true);
+    expect(route.matchesLocation('/login')).toBe(true);
+    expect(route.matchesLocation('/en/login')).toBe(true);
+    expect(route.matchesLocation('/en/not_login')).toBe(false);
   });
 
   it('properly sets params', ()=>{
-    route.setParams({pathname: '/en/login'});
-    expect(route.params).toEqual({locale: 'en'});
+    let params = route.parseParams({pathname: '/en/login'});
+    expect(params).toEqual({locale: 'en'});
   });
 
   it('can create url from action', ()=>{
-    let action = {payload: {}})
+    let action = {payload: {}};
     expect(route.url(action, i18n)).toEqual('/en/login');
   })
 

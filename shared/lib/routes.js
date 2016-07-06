@@ -26,7 +26,7 @@ export function defineRoutes(i18n) {
   ]);
 }
 
-function includeHelpers(routes){
+export function includeHelpers(routes){
 
   Object.defineProperty(routes, 'getRoute', {
     value: function(route_name){

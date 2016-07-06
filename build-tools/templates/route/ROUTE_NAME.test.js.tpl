@@ -10,16 +10,17 @@ describe('<%=  componentNameCamelCase %> route', ()=>{
   testSharedRouteBehavior(route);
 
   it('detects location', ()=>{
-    expect(route.matchesLocation({pathname: '/en/<%=  componentNameLowerCase %>'})).toBe(true);
+    expect(route.matchesLocation('<%=  componentNameLowerCase %>')).toBe(true);
+    expect(route.matchesLocation('/en/<%=  componentNameLowerCase %>')).toBe(true);
   });
 
   it('properly sets params', ()=>{
-    route.setParams({pathname: '/en/<%= componentNameLowerCase %>'});
-    expect(route.params).toEqual({locale: 'en'});
+    let params = route.parseParams({pathname: '/en/<%= componentNameLowerCase %>'});
+    expect(params).toEqual({locale: 'en'});
   });
 
   it('can create url from action', ()=>{
-    let action = {payload: {}})
+    let action = {payload: {}};
     expect(route.url(action, i18n)).toEqual('/en/<%= componentNameLowerCase %>');
   })
 

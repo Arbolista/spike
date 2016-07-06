@@ -12,24 +12,17 @@ import locationReducer from 'shared/reducers/location.reducer';
 
 export default class StateManager {
 
-  // This is server side only and should be overridden by
-  // client/lib/state_manager for client side.
-  initializeRouterAndStore(i18n, initial_location, cookies){
-    let state_manager = this,
-        router = new Router(i18n),
-        initial_state = state_manager.initialState({
-          location: fromJS(router.parseLocation(initial_location))
-        }, cookies),
-        reducer = combineReducers({
-          current_example: currentExampleReducer,
-          examples: examplesReducer,
-          session: sessionReducer,
-          location: locationReducer
-        });
-    state_manager.store = createStore(reducer, initial_state, install());
-    return router;
+  initializeStore(initial_state){
+    let reducer = combineReducers({
+      current_example: currentExampleReducer,
+      examples: examplesReducer,
+      session: sessionReducer,
+      location: locationReducer
+    });
+    this.store = createStore(reducer, initial_state, install());
   }
 
+  // overridden in client state_manager.
   initialState(opts, cookies){
     return Object.assign({
       session: fromJS({ token: cookies.token || null })

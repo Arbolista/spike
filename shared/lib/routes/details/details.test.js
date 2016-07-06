@@ -10,21 +10,21 @@ describe('Details route', ()=>{
   testSharedRouteBehavior(route);
 
   it('detects location', ()=>{
-    expect(route.matchesLocation({pathname: '/details'})).toBe(false);
-    expect(route.matchesLocation({pathname: '/en/details'})).toBe(false);
-    expect(route.matchesLocation({pathname: '/details/15'})).toBe(true);
-    expect(route.matchesLocation({pathname: 'details/15'})).toBe(true);
-    expect(route.matchesLocation({pathname: '/en/details/15'})).toBe(true);
-    expect(route.matchesLocation({pathname: 'en/details/15'})).toBe(true);
+    expect(route.matchesLocation('/details')).toBe(false);
+    expect(route.matchesLocation('/en/details')).toBe(false);
+    expect(route.matchesLocation('/details/15')).toBe(true);
+    expect(route.matchesLocation('details/15')).toBe(true);
+    expect(route.matchesLocation('/en/details/15')).toBe(true);
+    expect(route.matchesLocation('en/details/15')).toBe(true);
   });
 
   it('properly sets params', ()=>{
-    route.setParams({pathname: '/en/details/15'});
-    expect(route.params).toEqual({locale: 'en', user_id: '15'});
+    let params = route.parseParams({pathname: '/en/details/15'});
+    expect(params).toEqual({locale: 'en', example_id: '15'});
   });
 
   it('can create url from action', ()=>{
-    let action = {payload: {user_id: 15}})
+    let action = {payload: {id: 15}}
     expect(route.url(action, i18n)).toEqual('/en/details/15');
   });
 
