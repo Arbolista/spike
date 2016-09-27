@@ -30,7 +30,9 @@ describe('base route', ()=>{
           var body = res.text,
               $ = cheerio.load(body);
           expect($('meta[name="example_id"]').length).toEqual(0);
-          expect($('#prerender_data').text()).toMatch(JSON.stringify(EXAMPLES));
+          console.log("############ERROR############");
+          console.log(body);
+          expect($('#login').text()).toMatch(JSON.stringify(EXAMPLES));
 
           expect($('.alert-warning').text()).toMatch('Choose an example');
           expect($('.alert-info').length).toEqual(0);
