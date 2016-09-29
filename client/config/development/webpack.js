@@ -2,12 +2,14 @@
 
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import path from 'path';
 
 const CLIENT = __dirname + '/../..';
 const ROOT = CLIENT + '/..';
 
 // Identical to development webpack config, except minified.
 module.exports = {
+  context: __dirname + '/../../../',
   entry: {
     app: __dirname + '/entry',
     style: __dirname + '/style'
@@ -24,10 +26,22 @@ module.exports = {
         loader: 'babel'
       }, {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css!sass?sourceMap=true')
+        loaders: //ExtractTextPlugin.extract({fallbackLoader:'style', loader:'css!sass?sourceMap=true'})
+        [
+          'style-loader',
+          'css-loader?importLoaders=2&sourceMap',
+          'postcss-loader',
+          'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+        ]
       }, {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap=true')
+        loaders: //ExtractTextPlugin.extract('style', 'css?sourceMap=true')
+       [
+          'style-loader',
+          'css-loader?importLoaders=2&sourceMap',
+          'postcss-loader',
+          'sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+        ]
       }, {
         test: /\.json$/,
         loader: 'json'
@@ -61,13 +75,11 @@ module.exports = {
       }
     ]
   },
-  sassLoader: {
+  /*sassLoader: {
     includePaths: [CLIENT, ROOT + '/node_modules']
-  },
+  },*/
   plugins: [
-    new ExtractTextPlugin('style.css', {
-      allChunks: true
-    }),
+
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -79,7 +91,8 @@ module.exports = {
     })
   ],
   node: {
-    fs: 'empty'
+    fs: 'empty',
+    __dirname: true
   },
   resolve: {
     alias: {

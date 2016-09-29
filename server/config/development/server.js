@@ -7,7 +7,7 @@ import ServerBase from '../server.base';
 import serverRenderable from 'server/lib/mixins/server_renderable';
 import config from 'client/config/development/webpack';
 
-const APP_PORT = 3000;
+const APP_PORT = 8000;
 
 class Server extends serverRenderable(ServerBase) {
 
@@ -28,7 +28,7 @@ class Server extends serverRenderable(ServerBase) {
     server.config();
 
     server.dev_server.listen(APP_PORT, () => {
-      console.info(`App is now running on http://localhost:${APP_PORT}`);
+      console.info(`WebpackDevServer is now running on http://localhost:${APP_PORT}`);
     });
   }
 
