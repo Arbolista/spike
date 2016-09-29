@@ -16,10 +16,13 @@
 
     <% if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'design') { %>
       <script src="http://localhost:8000/webpack-dev-server.js"></script>
+      <script src="http://localhost:8000/assets/app.js"></script>
+      <script src="http://localhost:8000/assets/style.js"></script>
+    <% }else { %>
+      <script src="/assets/app.js"></script>
+      <script src="/assets/style.js"></script>
     <% } %>
-
-    <script src="http://localhost:8000/assets/app.js"></script>
-    <script src="http://localhost:8000/assets/style.js"></script>
+   
     
   </body>
 </html>

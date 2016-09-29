@@ -17,7 +17,10 @@
     "development-build-server": "webpack --config webpack.server.config.entry.js --watch --colors --display-error-details",
     "development-server": "BABEL_DISABLE_CACHE=1 NODE_ENV=development nodemon --exec babel-node ./start-server.js --watch ./build/development/server",
     "development-server-delayed": "npm-run-all delay development-server",
-    "production": "BABEL_DISABLE_CACHE=1 NODE_ENV=production babel-node run.js",
+    "production": "npm-run-all production-build-client production-build-server production-server",
+    "production-build-client": "webpack --colors --display-error-details --config webpack.client.config.entry.production.js",
+    "production-build-server": "webpack --colors --display-error-details --config webpack.server.config.entry.production.js",
+    "production-server": "BABEL_DISABLE_CACHE=1 NODE_ENV=production nodemon --exec babel-node ./start-server.production.js --watch ./build/production/server",
     "design": "NODE_ENV=design npm start",
     "generate": "gulp generate"
   },
