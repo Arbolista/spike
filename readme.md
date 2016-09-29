@@ -105,7 +105,7 @@ Can run scripts in four modes:
 
 ### Local Production
 
-`npm run production_build`
+`npm run production-local`
 
 - Server side rendering.
 - Babel compiles & caches templates on server.

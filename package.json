@@ -21,6 +21,7 @@
     "production-build-client": "webpack --colors --display-error-details --config webpack.client.config.entry.production.js",
     "production-build-server": "webpack --colors --display-error-details --config webpack.server.config.entry.production.js",
     "production-server": "BABEL_DISABLE_CACHE=1 NODE_ENV=production nodemon --exec babel-node ./start-server.production.js --watch ./build/production/server",
+    "production-local": "npm-run-all production-build-server production-server",
     "design": "NODE_ENV=design npm start",
     "generate": "gulp generate"
   },
