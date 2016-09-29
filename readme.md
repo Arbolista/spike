@@ -27,6 +27,7 @@ Project supports Node 5.10+, so using [nvm](https://github.com/creationix/nvm):
 ```sh
 nvm install 5.10
 nvm use 5.10
+npm install -g npm-run-all
 npm install
 ```
 
@@ -40,7 +41,7 @@ A Spike application is separated into 3 main directories:
   - Browser specific tests.
 - server
   - Express server for serving Webpack development server in development.
-  - Configuration for pre-rendering application server side.
+  - Configuration for isomorphic pre-rendering application server side.
   - Supporting assets such as stylesheets, fonts, vendor libraries.
   - Models, repositories, and api classes for accessing data from server.
   - Server specific tests.
