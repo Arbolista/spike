@@ -30,7 +30,7 @@ export default class Router {
           pathname: new_location.pathname,
           query: queryString.parse(new_location.search)
         };
-    location.route_name = route.route_name;
+    location.route_name = route.name;
     location.params = route.parseParams(location);
     return location;
   }

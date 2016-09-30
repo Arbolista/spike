@@ -42,7 +42,7 @@ export default class Router extends BaseRouter {
     };
 
     router.pushHistory({
-      pathname: route.url(action, router.i18n),
+      pathname: route.url(payload, router.i18n),
       state: action
     });
   }

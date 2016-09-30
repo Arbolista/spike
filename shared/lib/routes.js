@@ -1,49 +1,39 @@
-import Index from './routes/index/index.route';
-import Details from './routes/details/details.route';
-import Login from './routes/login/login.route';
-import Missing from './routes/missing/missing.route';
-
-
+import pathToRegexp from 'path-to-regexp';
+import Route from './routes/route.js'
 
 export function defineRoutes(i18n) {
-  return includeHelpers([
-     
-    new Index({
-      path: new RegExp(`^\/?((\\w{2})\/?)?$`),
-      parameters: {2: 'locale'},
-      i18n:i18n
-    })
+  let routes = [
+
+    { name : "Index",
+      path: ["/:locale?/index",
+             "/:locale?"
+            ]
+    }
     ,
-    
-    new Details({
-      path: new RegExp("^\/?((\\w{2})\/)?"+i18n.t('details')),
-      parameters: {2: 'locale'},
-      i18n:i18n
-    })
+    { name : "Details",
+      path: `/:locale?/${i18n.t('details')}/:example_id`,
+      url: (payload,i18n) => {
+        console.log(payload);
+        return `/${i18n.language}/${i18n.t('details')}/${payload.id}`
+      }
+    }
     ,
-    
-    new Login({
-      path: new RegExp("^\/?((\\w{2})\/)?"+i18n.t('login')),
-      parameters: {2: 'locale'},
-      i18n:i18n
-    })
+    { name : "Login",
+      path: `/:locale?/${i18n.t('login')}`,
+    }
     ,
-    
-    new Missing({
-      path: /\.*/,
-      parameters: {2: 'locale'},
-      i18n:i18n
-    })
-    
-    
-  ]);
+    { name : "Missing",
+      path: "/*",
+    }
+  ].map((definition)=> new Route(definition));
+  return includeHelpers(routes);
 }
 
 export function includeHelpers(routes){
 
   Object.defineProperty(routes, 'getRoute', {
-    value: function(route_name){
-      return this.find( route => route.route_name === route_name)
+    value: function(name){
+      return this.find( route => route.name === name)
     },
     enumerable: false,
     configurable: false
