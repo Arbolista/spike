@@ -59,13 +59,9 @@ See [Best Practice documentation](best_practices.md) for a list of concepts and 
 
 Currently, there are two generator helpers:
 
-- `npm run generate -- --what component --name MySubComponent --where {path_relative_to shared/components}`
+- `npm run generate-component -- --name MySubComponent [--where {path_relative_to shared/components/layouts/}] [--withoutCss]` 
 
-This will generate a React component file (`component.js`), a React template file (`rt.html`), a Sas file (`.scss`), and Jasmine test file (`.test.js`).
-
-- `npm run generate -- --what layout --name SomeLayout`
-
-This will generate the template files above, as well as a new directory in `shared/lib/routes` with a route file. You'll still need to initialize the route in `shared/lib/routes.js` to get the layout to render.
+This will generate a React component file (`component.js`), a React template file (`rt.html`), a Sass file (`.scss`), and Jasmine test file (`.test.js`).
 
 ## Configuration
 

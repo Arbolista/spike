@@ -12,7 +12,8 @@
     "develop": "BABEL_DISABLE_CACHE=1 NODE_ENV=development babel-node run.js",
     "production": "BABEL_DISABLE_CACHE=1 NODE_ENV=production babel-node run.js",
     "design": "NODE_ENV=design npm start",
-    "generate": "gulp generate"
+    "generate_layout": "gulp generate-layout",
+    "generate_component": "gulp generate-component"
   },
   "keywords": [
     "karma",
