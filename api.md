@@ -1,4 +1,4 @@
-## Spike Classes
+# Spike Classes
 
 ```js
 import ClientStateManager from 'spike/client/state_manager';
@@ -13,6 +13,8 @@ import Route from 'spike/shared/route.js';
 
 import RouteLink from 'spike/shared/components/route/route.component.js';
 ```
+
+# Generators
 
 ## Component Generators
 
@@ -115,10 +117,26 @@ shared
 ```
 
 I will need to think through options to configure:
-- Whether to include translations in app generation.
--
 
-## Other Requirements
+- Whether to include translations in app generation.
+
+# Build and Run Tools
+
+We will want to provide easy build commands:
+
+```sh
+NODE_ENV=production spike build
+```
+
+This should build client assets (app.js, style.css, as well as a server build in build/production/server). See this article.
+
+```sh
+NODE_ENV=development spike run
+```
+
+I need to go through this more thoroughly.
+
+# Other Requirements
 
 - We'll want to make sure that `<img src=""/>` and any `url()` within css is compiled through webpack both when components are compiled on client and server.
 
