@@ -3,7 +3,7 @@
 import React from 'react';
 
 import template from './header.rt.html';
-import SpikeComponent from 'shared/lib/base_classes/spike_component';
+import SpikeComponent from 'espina/shared/base_component';
 import { login, logout } from 'shared/reducers/session.reducer';
 
 class HeaderComponent extends SpikeComponent {

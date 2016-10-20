@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import SpikeComponent from 'shared/lib/base_classes/spike_component';
+import SpikeComponent from 'espina/shared/base_component';
 import template from './login.rt.html';
 import container from './login.container';
 import { login } from 'shared/reducers/session.reducer';

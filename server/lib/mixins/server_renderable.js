@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { fromJS } from 'immutable';
 
-import ApplicationComponent from 'shared/components/application/application.component';
-import StateManager from 'shared/lib/state_manager/state_manager';
-import Router from 'shared/lib/router/router';
+import ApplicationComponent from 'espina/shared/application_component';
+import StateManager from 'espina/server/state_manager';
+import Router from 'espina/server/router';
+import reducers from "shared/reducers/index"
+import {defineRoutes} from 'shared/lib/routes'
+import LayoutComponent from 'shared/components/layout/layout.component';
 
 export default function(superclass){
 
@@ -51,29 +54,25 @@ export default function(superclass){
 
     prerenderReact(req, i18n){
       let state_manager = new StateManager(),
-          router = new Router(i18n);
+          router = new Router(i18n,defineRoutes(i18n));
       let location = {
         pathname: req.path,
         query: req.query
       };
-      return state_manager.getInitialData()
-        .then(() => {
-          let initial_state = state_manager.initialState({
+      let initial_state = state_manager.initialState({
             location: fromJS(router.parseLocation(location))
           }, req.cookies);
-          return state_manager.initializeStore(initial_state);
-        })
-        .then(()=>{
-          let props = {
-            state_manager: state_manager,
-            router: router,
-            i18n: i18n
-          };
+      state_manager.initializeStore(initial_state,reducers);
+      let props = {
+        state_manager: state_manager,
+        router: router,
+        i18n: i18n,
+        rootComponent: LayoutComponent
+      };
 
-          let application = React.createFactory(ApplicationComponent)(props),
-              prerender_content = ReactDOMServer.renderToString(application);
-          return prerender_content;
-        });
+      let application = React.createFactory(ApplicationComponent)(props),
+          prerender_content = ReactDOMServer.renderToString(application);
+      return prerender_content;
     }
   }
 }

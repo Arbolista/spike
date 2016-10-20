@@ -70,6 +70,6 @@ const ACTIONS = {
 
 };
 
-const REDUCER = createReducer(ACTIONS);
+//const REDUCER = createReducer(ACTIONS, new Map());
 
-export default REDUCER;
+export default (initial_state ) =>  createReducer(ACTIONS, initial_state.session);
