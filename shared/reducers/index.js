@@ -3,12 +3,13 @@ import examples from "./examples.reducer"
 import session from "./session.reducer"
 import location from "./location.reducer"
 
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-loop'
 
-export default (intial_state) =>
-	 combineReducers({
+const reducers = combineReducers({
 		current_example:current_example,
 		examples:examples,
-		session:session(intial_state),
-		location:location(intial_state)
-	});
+		session:session,
+		location:location
+});
+
+export default reducers;

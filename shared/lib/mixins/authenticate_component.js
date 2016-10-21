@@ -6,9 +6,6 @@ export default function(superclass){
 
   return class extends superclass {
 
-    get logged_in(){
-      return !!this.props.session.get('token');
-    }
 
     render(){
       let component = this;

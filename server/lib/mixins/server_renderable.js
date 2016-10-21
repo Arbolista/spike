@@ -53,26 +53,31 @@ export default function(superclass){
     }
 
     prerenderReact(req, i18n){
-      let state_manager = new StateManager(),
+    let state_manager = new StateManager(),
           router = new Router(i18n,defineRoutes(i18n));
       let location = {
         pathname: req.path,
         query: req.query
       };
-      let initial_state = state_manager.initialState({
+      return new Promise((resolve) => resolve())
+        .then(() => {
+          let initial_state = state_manager.initialState({
             location: fromJS(router.parseLocation(location))
           }, req.cookies);
-      state_manager.initializeStore(initial_state,reducers);
-      let props = {
-        state_manager: state_manager,
-        router: router,
-        i18n: i18n,
-        rootComponent: LayoutComponent
-      };
+          return state_manager.initializeStore(initial_state,reducers);
+        })
+        .then(()=>{
+          let props = {
+            state_manager: state_manager,
+            router: router,
+            i18n: i18n,
+            rootComponent: LayoutComponent
+          };
 
-      let application = React.createFactory(ApplicationComponent)(props),
-          prerender_content = ReactDOMServer.renderToString(application);
-      return prerender_content;
+          let application = React.createFactory(ApplicationComponent)(props),
+              prerender_content = ReactDOMServer.renderToString(application);
+          return prerender_content;
+        });
     }
   }
 }

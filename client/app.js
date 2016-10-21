@@ -39,13 +39,16 @@ export default function(createHistory) {
   setTranslations()
     .then((_i18n)=>{
       i18n = _i18n;
-      let router = new Router(i18n,defineRoutes(i18n)),
-          location = { pathname: window.location.pathname, query: window.location.search },
+        router = new Router(i18n,defineRoutes(i18n));
+        let location = { pathname: window.location.pathname, query: window.location.search },
           initial_location_state = fromJS(router.parseLocation(location)),
           initial_state = state_manager.initialState({
             location: initial_location_state
           });
-      state_manager.initializeStore(initial_state,reducers(initial_state))
+      console.log(initial_state)
+      return state_manager.initializeStore(initial_state,reducers)
+    })
+    .then( () => {
       var initial_props = {
         state_manager: state_manager,
         router: router,

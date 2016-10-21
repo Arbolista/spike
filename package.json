@@ -102,8 +102,8 @@
     "react-templates": "0.4.x",
     "react-templates-loader": "0.4.x",
     "redux": "3.5.x",
-    "redux-act": "1.0.0",
-    "redux-loop": "2.2.2",
+    "redux-act": "0.5.x",
+    "redux-loop": "2.1.x",
     "serve-favicon": "2.2.x",
     "underscore.string": "^3.3.4",
     "yargs": "3.32.0"
