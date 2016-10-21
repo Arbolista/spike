@@ -40,8 +40,7 @@ const ACTIONS = {
     let Cookies = require('cookies-js');
     window.localStorage.setItem('token', new_token);
     Cookies.set('token', new_token);
-    _current_session.set("token",new_token);
-    return _current_session;
+    return Immutable.fromJS({token: new_token,loading:false});;
   },
 
   [sessionError]: (_current_session, _res)=>{
