@@ -4,7 +4,8 @@ export function defineRoutes(i18n) {
     path:[
        "/:locale/index",
        "/:locale?",
-       "/index"
+       "/index",
+       "/"
     ]
     //component:"./shared/components/layouts/index/index.component"
   },{
@@ -18,6 +19,6 @@ export function defineRoutes(i18n) {
     path:`/:locale?/${i18n.t('login')}`
   },{
     name:"Missing",
-    path:"/"
+    path:/.*/
   }];
 }
