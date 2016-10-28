@@ -6,6 +6,16 @@
       key="{example.id}"
       onClick="{this.detailExample.bind(this, example)}">
         {example.first_name} {example.last_name}
-    </button>
+    </button> 
+  </div>
+  <div>
+    <button class="btn btn-primary"
+      onClick="{this.goToHiddenText.bind(this)}">{this.t('Show text')}</button>
+  </div>
+  <div class="space">
+    
+  </div>
+  <div id="hidden">
+    Hidden Text
   </div>
 </div>

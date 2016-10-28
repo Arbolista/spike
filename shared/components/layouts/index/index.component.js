@@ -33,6 +33,9 @@ class IndexComponent
     // route_name, action, payload.
     this.pushRoute('Details', detailExample, {id: example.id});
   }
+  goToHiddenText() {
+    this.pushRoute('Index', null,{},{},"#hidden");
+  }
 
 }
 
