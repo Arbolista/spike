@@ -9,7 +9,7 @@ export default function(superclass){
 
     render(){
       let component = this;
-      if (component.logged_in){
+      if (component.loggedIn){
         return component.template.call(component);
       } else {
         return React.createElement(Login, {

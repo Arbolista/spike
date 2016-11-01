@@ -20,7 +20,7 @@ class LayoutComponent extends SpikeComponent {
   }
 
   get route_name() {
-    return this.props.location.get('route_name');
+    return this.props.location.get('routeName');
   }
 
   get token(){

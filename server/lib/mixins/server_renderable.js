@@ -61,14 +61,14 @@ export default function(superclass){
       };
       return new Promise((resolve) => resolve())
         .then(() => {
-          let initial_state = state_manager.initialState({
+          let initial_state = StateManager.initialState({
             location: fromJS(router.parseLocation(location))
           }, req.cookies);
           return state_manager.initializeStore(initial_state,reducers);
         })
         .then(()=>{
           let props = {
-            state_manager: state_manager,
+            stateManager: state_manager,
             router: router,
             i18n: i18n,
             rootComponent: LayoutComponent
