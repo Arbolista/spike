@@ -1,5 +1,5 @@
-import { createHistory, useQueries } from 'history';
+import createHistory from 'history/createBrowserHistory';
 
 import app from 'client/app';
 
-app(useQueries(createHistory));
+app(createHistory);
