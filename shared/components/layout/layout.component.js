@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import SpikeComponent from 'shared/lib/base_classes/spike_component';
+import SpikeComponent from 'espina/shared/base_component';
 import layoutContainer from './layout.container';
 const Header = require('../header/header.component'),
     Footer = require('../footer/footer.component');
@@ -16,11 +16,11 @@ class LayoutComponent extends SpikeComponent {
   }
 
   get current_route(){
-    return this.router.routes.getRoute(this.route_name);
+    return this.router.routes.findByName(this.route_name);
   }
 
   get route_name() {
-    return this.props.location.get('route_name');
+    return this.props.location.get('routeName');
   }
 
   get token(){

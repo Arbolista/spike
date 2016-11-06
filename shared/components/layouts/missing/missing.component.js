@@ -3,7 +3,7 @@
 import React from 'react';
 
 import template from './missing.rt.html';
-import SpikeComponent from 'shared/lib/base_classes/spike_component';
+import SpikeComponent from 'espina/shared/base_component';
 
 class MissingComponent extends SpikeComponent {
 

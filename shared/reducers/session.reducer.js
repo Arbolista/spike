@@ -40,7 +40,7 @@ const ACTIONS = {
     let Cookies = require('cookies-js');
     window.localStorage.setItem('token', new_token);
     Cookies.set('token', new_token);
-    return Immutable.fromJS({token: new_token});
+    return Immutable.fromJS({token: new_token,loading:false});;
   },
 
   [sessionError]: (_current_session, _res)=>{
@@ -69,6 +69,11 @@ const ACTIONS = {
   }
 
 };
+
+var initial = new Map();
+initial.set("token",null);
+initial.set("loading",false);
+
 
 const REDUCER = createReducer(ACTIONS);
 

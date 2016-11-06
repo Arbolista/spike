@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import SpikeComponent from 'shared/lib/base_classes/spike_component';
+import SpikeComponent from 'espina/shared/base_component';
 import authenticate from 'shared/lib/mixins/authenticate_component';
 import template from './details.rt.html';
 import detailsContainer from './details.container';

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { toJS } from 'immutable';
 
 import template from './index.rt.html';
-import SpikeComponent from 'shared/lib/base_classes/spike_component';
+import SpikeComponent from 'espina/shared/base_component';
 import authenticate from 'shared/lib/mixins/authenticate_component';
 import indexContainer from './index.container';
 import { detailExample } from 'shared/reducers/current_example.reducer';
@@ -32,6 +32,9 @@ class IndexComponent
   detailExample(example){
     // route_name, action, payload.
     this.pushRoute('Details', detailExample, {id: example.id});
+  }
+  goToHiddenText() {
+    this.pushRoute('Index', null,{},{},"#hidden");
   }
 
 }
